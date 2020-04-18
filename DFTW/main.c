@@ -34,8 +34,9 @@
 
 	int main(int argc, char* argv[]){
 	  // size of input array
-	  int N = 8000; // 8,000 is a good number for testing
+	  int N = 10000; // 8,000 is a good number for testing
 	  printf("DFTW calculation with N = %d \n",N);
+		printf("MAX Threads = %d\n", omp_get_max_threads());
 
 	  // Allocate array for input vector
 	  double* xr = (double*) malloc (N *sizeof(double));
@@ -87,7 +88,7 @@
 	// idft: 1 direct DFT, -1 inverse IDFT (Inverse DFT)
 	int DFT(int idft, double* xr, double* xi, double* Xr_o, double* Xi_o, int N){
 
-		/*omp_set_num_threads(N); //For HPCs that can support N threads potentially via MPI and suitable memory padding
+		/*omp_set_num_threads(N);
 		#pragma omp parallel
 		{
 			int k = omp_get_thread_num();
@@ -104,19 +105,20 @@
 		#pragma omp parallel for schedule(guided, 8)
 		for (int k=0 ; k<N ; k++)
 	    {
-			#pragma omp parallel for schedule(guided, 8) reduction(+ :Xr_o[k],Xi_o[k]) //simd //reduction(+ :Xr_o[k],Xi_o[k]) //
+			#pragma omp parallel for schedule(guided, 8) reduction(+ :Xr_o[k],Xi_o[k])
 	        for (int n=0 ; n<N ; n++)  {
+						double coss=cos(n * k * PI2 / N), sinn=sin(n * k * PI2 / N);
 	        	// Real part of X[k]
-	            Xr_o[k] += xr[n] * cos(n * k * PI2 / N) + idft*xi[n]*sin(n * k * PI2 / N);
+	            Xr_o[k] += xr[n] * coss + idft*xi[n]*sinn;
 	            // Imaginary part of X[k]
-	            Xi_o[k] += -idft*xr[n] * sin(n * k * PI2 / N) + xi[n] * cos(n * k * PI2 / N);
+	            Xi_o[k] += -idft*xr[n] * sinn + xi[n] * coss;
 
 	        }
 	    }
 
 	    // normalize if you are doing IDFT
 	    if (idft==-1){
-			#pragma omp parallel for schedule(guided, 8) 
+			#pragma omp parallel for schedule(guided, 8) shared(Xr_o)
 	    	for (int n=0 ; n<N ; n++){
 	    	Xr_o[n] /=N;
 	    	Xi_o[n] /=N;

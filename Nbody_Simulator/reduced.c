@@ -3,6 +3,7 @@
 #include <math.h>
 #include "stdlib.h" // malloc and rand for instance. Rand not thread safe!
 #include <sys/time.h>
+#include "omp.h"
 
 #define DIM 3
 #define N 1000
@@ -37,27 +38,20 @@ void summer()
   //vector temp;
   for(i = 0; i<N; i++)
   {
-    //vec_dat(&force_total[i],0,0,0);
-    memset(&force_total[i], 0, sizeof(vector));
-    //force_total[i].x = 0;
-    //force_total[i].y = 0;
-    //force_total[i].z = 0;
-
+    double Xt=0,Yt=0,Zt=0;
+    //#pragma omp parallel for reduction(+:Xt,Yt,Zt)
     for (j=0 ; j < N; j++)
     {
-      //THis has a Race condition unless handled
-
-      force_total[i].x += force[i][j].x;
-      force_total[i].y += force[i][j].y;
-      force_total[i].z += force[i][j].z;
-      /*
-      temp.x += force[i][j].x;
-      temp.y += force[i][j].y;
-      temp.z += force[i][j].z;
-      */
-
+      Xt += force[i][j].x;
+      Yt += force[i][j].y;
+      Zt += force[i][j].z;
     }
-    //vec_vec(&force_total[i], &temp)
+    //#pragma omp critical
+    {
+      force_total[i].x += Xt;
+      force_total[i].y += Yt;
+      force_total[i].z += Zt;
+    }
   }
 }
 void Calc()
@@ -66,9 +60,11 @@ void Calc()
   double  distX, distY, distZ,
           distX2, distY2, distZ2,
           total_dist, dist_cubed, GG;
+  //#pragma omp parallel for
   for (i = 0; i < N; i++)
   {
     //No Race conditions if we have shared instances
+    //#pragma omp parallel for private(distX, distY, distZ,distX2, distY2, distZ2,total_dist,dist_cubed,GG) shared(force)
     for (j = 0; j < i; j++)
     {
       distX = posX[i]-posX[j];
@@ -97,6 +93,7 @@ void Calc()
 void ending()
 {
   int i;
+  //#pragma omp parallel for
   for(i=0;i<DIM;i++)
   {//No Race
     vel[i].x = DELTA_T/mass[i]*force_total[i].x;
@@ -111,31 +108,30 @@ void ending()
   }
 }
 
-double mysecond(){
-  struct timeval tp;
-  struct timezone tzp;
-  int i;
-
-  i = gettimeofday(&tp,&tzp);
-  return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+float calculateSD(double data[]) {
+    double sum = 0.0, mean, SD = 0.0;
+    int i;
+    for (i = 0; i < TRIALS; ++i) {
+        sum += data[i];
+    }
+    mean = sum / TRIALS;
+    for (i = 0; i < TRIALS; ++i)
+        SD += pow(data[i] - mean, 2);
+    return sqrt(SD / TRIALS);
 }
 
 int main (int argc, char *argv[]) {
-  printf("Starting");
+  printf("MAX Threads = %d\n", omp_get_max_threads());
 
   //Var Declarations
 
   int i,j;
-  double t1[TRIALS], t2[TRIALS], t=0;
+  double t1[TRIALS], t2[TRIALS],tD[TRIALS], t=0;
   /*Initialization*/
-  printf("check 2");
+  //#pragma omp parallel for
   for(i=0;i<N;i++)
   {
-    /*
-    vec_dat(&pos[i], (rand() / (double)(RAND_MAX)) * 2 - 1, (rand() / (double)(RAND_MAX)) * 2 - 1, (rand() / (double)(RAND_MAX)) * 2 - 1);
-    vec_vec(&old_pos[i],&pos[i]);
-    vec_dat(&pos[i], (rand() / (double)(RAND_MAX)) * 2 - 1, (rand() / (double)(RAND_MAX)) * 2 - 1, (rand() / (double)(RAND_MAX)) * 2 - 1);
-    */
+
     posX[i] = (rand() / (double)(RAND_MAX)) * 2 - 1;
     posY[i] = (rand() / (double)(RAND_MAX)) * 2 - 1;
     posZ[i] = (rand() / (double)(RAND_MAX)) * 2 - 1;
@@ -150,27 +146,21 @@ int main (int argc, char *argv[]) {
 	}
 
   for(i=0;i<TRIALS; i++){
-    t1[i] = mysecond();
+    t1[i] = omp_get_wtime();
     for(j=0;j<TIME_STEPS;j++){
       memset(force, 0, N*N*sizeof(vector));
+      memset(force_total, 0, N*sizeof(vector));
       Calc();
       summer();
       ending();
     }
-    t2[i] = mysecond();
+    t2[i] = omp_get_wtime();
   }
-
-  //Printin
-  for(i=0;i<N;i++){
-    printf("Position x = %f\n", posX[i]);
-    printf("Position y = %f\n", posY[i]);
-    printf("Position z = %f\n", posZ[i]);
-		printf("Mass %d = %f\n", i, mass[i]);
-	}
   for(i=0;i<TRIALS; i++){
     t+=t2[i]-t1[i];
-    printf("%f - %f = %f\n", t2[i], t1[i], t2[i]-t1[i]);
+    tD[i]=t2[i]-t1[i];
+    printf("%f - %f = \t%f\n", t2[i], t1[i], t2[i]-t1[i]);
   }
-  printf("AVerage %f\n", t/TRIALS);
+  printf("AVerage \t%f\nSTD = \t%f\n", t/TRIALS, calculateSD(tD));
 
 }
