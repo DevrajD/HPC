@@ -22,13 +22,13 @@ double mysecond(){
 float calculateSD(float data[]) {
     float sum = 0.0, mean, SD = 0.0;
     int i;
-    for (i = 0; i < 10; ++i) {
+    for (i = 0; i < ITERATIONS; ++i) {
         sum += data[i];
     }
-    mean = sum / 10;
-    for (i = 0; i < 10; ++i)
+    mean = sum / ITERATIONS;
+    for (i = 0; i < ITERATIONS; ++i)
         SD += pow(data[i] - mean, 2);
-    return sqrt(SD / 10);
+    return sqrt(SD / ITERATIONS);
 }
 
 int main(int argc, char* argv[]){
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
 	double t1, t2;
 	int mloc;
 	double mval;
-	float data_time[ITERATIONS];
+	float data_time[ITERATIONS],avg_time=0;;
 
   #pragma omp parallel for
   for( i=0; i < N;i++){
@@ -50,15 +50,15 @@ int main(int argc, char* argv[]){
     MAX_THREADS = lis[i];
     omp_set_num_threads(MAX_THREADS);
   	printf("Threads = %d\ni = %d\n", omp_get_max_threads(),i);
-
+    avg_time=0;
   	typedef struct {double val; int loc;char pad[64]; } tvals;
   	tvals *maxinfo;//[MAX_THREADS];
     maxinfo = (tvals*)malloc(MAX_THREADS*sizeof(tvals));
   	//maxinfo = (tvals*) malloc(sizeof(tvals)*getenv("OMP_NUM_THREADS"));
 
-  	for(j=0;j<1000;j++)
+  	for(j=0;j<ITERATIONS;j++)
     {
-    	t1 = omp_get_wtime();
+    	t1 = mysecond();
     	#pragma omp parallel shared(maxinfo)
     	{
     		int id = omp_get_thread_num();
@@ -84,12 +84,13 @@ int main(int argc, char* argv[]){
     			mloc = maxinfo[k].loc;
     		}
     	}
-    	t2 = omp_get_wtime();
+    	t2 = mysecond();
     	data_time[j] = t2-t1;
+      avg_time+=t2-t1;
   	}
     free(maxinfo);
     #pragma omp critical
-  	printf("time = %f\nMaxloc = %d\nMaxVal=%f\nSD = %f\n", (t2 - t1)/1000,mloc,mval,calculateSD(data_time));
+  	printf("time = %f\nMaxloc = %d\nMaxVal=%f\nSD = %f\n", avg_time/ITERATIONS,mloc,mval,calculateSD(data_time));
   }
 	return 0;
 }
