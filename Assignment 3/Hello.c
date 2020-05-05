@@ -4,8 +4,7 @@
 int main(int argc, char *argv[])
 {
 
-	int rank, size, i, provided;
-	float A[10];
+	int rank, size, provided;
 
 	MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
 
