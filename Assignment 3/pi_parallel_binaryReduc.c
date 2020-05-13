@@ -17,6 +17,9 @@ int main(int argc, char* argv[])
 
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
 
+    double t1, t2;
+    t1 = MPI_Wtime();
+
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
@@ -63,12 +66,16 @@ int main(int argc, char* argv[])
         if (rank == j)
           MPI_Send(&pi, 1, MPI_DOUBLE, j-2^i, 0, MPI_COMM_WORLD);
 
-        result[0] = (result[0]+result[1])/2;
-        pi = result[0];
+        results[0] = (results[0]+results[1])/2;
+        pi = results[0];
       }
     }
 
-    printf("The result is %f\n", pi);
+    t2 = MPI_Wtime();
+    printf("MPI_Wtime measured a 1 second sleep to be: %1.2f\n", t2-t1);
+
+    if (rank == 0)
+      printf("The result is %f\n", pi);
 
 
     return 0;
