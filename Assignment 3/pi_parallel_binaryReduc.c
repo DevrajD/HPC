@@ -55,17 +55,17 @@ int main(int argc, char* argv[])
     //Gather the Pi values
     for (int i = 0; i < log2(size); i++)
     {
-      for (int j = 0; j < size; j=j+2^i)
+      for (int j = 0; j < size; j=j+pow(2,i))
       {
         printf("J = %d\n", j);
         if (rank == j)
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-        j=j+2^i;
+        j=j+pow(2,i);
         printf("J = %d\n", j);
-        
+
         if (rank == j)
-          MPI_Send(&pi, 1, MPI_DOUBLE, j-2^i, 0, MPI_COMM_WORLD);
+          MPI_Send(&pi, 1, MPI_DOUBLE, j-pow(2,i), 0, MPI_COMM_WORLD);
 
         results[0] = (results[0]+results[1])/2;
         pi = results[0];
