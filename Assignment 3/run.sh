@@ -26,8 +26,8 @@
 cc -O2 hello.c
 srun -n 10 ./a.out > my_output_fil
 
-cc -O2 pi.c
+cc -O2 pi_parallel_blocking
 srun -n 10 ./a.out > my_output_piBlockParallel
 
-cc -O2 pi_binaryreduc.c
+cc -O2 pi_parallel_binaryReduc
 srun -n 10 ./a.out > my_output_piBinaryTReduc
