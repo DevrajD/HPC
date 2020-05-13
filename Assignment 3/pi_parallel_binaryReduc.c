@@ -23,8 +23,7 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    if(rank == 0)
-      results = (double*) malloc(2*sizeof(double));
+    results = (double*) malloc(2*sizeof(double));
 
     srand(SEED*rank); // Important: Multiply SEED by "rank" when you introduce MPI!
 
