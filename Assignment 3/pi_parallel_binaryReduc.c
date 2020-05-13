@@ -57,11 +57,13 @@ int main(int argc, char* argv[])
     {
       for (int j = 0; j < size; j=j+2^i)
       {
+        printf("J = %d\n", j);
         if (rank == j)
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         j=j+2^i;
-
+        printf("J = %d\n", j);
+        
         if (rank == j)
           MPI_Send(&pi, 1, MPI_DOUBLE, j-2^i, 0, MPI_COMM_WORLD);
 
