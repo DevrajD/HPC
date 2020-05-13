@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
     }
 
     // Estimate Pi and display the result
-    pi = ((double)count / (double)NUM_ITER) * 4.0;
+    pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
 
     if(rank > 0)
       MPI_Send(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);

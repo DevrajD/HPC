@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if(rank == 0)
-      results = (double*) malloc(size*sizeof(double));
+      results = (double*) malloc(2*sizeof(double));
 
     srand(SEED*rank); // Important: Multiply SEED by "rank" when you introduce MPI!
 
@@ -43,25 +43,33 @@ int main(int argc, char* argv[])
     // Estimate Pi and display the result
     pi = ((double)count / (double)NUM_ITER) * 4.0;
 
-    if(rank > 0)
-      MPI_Send(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
-    else
+
+
+
+
+    //Set Pi value into the array
+    results[0] = pi;
+    results[1] = pi;
+    //Gather the Pi values
+    for (int i = 0; i < log2(size); i++)
     {
-      //Set Pi value into the array
-      results[0] = pi;
-      //Receive the Pi values
-      for (int i = 1; i < size; i++) {
-        MPI_Recv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      }
-      //Take average of pi values
-      double sum = 0, average = 0;
-      for (int i = 0; i < size; i++)
+      for (int j = 0; j < size; j=j+2^i)
       {
-        sum += results[i];
+        if (rank == j)
+          MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        j=j+2^i;
+
+        if (rank == j)
+          MPI_Send(&pi, 1, MPI_DOUBLE, j-2^i, 0, MPI_COMM_WORLD);
+
+        result[0] = (result[0]+result[1])/2;
+        pi = result[0];
       }
-      average = sum/size;
-      printf("The result is %f\n", average);
     }
+
+    printf("The result is %f\n", pi);
+
 
     return 0;
 }
