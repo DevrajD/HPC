@@ -63,5 +63,7 @@ int main(int argc, char* argv[])
       printf("The result is %f\n", average);
     }
 
+    MPI_Finalize();
+
     return 0;
 }

@@ -16,4 +16,6 @@ int main(int argc, char *argv[])
   //  A[i] = i*rank;
 
   printf("My rank %d of %d\n", rank, size);
+
+	MPI_Finalize();
 }
