@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     {
       for (int j = 0; j < size; j=(int)(j+pow(2,i)))
       {
-        printf("J = %d\n", j);
+        //printf("J = %d\n", j);
         if (rank == j)
         {
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 
 
         j=(int)(j+pow(2,i));
-        printf("J = %d\n", j);
+        //printf("J = %d\n", j);
 
         if (rank == j)
         {
