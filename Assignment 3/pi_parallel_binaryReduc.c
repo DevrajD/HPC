@@ -85,10 +85,6 @@ int main(int argc, char* argv[])
     if (rank == 0)
       printf("The Final result is %f\n", pi);
 
-
-
-
-
     MPI_Finalize();
     return 0;
 }

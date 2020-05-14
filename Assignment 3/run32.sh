@@ -9,7 +9,7 @@
 #SBATCH -J myjob32
 
 # 10 hours wall-clock time will be given to this job
-#SBATCH -t 00:15:00
+#SBATCH -t 00:10:00
 
 # Number of nodes
 #SBATCH --nodes=4

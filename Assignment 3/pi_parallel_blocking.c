@@ -69,9 +69,6 @@ int main(int argc, char* argv[])
     t2 = MPI_Wtime();
     printf("MPI_Wtime measured (pi_parallel_blocking) for total run to be: %f\n", t2-t1);
 
-    if (rank == 0)
-
-
     MPI_Finalize();
     return 0;
 }
