@@ -9,7 +9,7 @@
 #SBATCH -J myjob
 
 # 10 hours wall-clock time will be given to this job
-#SBATCH -t 00:05:00
+#SBATCH -t 00:15:00
 
 # Number of nodes
 #SBATCH --nodes=8
@@ -31,3 +31,6 @@ srun -n 8 ./a.out > my_output_piBlockParallel
 
 cc -O2 pi_parallel_binaryReduc.c
 srun -n 8 ./a.out > my_output_piBinaryTReduc
+
+cc -O2 pi_parallel_nonblocking.c
+srun -n 8 ./a.out > my_output_pi_parallel_nonblocking
