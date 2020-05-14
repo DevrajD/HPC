@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
         printf("J = %d\n", j);
         if (rank == j)
         {
-          MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+          MPI_Recv(&results[1], 1, MPI_DOUBLE, (int)(j+pow(2,i)), 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
 
 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
     }
 
     t2 = MPI_Wtime();
-    printf("MPI_Wtime measured a 1 second sleep to be: %f\n", t2-t1);
+    printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
 
     if (rank == 0)
       printf("The result is %f\n", pi);
