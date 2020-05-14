@@ -28,10 +28,10 @@ rm my_output_piBlockParallel8
 rm my_output_pi_parallel_nonblocking8
 rm my_output_piBinaryTReduc8
 
-cc -O2 Hello.c -o hello
-cc -O2 pi_parallel_blocking.c -o piblockin
-cc -O2 pi_parallel_nonblocking.c -o pinonblockin
-cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc
+cc -O2 Hello.c -o hello8
+cc -O2 pi_parallel_blocking.c -o piblockin8
+cc -O2 pi_parallel_nonblocking.c -o pinonblockin8
+cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc8
 
 
 srun -n 8 ./hello >> my_output_fil8

@@ -28,10 +28,10 @@ rm my_output_piBlockParallel32
 rm my_output_pi_parallel_nonblocking32
 rm my_output_piBinaryTReduc32
 
-cc -O2 Hello.c -o hello
-cc -O2 pi_parallel_blocking.c -o piblockin
-cc -O2 pi_parallel_nonblocking.c -o pinonblockin
-cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc
+cc -O2 Hello.c -o hello32
+cc -O2 pi_parallel_blocking.c -o piblockin32
+cc -O2 pi_parallel_nonblocking.c -o pinonblockin32
+cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc32
 
 
 srun -n 32 ./hello >> my_output_fil32
