@@ -12,9 +12,9 @@
 #SBATCH -t 00:15:00
 
 # Number of nodes
-#SBATCH --nodes=1
+#SBATCH --nodes=4
 # Number of MPI processes per node
-#SBATCH --ntasks-per-node=64
+#SBATCH --ntasks-per-node=32
 
 #SBATCH -e error_file.e
 #SBATCH -o output_file.o
@@ -33,10 +33,8 @@ cc -O2 pi_parallel_blocking.c -o piblockin
 cc -O2 pi_parallel_nonblocking.c -o pinonblockin
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc
 
-#for processes in  8 16 32 64
-#do
-srun -n 8 ./hello >> my_output_fil
-srun -n 8 ./piblockin >> my_output_piBlockParallel
-srun -n 8 ./pinonblockin >> my_output_pi_parallel_nonblocking
-srun -n 8 ./pibinaryreduc >> my_output_piBinaryTReduc
-#done
+
+srun -n 64 ./hello >> my_output_fil
+srun -n 64 ./piblockin >> my_output_piBlockParallel
+srun -n 64 ./pinonblockin >> my_output_pi_parallel_nonblocking
+srun -n 64 ./pibinaryreduc >> my_output_piBinaryTReduc
