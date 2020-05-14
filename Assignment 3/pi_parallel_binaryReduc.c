@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
     }
 
     // Estimate Pi and display the result
-    pi = ((double)count / (double)NUM_ITER/size) * 4.0;
+    pi = ((double)count / ((double)NUM_ITER/size)) * 4.0;
 
     //Set Pi value into the array
     results[0] = pi;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     for (int i = 0; i < (int)log2(size); i++)
     {
       printf("I = %d\n", i);
-      printf("Initial Pi = %f", pi);
+      printf("Initial Pi = %f \n", pi);
       for (int j = 0; j < size; j=(int)(j+pow(2,i)))
       {
         printf("J = %d\n", j);
