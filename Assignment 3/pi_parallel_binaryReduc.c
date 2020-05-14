@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 
     // Estimate Pi and display the result
     pi = ((double)count / (double)NUM_ITER) * 4.0;
-    
+
     //Set Pi value into the array
     results[0] = pi;
     results[1] = pi;
@@ -58,14 +58,20 @@ int main(int argc, char* argv[])
       {
         printf("J = %d\n", j);
         if (rank == j)
+        {
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        }
+
 
         j=(int)(j+pow(2,i));
         printf("J = %d\n", j);
 
         if (rank == j)
+        {
           MPI_Send(&pi, 1, MPI_DOUBLE, (int)(j-pow(2,i)), 0, MPI_COMM_WORLD);
+        }
 
+        //average Pi values
         results[0] = (results[0]+results[1])/2;
         pi = results[0];
       }
