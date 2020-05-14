@@ -34,7 +34,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin32
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc32
 
 
-srun -n 32 ./hello >> my_output_fil32
-srun -n 32 ./piblockin >> my_output_piBlockParallel32
-srun -n 32 ./pinonblockin >> my_output_pi_parallel_nonblocking32
-srun -n 32 ./pibinaryreduc >> my_output_piBinaryTReduc32
+srun -n 32 ./hello32 >> my_output_fil32
+srun -n 32 ./piblockin32 >> my_output_piBlockParallel32
+srun -n 32 ./pinonblockin32 >> my_output_pi_parallel_nonblocking32
+srun -n 32 ./pibinaryreduc32 >> my_output_piBinaryTReduc32

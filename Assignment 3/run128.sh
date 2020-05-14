@@ -34,7 +34,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin128
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc128
 
 
-srun -n 128 ./hello >> my_output_fil128
-srun -n 128 ./piblockin >> my_output_piBlockParallel128
-srun -n 128 ./pinonblockin >> my_output_pi_parallel_nonblocking128
-srun -n 128 ./pibinaryreduc >> my_output_piBinaryTReduc128
+srun -n 128 ./hello128 >> my_output_fil128
+srun -n 128 ./piblockin128 >> my_output_piBlockParallel128
+srun -n 128 ./pinonblockin128 >> my_output_pi_parallel_nonblocking128
+srun -n 128 ./pibinaryreduc128 >> my_output_piBinaryTReduc128

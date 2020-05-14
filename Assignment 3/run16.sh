@@ -34,7 +34,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin16
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc16
 
 
-srun -n 16 ./hello >> my_output_fil16
-srun -n 16 ./piblockin >> my_output_piBlockParallel16
-srun -n 16 ./pinonblockin >> my_output_pi_parallel_nonblocking16
-srun -n 16 ./pibinaryreduc >> my_output_piBinaryTReduc16
+srun -n 16 ./hello16 >> my_output_fil16
+srun -n 16 ./piblockin16 >> my_output_piBlockParallel16
+srun -n 16 ./pinonblockin16 >> my_output_pi_parallel_nonblocking16
+srun -n 16 ./pibinaryreduc16 >> my_output_piBinaryTReduc16

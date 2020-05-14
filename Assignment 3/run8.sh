@@ -34,7 +34,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin8
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc8
 
 
-srun -n 8 ./hello >> my_output_fil8
-srun -n 8 ./piblockin >> my_output_piBlockParallel8
-srun -n 8 ./pinonblockin >> my_output_pi_parallel_nonblocking8
-srun -n 8 ./pibinaryreduc >> my_output_piBinaryTReduc8
+srun -n 8 ./hello8 >> my_output_fil8
+srun -n 8 ./piblockin8 >> my_output_piBlockParallel8
+srun -n 8 ./pinonblockin8 >> my_output_pi_parallel_nonblocking8
+srun -n 8 ./pibinaryreduc8 >> my_output_piBinaryTReduc8

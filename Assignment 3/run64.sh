@@ -34,7 +34,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin64
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc64
 
 
-srun -n 64 ./hello >> my_output_fil64
-srun -n 64 ./piblockin >> my_output_piBlockParallel64
-srun -n 64 ./pinonblockin >> my_output_pi_parallel_nonblocking64
-srun -n 64 ./pibinaryreduc >> my_output_piBinaryTReduc64
+srun -n 64 ./hello64 >> my_output_fil64
+srun -n 64 ./piblockin64 >> my_output_piBlockParallel64
+srun -n 64 ./pinonblockin64 >> my_output_pi_parallel_nonblocking64
+srun -n 64 ./pibinaryreduc64 >> my_output_piBinaryTReduc64
