@@ -14,14 +14,17 @@ int main(int argc, char* argv[])
     int count = 0;
     double x, y, z, pi, *results;
     int rank, size, i, provided;
+    double t1, t2;
+
 
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
 
-    double t1, t2;
     t1 = MPI_Wtime();
 
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    printf("My rank %d of %d\n", rank, size);
 
     results = (double*) malloc(2*sizeof(double));
 
@@ -44,28 +47,24 @@ int main(int argc, char* argv[])
 
     // Estimate Pi and display the result
     pi = ((double)count / (double)NUM_ITER) * 4.0;
-
-
-
-
-
+    
     //Set Pi value into the array
     results[0] = pi;
     results[1] = pi;
     //Gather the Pi values
     for (int i = 0; i < log2(size); i++)
     {
-      for (int j = 0; j < size; j=j+pow(2,i))
+      for (int j = 0; j < size; j=(int)(j+pow(2,i)))
       {
         printf("J = %d\n", j);
         if (rank == j)
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-        j=j+pow(2,i);
+        j=(int)(j+pow(2,i));
         printf("J = %d\n", j);
 
         if (rank == j)
-          MPI_Send(&pi, 1, MPI_DOUBLE, j-pow(2,i), 0, MPI_COMM_WORLD);
+          MPI_Send(&pi, 1, MPI_DOUBLE, (int)(j-pow(2,i)), 0, MPI_COMM_WORLD);
 
         results[0] = (results[0]+results[1])/2;
         pi = results[0];
@@ -73,7 +72,7 @@ int main(int argc, char* argv[])
     }
 
     t2 = MPI_Wtime();
-    printf("MPI_Wtime measured a 1 second sleep to be: %1.2f\n", t2-t1);
+    printf("MPI_Wtime measured a 1 second sleep to be: %f\n", t2-t1);
 
     if (rank == 0)
       printf("The result is %f\n", pi);
