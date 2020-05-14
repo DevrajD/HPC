@@ -21,7 +21,8 @@ int main(int argc, char* argv[])
     t1 = MPI_Wtime();
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
+    printf("My rank %d of %d\n", rank, size);
+    
     if(rank == 0)
       results = (double*) malloc(size*sizeof(double));
 
