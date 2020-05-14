@@ -6,7 +6,7 @@
 #SBATCH -A edu20.DD2356
 
 # The name of the script is myjob
-#SBATCH -J myjob
+#SBATCH -J myjob32
 
 # 10 hours wall-clock time will be given to this job
 #SBATCH -t 00:15:00
