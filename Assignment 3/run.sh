@@ -23,14 +23,20 @@
 
 # Run the executable named myexe
 # and write the output into my_output_file
-cc -O2 Hello.c
-srun -n 8 ./a.out > my_output_fil
+rm my_output_fil
+rm my_output_piBlockParallel
+rm my_output_pi_parallel_nonblocking
+rm my_output_piBinaryTReduc
 
-cc -O2 pi_parallel_blocking.c
-srun -n 8 ./a.out > my_output_piBlockParallel
+cc -O2 Hello.c -o hello
+cc -O2 pi_parallel_blocking.c -o piblockin
+cc -O2 pi_parallel_nonblocking.c -o pinonblockin
+cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc
 
-cc -O2 pi_parallel_nonblocking.c
-srun -n 8 ./a.out > my_output_pi_parallel_nonblocking
-
-cc -O2 pi_parallel_binaryReduc.c
-srun -n 8 ./a.out > my_output_piBinaryTReduc
+for processes in  8 16 32 64 128
+do
+srun -n $processes ./a.out >> my_output_fil
+srun -n $processes ./piblockin >> my_output_piBlockParallel
+srun -n $processes ./pinonblockin >> my_output_pi_parallel_nonblocking
+srun -n $processes ./pibinaryreduc >> my_output_piBinaryTReduc
+done
