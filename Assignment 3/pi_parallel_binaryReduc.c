@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
     }
 
     t2 = MPI_Wtime();
-    printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
+    printf("MPI_Wtime measured for (pi binary reduc) total run to be: %f\n", t2-t1);
 
     //if (rank == 0)
     //  printf("The result is %f\n", pi);

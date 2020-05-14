@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
       average = sum/size;
     }
     t2 = MPI_Wtime();
-    printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
+    printf("MPI_Wtime measured (pi_parallel_blocking) for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
 

@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     printf("My rank %d of %d\n", rank, size);
-    
+
     if(rank == 0)
       results = (double*) malloc(size*sizeof(double));
 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
     t2 = MPI_Wtime();
 
 
-    printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
+    printf("MPI_Wtime measured pi_parallel_nonblocking for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
     printf("The result is %f\n", average); //Move out of the Timed zone
