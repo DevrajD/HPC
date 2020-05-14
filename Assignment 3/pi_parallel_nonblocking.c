@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
     int count = 0;
     double x, y, z, pi, *results;
     int rank, size, i, provided;
+    double sum = 0, average = 0;
     double t1, t2;
 
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
@@ -45,35 +46,41 @@ int main(int argc, char* argv[])
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
 
     MPI_Request requestS;
-    if(rank > 0)
-      MPI_Isend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requestS);
-    else
+
+    if (rank > 0)
     {
-      MPI_Request *request;
-      request = (MPI_Request*) malloc(size*sizeof(MPI_Request));
+      MPI_Isend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requestS);
+    }
 
-      MPI_Status *status;
-      status = (MPI_Status*) malloc(size*sizeof(MPI_Status));
+    MPI_Request *requestR;
+    requestR = (MPI_Request*) malloc((size-1)*sizeof(MPI_Request));
+    MPI_Status *status;
+    status = (MPI_Status*) malloc((size-1)*sizeof(MPI_Status));
 
-      //Set Pi value into the array
+    if (rank == 0)
+    {
       results[0] = pi;
-      //Receive the Pi values
       for (int i = 1; i < size; i++) {
-        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, request);
+        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, &requestR[i-1]);
+        //status[i-1] = MPI_STATUSES_IGNORE;
       }
-      MPI_Waitall(size, request, MPI_STATUSES_IGNORE);
+      MPI_Waitall(size-1, requestR, MPI_STATUSES_IGNORE);
+
       //Take average of pi values
-      double sum = 0, average = 0;
+
       for (int i = 0; i < size; i++)
       {
         sum += results[i];
       }
       average = sum/size;
-      printf("The result is %f\n", average);
+
     }
     t2 = MPI_Wtime();
+    if (rank == 0)
+      printf("The result is %f\n", average); //Move out of the Timed zone
+
     printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
-    
+
     MPI_Finalize();
 
     return 0;

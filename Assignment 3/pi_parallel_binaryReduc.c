@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 
 
         j=(int)(j+pow(2,i));
-        //printf("J = %d\n", j);
+        printf("J = %d\n", j);
 
         if (rank == j)
         {
