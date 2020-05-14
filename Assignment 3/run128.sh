@@ -16,8 +16,8 @@
 # Number of MPI processes per node
 #SBATCH --ntasks-per-node=32
 
-#SBATCH -e error_file.e
-#SBATCH -o output_file.o
+#SBATCH -e error_file.e128
+#SBATCH -o output_file.o128
 
 #SBATCH -C Haswell
 
