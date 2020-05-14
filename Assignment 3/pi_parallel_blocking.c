@@ -16,6 +16,8 @@ int main(int argc, char* argv[])
     int rank, size, i, provided;
     double t1, t2;
 
+    double sum = 0, average = 0;
+
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
     t1 = MPI_Wtime();
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -55,17 +57,18 @@ int main(int argc, char* argv[])
         MPI_Recv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       }
       //Take average of pi values
-      double sum = 0, average = 0;
       for (int i = 0; i < size; i++)
       {
         sum += results[i];
       }
       average = sum/size;
-      printf("The result is %f\n", average);
     }
     t2 = MPI_Wtime();
     printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
+
     MPI_Finalize();
+
+    printf("The result is %f\n", average);
 
     return 0;
 }

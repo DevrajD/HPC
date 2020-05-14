@@ -76,12 +76,11 @@ int main(int argc, char* argv[])
 
     }
     t2 = MPI_Wtime();
-    if (rank == 0)
-      printf("The result is %f\n", average); //Move out of the Timed zone
+
 
     printf("MPI_Wtime measured for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
-
+    printf("The result is %f\n", average); //Move out of the Timed zone
     return 0;
 }
