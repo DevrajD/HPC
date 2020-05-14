@@ -54,7 +54,8 @@ int main(int argc, char* argv[])
     //Gather the Pi values
     for (int i = 0; i < (int)log2(size); i++)
     {
-      printf("%d\n", i);
+      printf("I = %d\n", i);
+      printf("Initial Pi = %f", pi)
       for (int j = 0; j < size; j=(int)(j+pow(2,i)))
       {
         printf("J = %d\n", j);
