@@ -52,11 +52,12 @@ int main(int argc, char* argv[])
     results[0] = pi;
     results[1] = pi;
     //Gather the Pi values
-    for (int i = 0; i < log2(size); i++)
+    for (int i = 0; i <= (int)log2(size); i++)
     {
+      printf("%d\n", i);
       for (int j = 0; j < size; j=(int)(j+pow(2,i)))
       {
-        //printf("J = %d\n", j);
+        printf("J = %d\n", j);
         if (rank == j)
         {
           MPI_Recv(&results[1], 1, MPI_DOUBLE, j, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
