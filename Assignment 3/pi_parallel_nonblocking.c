@@ -43,17 +43,24 @@ int main(int argc, char* argv[])
     // Estimate Pi and display the result
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
 
+    MPI_Request requestS;
     if(rank > 0)
-      MPI_Isend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+      MPI_Isend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requestS);
     else
     {
+      MPI_Request *request;
+      request = (MPI_Request*) malloc(size*sizeof(MPI_Request));
+
+      MPI_Status *status;
+      status = (MPI_Status*) malloc(size*sizeof(MPI_Status));
+
       //Set Pi value into the array
       results[0] = pi;
       //Receive the Pi values
       for (int i = 1; i < size; i++) {
-        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, request);
       }
-      MPI_Waitall();
+      MPI_Waitall(size, request, MPI_STATUSES_IGNORE);
       //Take average of pi values
       double sum = 0, average = 0;
       for (int i = 0; i < size; i++)

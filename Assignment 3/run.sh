@@ -29,8 +29,8 @@ srun -n 8 ./a.out > my_output_fil
 cc -O2 pi_parallel_blocking.c
 srun -n 8 ./a.out > my_output_piBlockParallel
 
-cc -O2 pi_parallel_binaryReduc.c
-srun -n 8 ./a.out > my_output_piBinaryTReduc
-
 cc -O2 pi_parallel_nonblocking.c
 srun -n 8 ./a.out > my_output_pi_parallel_nonblocking
+
+cc -O2 pi_parallel_binaryReduc.c
+srun -n 8 ./a.out > my_output_piBinaryTReduc
