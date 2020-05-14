@@ -35,8 +35,8 @@ cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc
 
 #for processes in  8 16 32 64
 #do
-srun -n $processes ./hello >> my_output_fil
-srun -n $processes ./piblockin >> my_output_piBlockParallel
-srun -n $processes ./pinonblockin >> my_output_pi_parallel_nonblocking
-srun -n $processes ./pibinaryreduc >> my_output_piBinaryTReduc
+srun -n 8 ./hello >> my_output_fil
+srun -n 8 ./piblockin >> my_output_piBlockParallel
+srun -n 8 ./pinonblockin >> my_output_pi_parallel_nonblocking
+srun -n 8 ./pibinaryreduc >> my_output_piBinaryTReduc
 #done
