@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     int count = 0;
     double x, y, z, pi, *results;
     int rank, size, i, provided;
-    double sum = 0, average = 0;
+
     double t1, t2;
 
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
@@ -68,13 +68,13 @@ int main(int argc, char* argv[])
       MPI_Waitall(size-1, requestR, MPI_STATUSES_IGNORE);
 
       //Take average of pi values
-
+      double sum = 0, average = 0;
       for (int i = 0; i < size; i++)
       {
         sum += results[i];
       }
       average = sum/size;
-
+      printf("The Final result is %f\n", average);
     }
     t2 = MPI_Wtime();
 
@@ -82,6 +82,5 @@ int main(int argc, char* argv[])
     printf("MPI_Wtime measured pi_parallel_nonblocking for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
-    printf("The result is %f\n", average); //Move out of the Timed zone
     return 0;
 }
