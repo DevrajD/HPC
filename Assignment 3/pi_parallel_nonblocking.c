@@ -46,11 +46,10 @@ int main(int argc, char* argv[])
     // Estimate Pi and display the result
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
 
-    MPI_Request requestS;
 
     if (rank > 0)
     {
-      MPI_Isend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, &requestS);
+      MPI_Ssend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
     }
 
     MPI_Request *requestR;

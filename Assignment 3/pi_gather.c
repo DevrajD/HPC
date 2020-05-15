@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 		double sum = 0, average = 0;
 		for (int i = 0; i < size; i++)
 		{
-		sum += results[i];
+		sum += buffer[i];
 		}
 		average = sum/size;
 		printf("The Final result is %f\n", average);
