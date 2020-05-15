@@ -8,7 +8,7 @@
 
 #define SEED     921
 #define NUM_ITER 1000000000
- 
+
 int main(int argc, char* argv[])
 {
     int count = 0;
@@ -22,8 +22,8 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     printf("My rank %d of %d\n", rank, size);
- 
- 
+
+
     // Define my value
     srand(SEED*rank); // Important: Multiply SEED by "rank" when you introduce MPI!
 
@@ -43,16 +43,18 @@ int main(int argc, char* argv[])
     }
 	// Estimate Pi and display the result
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
- 
+
     double reduction_result = 0;
     MPI_Reduce(&pi, &reduction_result, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
- 
+
     if(rank == 0)
     {
         printf("The Final result is %f\n", reduction_result/size);
     }
- 
+    t2 = MPI_Wtime();
+    printf("MPI_Wtime measured (pi_reduce) for total run to be: %f\n", t2-t1);
+
     MPI_Finalize();
- 
+
     return 0;
 }
