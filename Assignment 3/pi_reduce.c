@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 	double time_spent = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == 0)
-		printf("Total time by each process = %f  And Average = %f ", t, t/size);
+		printf("Total time (pi_reduce) by each process = %f  And Average = %f ", t, t/size);
 	
     printf("MPI_Wtime measured (pi_reduce) for total run to be: %f\n", t2-t1);
 
