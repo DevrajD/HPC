@@ -27,6 +27,7 @@ cc -O2 pi_parallel_nonblocking.c -o pinonblockin -lm
 cc -O2 pi_parallel_binaryReduc.c -o pibinaryreduc -lm
 cc -O2 pi_reduce.c -o piReduce -lm
 cc -O2 pi_gather.c -o piGather -lm
+cc -O2 pi_windows.c -o piWindows -lm
 
 for i in 8 16 32 64 128
 do
@@ -42,5 +43,6 @@ rm my_output_piReduce$i
 srun -n $i ./piReduce >> my_output_piReduce$i
 rm my_output_piGather$i
 srun -n $i ./piGather >> my_output_piGather$i
+rm my_output_piWindows$i
+srun -n $i ./piWindows >> my_output_piWindows$i
 done
-
