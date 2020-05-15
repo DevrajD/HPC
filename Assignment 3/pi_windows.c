@@ -50,6 +50,8 @@ int main(int argc, char* argv[])
     }
 	// Estimate Pi and display the result
     window_pi[rank] = ((double)count / (double)(NUM_ITER/size)) * 4.0;
+
+    MPI_Win_fence(0, win);
     for (int i = 0; i < size; i++)
     {
       printf("The mem value at %d is %f\n", i, window_pi[i]);
