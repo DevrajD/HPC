@@ -61,10 +61,10 @@ int main(int argc, char* argv[])
 
 
     MPI_Win_fence(0, win);
-    for (int i = 0; i < size; i++)
-    {
-      printf("The mem value at %d is %f\n", i, window_pi[i]);
-    }
+    //for (int i = 0; i < size; i++)
+    //{
+      //printf("The mem value at %d is %f\n", i, window_pi[i]);
+    //}
     if(rank == 0)
     {
       //Take average of pi values
@@ -85,9 +85,9 @@ int main(int argc, char* argv[])
 	double time_spent = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == 0)
-		printf("Total time (pi_reduce) by each process = %f  And Average = %f ", time_spent, time_spent/size);
+		printf("Total time (pi_windows) by each process = %f  And Average = %f ", time_spent, time_spent/size);
 
-    printf("MPI_Wtime measured (pi_reduce) for total run to be: %f\n", t2-t1);
+    printf("MPI_Wtime measured (pi_windows) for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
 
