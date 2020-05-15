@@ -30,8 +30,8 @@ int main(int argc, char* argv[])
 
     MPI_Win win;
     double *window_pi;
-    MPI_Alloc_mem(size*sizeof(double), MPI_INFO_NULL, &window_pi);
-    MPI_Win_create(window_pi, size*sizeof(double), sizeof(double), MPI_INFO_NULL, MPI_COMM_WORLD, &win);
+    //MPI_Alloc_mem(size*sizeof(double), MPI_INFO_NULL, &window_pi);
+    MPI_Win_allocate(size*sizeof(double), sizeof(double), MPI_INFO_NULL, MPI_COMM_WORLD, &window_pi,  &win);
 
 
     // Calculate PI following a Monte Carlo method
@@ -48,8 +48,16 @@ int main(int argc, char* argv[])
             count++;
         }
     }
-	// Estimate Pi and display the result
+
+    // Estimate Pi and display the result
     window_pi[rank] = ((double)count / (double)(NUM_ITER/size)) * 4.0;
+
+    if(rank > 0)
+    {
+        // Push my value into the first integer in MPI process 1 window
+        MPI_Put(&(window_pi[rank]), 1, MPI_DOUBLE, 0, rank, size, MPI_DOUBLE, win);
+    }
+
 
     MPI_Win_fence(0, win);
     for (int i = 0; i < size; i++)
