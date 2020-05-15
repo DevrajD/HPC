@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
     // Estimate Pi and display the result
     window_pi[rank] = ((double)count / (double)(NUM_ITER/size)) * 4.0;
 
+    MPI_Win_fence(0, win);
     if(rank > 0)
     {
         // Push my value into the first integer in MPI process 1 window
@@ -76,7 +77,6 @@ int main(int argc, char* argv[])
       printf("The Final result is %f\n", average);
     }
     MPI_Win_free(&win);
-    MPI_Free_mem(window_pi);
 
 
     t2 = MPI_Wtime();
