@@ -64,9 +64,9 @@ int main(int argc, char* argv[])
     }
     MPI_Win_free(&win);
     MPI_Free_mem(window_pi);
-    
 
-    t2 = MPI_Wtime(window_pi);
+
+    t2 = MPI_Wtime();
 
 	t = t2-t1;
 	double time_spent = 0;
