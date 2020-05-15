@@ -8,7 +8,7 @@
 # The name of the script is myjob
 #SBATCH -J myjobAll
 
-#SBATCH -t 00:20:00
+#SBATCH -t 00:35:00
 
 # Number of nodes
 #SBATCH --nodes=4
