@@ -68,10 +68,11 @@ int main(int argc, char* argv[])
     }
     t2 = MPI_Wtime();
 	
+	t = t2-t1;
 	double time_spent = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == 0)
-		printf("Total time (pi_parallel_blocking) by each process = %f  And Average = %f ", t, t/size);
+		printf("Total time (pi_parallel_blocking) by each process = %f  And Average = %f ", time_spent, time_spent/size);
 	
     printf("MPI_Wtime measured (pi_parallel_blocking) for total run to be: %f\n", t2-t1);
 
