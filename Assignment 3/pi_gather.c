@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     double x, y, z, pi, *results;
     int rank, size, i, provided;
 
-    double t1, t2;
+    double t1, t2, t;
 
     MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
     t1 = MPI_Wtime();
@@ -62,6 +62,12 @@ int main(int argc, char* argv[])
         MPI_Gather(&pi, 1, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     }
     t2 = MPI_Wtime();
+	
+	double time_spent = 0;
+    MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+	if(rank == 0)
+		printf("Total time by each process = %f  And Average = %f ", t, t/size);
+	
     printf("MPI_Wtime measured (pi_gather) for total run to be: %f\n", t2-t1);
 
     MPI_Finalize();
