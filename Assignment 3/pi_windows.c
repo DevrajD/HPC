@@ -50,7 +50,10 @@ int main(int argc, char* argv[])
     }
 	// Estimate Pi and display the result
     window_pi[rank] = ((double)count / (double)(NUM_ITER/size)) * 4.0;
-
+    for (int i = 0; i < size; i++)
+    {
+      printf("The mem value at %d is %f\n", i, window_pi[i]);
+    }
     if(rank == 0)
     {
       //Take average of pi values
