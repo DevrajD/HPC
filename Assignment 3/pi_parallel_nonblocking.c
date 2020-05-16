@@ -22,10 +22,20 @@ int main(int argc, char* argv[])
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     printf("My rank %d of %d\n", rank, size);
+	
+	MPI_Request *requestR;
+    requestR = (MPI_Request*) malloc((size-1)*sizeof(MPI_Request));
+    MPI_Status *status;
+    status = (MPI_Status*) malloc((size-1)*sizeof(MPI_Status));
+	
 
     if(rank == 0)
-      results = (double*) malloc(size*sizeof(double));
-
+	{
+		results = (double*) malloc(size*sizeof(double));
+		for (int i = 1; i < size; i++)
+        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, &requestR[i-1]);
+	}
+	
     srand(SEED*rank); // Important: Multiply SEED by "rank" when you introduce MPI!
 
     // Calculate PI following a Monte Carlo method
@@ -45,25 +55,17 @@ int main(int argc, char* argv[])
 
     // Estimate Pi and display the result
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
-
+	results[0] = pi;
 
     if (rank > 0)
     {
       MPI_Ssend(&pi, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
     }
 
-    MPI_Request *requestR;
-    requestR = (MPI_Request*) malloc((size-1)*sizeof(MPI_Request));
-    MPI_Status *status;
-    status = (MPI_Status*) malloc((size-1)*sizeof(MPI_Status));
+   
 
     if (rank == 0)
     {
-      results[0] = pi;
-      for (int i = 1; i < size; i++) {
-        MPI_Irecv(&results[i], 1, MPI_DOUBLE, i, 0, MPI_COMM_WORLD, &requestR[i-1]);
-        //status[i-1] = MPI_STATUSES_IGNORE;
-      }
       MPI_Waitall(size-1, requestR, MPI_STATUSES_IGNORE);
 
       //Take average of pi values
