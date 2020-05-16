@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
     // Estimate Pi and display the result
     pi = ((double)count / (double)(NUM_ITER/size)) * 4.0;
-	results[0] = pi;
+	
 
     if (rank > 0)
     {
@@ -66,6 +66,7 @@ int main(int argc, char* argv[])
 
     if (rank == 0)
     {
+		results[0] = pi;
       MPI_Waitall(size-1, requestR, MPI_STATUSES_IGNORE);
 
       //Take average of pi values
