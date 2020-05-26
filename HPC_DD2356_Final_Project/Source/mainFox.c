@@ -11,7 +11,7 @@
 #endif
 
 /* Global Variable Declarations */
-double MatA[N][N], MatB[N][N]; 
+double MatA[N][N], MatB[N][N];
 
 /* Function Declarations */
 void InitiateMatrix()
@@ -27,7 +27,7 @@ void InitiateMatrix()
     }
 }
 
-void PrintMatrix(double* Mat)
+void PrintMatrix(double** Mat)
 {
     for(int i = 0; i < N ; i++)
     {
@@ -42,10 +42,10 @@ void PrintMatrix(double* Mat)
 
 
 int main(int argc, char* argv[]) {
-    int size;   // num procs
-    int rank;   // my rank
+    int rank, size, provided;
     int q;      // num procs per row and per col
     int n_bar;  // block order (block is n_bar by n_bar)
+    double t1;
 
 
     {
@@ -61,32 +61,32 @@ int main(int argc, char* argv[]) {
     {
         printf("Incorrect number of Process alocated, must be %d", (int)N*N);
         MPI_Finalize();
-        return NULL;
+        return 1;
     }
 
     // Define boundaries for processing
     int dims[2] = {0, 0};               // Ask MPI to decompose our processes in a 2D cartesian grid for us
     MPI_Dims_create(size, 2, dims);
-    int periods[2] = {true, true};      //Mesh Topology, set to True for Torus Topology
-    int reorder = true;                 // Let MPI assign arbitrary ranks if it deems it necessary
+    int periods[2] = {1, 1};      //Mesh Topology, set to True for Torus Topology
+    int reorder = 1;                 // Let MPI assign arbitrary ranks if it deems it necessary
     MPI_Comm cart_comm;          // Create a communicator with a cartesian topology.
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, reorder, &cart_comm);
- 
+
     // Declare our neighbours
     enum DIRECTIONS {DOWN, UP, LEFT, RIGHT};
     char* neighbours_names[4] = {"down", "up", "left", "right"};
     int neighbours_ranks[4];
-    
+
     //keep in mind that for MPI dimension 0 is for 'columns' and 1 is for 'rows' (like in Fortran). For more information see here.
     //MPI_Cart_shift(cart_comm, 0, 1, &neighbours_ranks[LEFT], &neighbours_ranks[RIGHT]);  // Let consider dims[0] = X, so the shift tells us our left and right neighbours
     //MPI_Cart_shift(cart_comm, 1, 1, &neighbours_ranks[DOWN], &neighbours_ranks[UP]);     // Let consider dims[1] = Y, so the shift tells us our up and down neighbours
- 
+
     // Get my rank in the new communicator
     int cart_rank;
     MPI_Comm_rank(cart_comm, &cart_rank);
-    
+
     {
-        int x = cart_rank / q; 
+        int x = cart_rank / q;
         int y = cart_rank % q;
 
         int row = x; // Determine color based on row
@@ -103,8 +103,8 @@ int main(int argc, char* argv[]) {
         printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d", rank, cart_rank, x, y, row_rank, row_size);
     }
 
-    
-   
+
+
     MPI_Finalize();
     return 0;
 }
