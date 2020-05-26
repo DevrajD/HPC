@@ -10,6 +10,8 @@
 #define N 3
 #endif
 
+/* Global Variable Declarations */
+double MatA[N][N], MatB[N][N]; 
 
 /* Function Declarations */
 void InitiateMatrix()
@@ -37,8 +39,7 @@ void PrintMatrix(double* Mat)
     }
 }
 
-/* Global Variable Declarations */
-double MatA[N][N], MatB[N][N]; 
+
 
 int main(int argc, char* argv[]) {
     int size;   // num procs
