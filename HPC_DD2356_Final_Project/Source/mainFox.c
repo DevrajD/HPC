@@ -47,12 +47,11 @@ int main(int argc, char* argv[]) {
     int n_bar;  // block order (block is n_bar by n_bar)
     double t1;
 
-
     {
         MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
         MPI_Comm_size(MPI_COMM_WORLD, &size);
         MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-        printf("My rank %d of %d\n", rank, size);
+        //printf("My rank %d of %d\n", rank, size);
     }
     t1 = MPI_Wtime();
 
