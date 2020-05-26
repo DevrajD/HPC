@@ -26,5 +26,5 @@ cc -O2 mainFox.c -o Fox -lm -D N=3
 for i in 9
 do
 rm my_output_fil$i
-srun -n $i ./hello >> my_output_fil$i
+srun -n $i ./Fox >> my_output_fil$i
 done
