@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
         MPI_Comm_rank(row_comm, &row_rank);
         MPI_Comm_size(row_comm, &row_size);
 
-        printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d", rank, cart_rank, x, y, row_rank, row_size);
+        printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
     }
 
 
