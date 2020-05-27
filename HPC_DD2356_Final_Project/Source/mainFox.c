@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
         MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
         //tiling Size descriptors
-        double* BufA, BufB, BufBtemp, BufC;
+        double *BufA, *BufB, *BufBtemp, *BufC;
         BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
         BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
         BufBtemp=(double*)malloc(n_bar*n_bar*sizeof(double));
@@ -152,8 +152,8 @@ int main(int argc, char* argv[]) {
                 MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x + i) % row_size, row_comm);
             }
             multiplyMatrices(BufA, BufB, BufC, n_bar);
-            MPI_Sendrecv(   &BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
-                            &BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+            MPI_Sendrecv(   BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
+                            BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
             memcpy(BufB, BufBtemp, n_bar*n_bar);
             printf("Rank %d Sending to %d and receiving from %d in Stage %d\n",cart_rank, send_to, receive_from, i);
         }
@@ -163,7 +163,6 @@ int main(int argc, char* argv[]) {
         if(rank == 0)
         {
             double MatCbuf[N][N];
-            buffer = (double*) malloc(size*sizeof(double));
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, MatCbuf, n_bar*n_bar, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             {
 
