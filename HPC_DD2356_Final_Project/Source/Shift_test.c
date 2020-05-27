@@ -57,9 +57,12 @@ int main(int argc, char* argv[])
     enum DIRECTIONS {DOWN, UP, LEFT, RIGHT};
     char* neighbours_names[4] = {"down", "up", "left", "right"};
     int neighbours_ranks[4];
+    int old_ranks[4];
+    int new_ranks[4];
+    
  
     // Let consider dims[0] = X, so the shift tells us our left and right neighbours
-    MPI_Cart_shift(new_communicator, 0, 1, &neighbours_ranks[LEFT], &neighbours_ranks[RIGHT]);
+    MPI_Cart_shift(new_communicator, 0, 1, &old_ranks[LEFT], &new_ranks[RIGHT]);
  
     // Let consider dims[1] = Y, so the shift tells us our up and down neighbours
     MPI_Cart_shift(new_communicator, 1, 1, &neighbours_ranks[DOWN], &neighbours_ranks[UP]);
@@ -74,6 +77,7 @@ int main(int argc, char* argv[])
             printf("[MPI process %d] I have no %s neighbour.\n", my_rank, neighbours_names[i]);
         else
             printf("[MPI process %d] I have a %s neighbour: process %d.\n", my_rank, neighbours_names[i], neighbours_ranks[i]);
+        printf("Old %d new %d.\n", old_ranks[i], new_ranks[i]);
     }
  
     MPI_Finalize();

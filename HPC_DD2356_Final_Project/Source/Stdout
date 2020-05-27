@@ -47,3 +47,21 @@ Two Dimensional array elements:
 [MPI process 3] I have no up neighbour.
 [MPI process 3] I have a left neighbour: process 1.
 [MPI process 3] I have no right neighbour.
+
+
+[MPI process 0] I have a down neighbour: process 1.
+[MPI process 0] I have a up neighbour: process 1.
+[MPI process 0] I have a left neighbour: process 2.
+[MPI process 0] I have a right neighbour: process 2.
+[MPI process 1] I have a down neighbour: process 0.
+[MPI process 1] I have a up neighbour: process 0.
+[MPI process 1] I have a left neighbour: process 3.
+[MPI process 1] I have a right neighbour: process 3.
+[MPI process 2] I have a down neighbour: process 3.
+[MPI process 2] I have a up neighbour: process 3.
+[MPI process 2] I have a left neighbour: process 0.
+[MPI process 2] I have a right neighbour: process 0.
+[MPI process 3] I have a down neighbour: process 2.
+[MPI process 3] I have a up neighbour: process 2.
+[MPI process 3] I have a left neighbour: process 1.
+[MPI process 3] I have a right neighbour: process 1.
