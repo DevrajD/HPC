@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
     size_root = sqrt((double) size);
     q = (int) size_root;
     n_bar = N/q;
-    if ((N % q == 0) && (size_root == round(size_root)))
+    if !((N % q == 0) && (size_root == round(size_root)))
     {
         printf("Incorrect number of Process alocated, refer instructions for correct # of Process");
         MPI_Finalize();
