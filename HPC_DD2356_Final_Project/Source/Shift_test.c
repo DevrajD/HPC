@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     // Get my rank in the new communicator
     int my_rank;
     MPI_Comm_rank(new_communicator, &my_rank);
-    printf("My rank = %d \t Old rankx = %d \t New Rankx = %d\t Old ranky = %d \t New Ranky = %d\t", my_rank, old_ranksx, new_ranksx, old_ranksy , new_ranksy);
+    printf("My rank = %d \t Old rankx = %d \t New Rankx = %d\t Old ranky = %d \t New Ranky = %d\t \n", my_rank, old_ranksx, new_ranksx, old_ranksy , new_ranksy);
  
     
  
