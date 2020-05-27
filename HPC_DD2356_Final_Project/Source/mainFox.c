@@ -125,6 +125,7 @@ int main(int argc, char* argv[]) {
 
         //tiling Size descriptors
         double *BufA, *BufB, *BufBtemp, *BufC;
+        double MatCbuf[N][N];
         BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
         BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
         BufBtemp=(double*)malloc(n_bar*n_bar*sizeof(double));
@@ -162,7 +163,7 @@ int main(int argc, char* argv[]) {
 
         if(rank == 0)
         {
-            double MatCbuf[N][N];
+            
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, MatCbuf, n_bar*n_bar, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             {
 
