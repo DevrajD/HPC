@@ -63,6 +63,7 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
         }
         printf("%f ", C[i]);
     }
+    printf("\n");
 }
 
 
@@ -71,7 +72,7 @@ int main(int argc, char* argv[]) {
     int q;      // num procs per row and per col
     int n_bar;  // block order (block is n_bar by n_bar)
     double t1, size_root;
-
+    InitiateMatrix();
     {
         MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
         MPI_Comm_size(MPI_COMM_WORLD, &size);
