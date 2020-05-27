@@ -5,8 +5,8 @@
 
 #define ROWS 10
 #define COLUMNS 10
-#define CHUNK_ROWS 5
-#define CHUNK_COLUMNS 5
+#define CHUNK_ROWS 2
+#define CHUNK_COLUMNS 2
 #define TAG 0
 
 int** alloca_matrice(int righe, int colonne)
