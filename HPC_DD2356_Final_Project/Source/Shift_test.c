@@ -53,32 +53,21 @@ int main(int argc, char* argv[])
     MPI_Comm new_communicator;
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, reorder, &new_communicator);
  
-    // Declare our neighbours
-    enum DIRECTIONS {DOWN, UP, LEFT, RIGHT};
-    char* neighbours_names[4] = {"down", "up", "left", "right"};
-    int neighbours_ranks[4];
-    int old_ranks[4];
-    int new_ranks[4];
+    int old_ranksx, new_ranksx, old_ranksy, new_ranksy;
     
  
     // Let consider dims[0] = X, so the shift tells us our left and right neighbours
-    MPI_Cart_shift(new_communicator, 0, 1, &old_ranks[LEFT], &new_ranks[RIGHT]);
+    MPI_Cart_shift(new_communicator, 0, 1, &old_ranksx, &new_ranksx);
  
     // Let consider dims[1] = Y, so the shift tells us our up and down neighbours
-    MPI_Cart_shift(new_communicator, 1, 1, &neighbours_ranks[DOWN], &neighbours_ranks[UP]);
+    MPI_Cart_shift(new_communicator, 1, 1, &old_ranksy, &new_ranksy);
  
     // Get my rank in the new communicator
     int my_rank;
     MPI_Comm_rank(new_communicator, &my_rank);
+    printf("My rank = %d \t Old rankx = %d \t New Rankx = %d\t Old ranky = %d \t New Ranky = %d\t", my_rank, old_ranksx, new_ranksx, old_ranksy , new_ranksy);
  
-    for(int i = 0; i < 4; i++)
-    {
-        if(neighbours_ranks[i] == MPI_PROC_NULL)
-            printf("[MPI process %d] I have no %s neighbour.\n", my_rank, neighbours_names[i]);
-        else
-            printf("[MPI process %d] I have a %s neighbour: process %d.\n", my_rank, neighbours_names[i], neighbours_ranks[i]);
-        printf("Old %d new %d.\n", old_ranks[i], new_ranks[i]);
-    }
+    
  
     MPI_Finalize();
  
