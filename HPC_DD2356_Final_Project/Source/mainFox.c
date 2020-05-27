@@ -69,7 +69,7 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
 
 int main(int argc, char* argv[]) {
     int rank, size, provided;
-    int q;      // num procs per row and per col
+    int q, n_bar;      // num procs per row and per col
     
     double t1, size_root;
     InitiateMatrix();
