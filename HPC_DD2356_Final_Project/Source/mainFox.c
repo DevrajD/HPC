@@ -147,8 +147,8 @@ int main(int argc, char* argv[]) {
             }
             
         }
-        printf("\nBuf B\n");
-        PrintMatrixBuf(BufB);
+        //printf("\nBuf B\n");
+        //PrintMatrixBuf(BufB);
         //Looping
         
         for(int i = 0; i < q; i++) //Control stages
