@@ -3,9 +3,13 @@
  * @brief Original source code at https://www.rookiehpc.com/mpi/docs/mpi_cart_shift.php
  **/
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
 #include <mpi.h>
  
 /**
@@ -28,6 +32,8 @@
  **/
 int main(int argc, char* argv[])
 {
+    srand(time(NULL) + 14876);
+    double afg = (double) random() / (double) RAND_MAX;
     MPI_Init(&argc, &argv);
  
     // Size of the default communicator
@@ -65,6 +71,7 @@ int main(int argc, char* argv[])
     // Get my rank in the new communicator
     int my_rank;
     MPI_Comm_rank(new_communicator, &my_rank);
+    printf("%f",afg);
     printf("My rank = %d \t Old rankx = %d \t New Rankx = %d\t Old ranky = %d \t New Ranky = %d\t \n", my_rank, old_ranksx, new_ranksx, old_ranksy , new_ranksy);
  
     
