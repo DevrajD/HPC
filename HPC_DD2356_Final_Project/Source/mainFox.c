@@ -173,7 +173,7 @@ int main(int argc, char* argv[]) {
         {
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
         }
-        PrintMatrix(MatCbuf);
+        //PrintMatrix(MatCbuf);
     }
 
 
