@@ -159,10 +159,25 @@ int main(int argc, char* argv[]) {
             {
                 MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x % row_size)+i, row_comm);
             }
-
-            
             multiplyMatrices(BufA, BufB, BufC, n_bar);
 
+/*
+ *      +-----------+-----------+
+ *      |           |           |
+ *    ^ | process 0 | process 1 |
+ *    | |           |           |
+ * UP | +-----------+-----------+
+ *    | |           |           |
+ *    | | process 2 | process 3 |
+ *      |           |           |
+ *      +-----------------------+
+ *        ------------------->
+ *                RIGHT
+ */
+            int old_ranksrow, new_ranksrow;
+            MPI_Cart_shift(new_communicator, 0, 1, &old_ranksx, &new_ranksx);
+            MPI_Sendrecv(   &buffer_send, 1, MPI_INT, peer, tag_send,
+                            &buffer_recv, 1, MPI_INT, peer, tag_recv, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
     }
 

@@ -39,18 +39,14 @@ int main(int argc, char* argv[])
     // Size of the default communicator
     int size;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-    if(size != 4)
-    {
-        printf("This application is meant to be run with 4 processes, not %d.\n", size);
-        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-    }
+    
  
     // Ask MPI to decompose our processes in a 2D cartesian grid for us
     int dims[2] = {0, 0};
     MPI_Dims_create(size, 2, dims);
  
     // Make both dimensions periodic
-    int periods[2] = {false, false};
+    int periods[2] = {true, true};
  
     // Let MPI assign arbitrary ranks if it deems it necessary
     int reorder = true;
