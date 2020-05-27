@@ -137,6 +137,7 @@ int main(int argc, char* argv[]) {
         {
             memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
         }
+        printf("\nBuf B\n");
         PrintMatrixBuf(BufB);
         //Looping
         
@@ -148,6 +149,7 @@ int main(int argc, char* argv[]) {
                 {
                     memcpy(&BufA[j*n_bar],&MatA[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
                 }
+                printf("\nBuf A\n");
                 PrintMatrixBuf(BufA);
                 MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,row_rank, row_comm);
             }
@@ -159,6 +161,8 @@ int main(int argc, char* argv[]) {
             MPI_Sendrecv(   BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
                             BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
             memcpy(BufB, BufBtemp, n_bar*n_bar);
+            printf("\nBuf B\n");
+            PrintMatrixBuf(BufB);
             printf("Rank %d Sending to %d and receiving from %d in Stage %d\n",cart_rank, send_to, receive_from, i);
         }
 
@@ -169,7 +173,7 @@ int main(int argc, char* argv[]) {
             
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, MatCbuf, n_bar*n_bar, MPI_DOUBLE, 0, MPI_COMM_WORLD);
             {
-
+                
             }
         }
         else
