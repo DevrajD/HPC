@@ -10,6 +10,10 @@
 #define N 6
 #endif
 
+#ifndef N_BAR
+#define N_BAR 2
+#endif
+
 /* Global Variable Declarations */
 double MatA[N][N], MatB[N][N];
 int n_bar;  // block order (block is n_bar by n_bar)
@@ -126,16 +130,22 @@ int main(int argc, char* argv[]) {
         MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
         //tiling Size descriptors
-        double *BufA, *BufB, *BufBtemp, *BufC;
+        //double *BufA, *BufB, *BufBtemp, *BufC;
         double MatCbuf[N][N];
-        BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
-        BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
-        BufBtemp=(double*)malloc(n_bar*n_bar*sizeof(double));
-        BufC=(double*)calloc(n_bar*n_bar, sizeof(double)); //Initiate and set zero
+        //BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
+        //BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
+        double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0};
+        //BufBtemp=(double*)malloc(n_bar*n_bar*sizeof(double));
+        //BufC=(double*)calloc(n_bar*n_bar, sizeof(double)); //Initiate and set zero
 
         for (int j = 0; j < n_bar; j++) //Generate B Tile
         {
-            memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
+            //memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
+            for (int i = 0; i < n_bar; i++)
+            {
+                BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
+            }
+            
         }
         printf("\nBuf B\n");
         PrintMatrixBuf(BufB);
@@ -145,29 +155,56 @@ int main(int argc, char* argv[]) {
         {
             if ((x + i) % row_size == y) //True if this is sender
             {
-                for (int j = 0; j < n_bar; j++) //Generate A Tile
+                /* for (int j = 0; j < n_bar; j++) //Generate A Tile
                 {
                     memcpy(&BufA[j*n_bar],&MatA[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
+                } */
+                for (int j = 0; j < n_bar; j++) //Generate B Tile
+                {
+                    for (int i = 0; i < n_bar; i++)
+                    {
+                        BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
+                    }
+                    
                 }
-                printf("\nBuf A\n");
-                PrintMatrixBuf(BufA);
-                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,row_rank, row_comm);
+                //printf("\nBuf A\n");
+                //PrintMatrixBuf(BufA);
+                //MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,row_rank, row_comm);
+                MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,row_rank, row_comm);
             }
             else
             {
-                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x + i) % row_size, row_comm);
+                //MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x + i) % row_size, row_comm);
+                MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
             }
-            multiplyMatrices(BufA, BufB, BufC, n_bar);
-            MPI_Sendrecv(   BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
-                            BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
-            memcpy(BufB, BufBtemp, n_bar*n_bar);
-            printf("\nBuf B\n");
-            PrintMatrixBuf(BufB);
+            //multiplyMatrices(BufA, BufB, BufC, n_bar);
+            double sum = 0;
+            for (int c = 0 ; c < N_BAR ; c++ )
+            {
+                for (int d = 0 ; d < N_BAR ; d++ )
+                {
+                    for (int k = 0 ; k < N_BAR ; k++ )
+                    {
+                    sum = sum + BufMatA[c][k]*BufMatB[k][d];
+                    }
+                    BufMatC[c][d] += sum;
+                    sum = 0;
+                }
+            }
+            //MPI_Sendrecv(   BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
+            //                BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+            MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
+                            BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+
+            //memcpy(BufB, BufBtemp, n_bar*n_bar);
+            memcpy(BufMatB, BufMatBtemp, n_bar*n_bar*sizeof(double));
+            //printf("\nBuf B\n");
+            //PrintMatrixBuf(BufB);
             printf("Rank %d Sending to %d and receiving from %d in Stage %d\n",cart_rank, send_to, receive_from, i);
         }
 
         
-
+/*
         if(rank == 0)
         {
             
@@ -180,6 +217,7 @@ int main(int argc, char* argv[]) {
         {
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
         }
+*/
         //PrintMatrix(MatCbuf);
     }
 
