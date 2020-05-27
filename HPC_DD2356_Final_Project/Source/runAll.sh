@@ -21,7 +21,7 @@
 #SBATCH -C Haswell
 
 
-cc -O2 mainFox.c -o Fox -lm -D N=6
+cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2
 
 for i in 9
 do

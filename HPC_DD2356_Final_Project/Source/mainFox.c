@@ -182,7 +182,7 @@ int main(int argc, char* argv[]) {
         {
             if(row_rank == 0)
             {
-                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, &MatCbuf_row[i*N_BAR], N_BAR, MPI_DOUBLE, 0, row_comm);
+                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, MatCbuf_row, N_BAR, MPI_DOUBLE, 0, row_comm);
             }
             else
             {
