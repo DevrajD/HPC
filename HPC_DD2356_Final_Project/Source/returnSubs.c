@@ -1,7 +1,7 @@
 #include <mpi.h>
-#include <iostream.h>
+#include <stdio.h>
 #include <stdlib.h>
-using namespace std;
+
 
 #define ROWS 10
 #define COLUMNS 10
