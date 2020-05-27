@@ -39,13 +39,51 @@ void PrintMatrix(double** Mat)
     }
 }
 
+void multiplyMatrices(double* A, double* B, double* C, int n) 
+{
+    memset(C, 0, n*n*sizeof(double)); 
+    // Multiplying first and second matrices and storing in mult.
+    for (int i = 0; i < r1; ++i) {
+        for (int j = 0; j < c2; ++j) {
+            for (int k = 0; k < c1; ++k) {
+                mult[i][j] += first[i][k] * second[k][j];
+            }
+        }
+    }
+}
+
+void multiplyMatrices(double* a, double* b, double* C, int n) 
+{
+
+    //memset(C, 0, n*n*sizeof(double)); 
+
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = 0; j < n; j++) 
+        {
+            int sum = 0;
+            for (int k = 0; k < n; k++)
+                sum = sum + a[i * n + k] * b[k * n + j];
+            C[i * n + j] = sum;
+        }
+    }
+
+    for (int i = 0; i < n*n; i++) 
+    {
+        if (i % n == 0) 
+        {
+            printf("\n");
+        }
+        printf("%f ", C[i]);
+    }
+}
 
 
 int main(int argc, char* argv[]) {
     int rank, size, provided;
     int q;      // num procs per row and per col
     int n_bar;  // block order (block is n_bar by n_bar)
-    double t1;
+    double t1, size_root;
 
     {
         MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
@@ -54,11 +92,12 @@ int main(int argc, char* argv[]) {
         //printf("My rank %d of %d\n", rank, size);
     }
     t1 = MPI_Wtime();
-
-    q = (int) sqrt((double) size);
-    if (q != N )
+    size_root = sqrt((double) size);
+    q = (int) size_root;
+    n_bar = N/q;
+    if ((N % q == 0) && (size_root == round(size_root)))
     {
-        printf("Incorrect number of Process alocated, must be %d", (int)N*N);
+        printf("Incorrect number of Process alocated, refer instructions for correct # of Process");
         MPI_Finalize();
         return 1;
     }
@@ -100,6 +139,38 @@ int main(int argc, char* argv[]) {
         MPI_Comm_size(row_comm, &row_size);
 
         printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
+
+        //tiling Size descriptors
+        double* BufA, BufB, BufC;
+        BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
+        BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
+        BufC=(double*)calloc(n_bar*n_bar, sizeof(double)); //Initiate and set zero
+        //Looping
+        
+
+
+        for(int i = 0; i < N; i++) //Control stages
+        {
+            if (x + i == y) //True if this is sender
+            {
+                for (int j = 0; j < n_bar; j++) //Generate A Tile
+                {
+                    memcpy(&BufA[j*n_bar],&MatA[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
+                }
+                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,row_rank, row_comm);
+            }
+            else
+            {
+                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x % row_size)+i, row_comm);
+            }
+
+            for (int j = 0; j < n_bar; j++) //Generate B Tile
+            {
+                memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
+            }
+            multiplyMatrices(BufA, BufB, BufC, n_bar);
+        }
+
     }
 
 
