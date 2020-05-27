@@ -12,6 +12,7 @@
 
 /* Global Variable Declarations */
 double MatA[N][N], MatB[N][N];
+int n_bar;  // block order (block is n_bar by n_bar)
 
 /* Function Declarations */
 void InitiateMatrix()
@@ -23,17 +24,19 @@ void InitiateMatrix()
         {
             MatA[i][j] = (double) random() / (double) RAND_MAX;
             MatB[i][j] = (double) random() / (double) RAND_MAX;
+            printf("%f , %f\t",MatA[i][j], MatB[i][j]);
         }
+        printf("\n");
     }
 }
 
-void PrintMatrix(double** Mat)
+void PrintMatrixBuf(double* buf)
 {
-    for(int i = 0; i < N ; i++)
+    for(int i = 0; i < n_bar ; i++)
     {
-        for(int j = 0; j < N ; j++)
+        for(int j = 0; j < n_bar ; j++)
         {
-            printf("%.6f\t", Mat[i][j]); //Upto 6 decimal places
+            printf("%.6f\t", buf[i*n_bar + j]); //Upto 6 decimal places
         }
         printf("\n");
     }
@@ -48,10 +51,8 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
     {
         for (int j = 0; j < n; j++) 
         {
-            int sum = 0;
             for (int k = 0; k < n; k++)
-                sum = sum + a[i * n + k] * b[k * n + j];
-            C[i * n + j] = sum;
+                C[i * n + j] += a[i * n + k] * b[k * n + j]; //Accumulate the results here
         }
     }
 
@@ -70,7 +71,7 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
 int main(int argc, char* argv[]) {
     int rank, size, provided;
     int q;      // num procs per row and per col
-    int n_bar;  // block order (block is n_bar by n_bar)
+    
     double t1, size_root;
     InitiateMatrix();
     {
@@ -136,7 +137,7 @@ int main(int argc, char* argv[]) {
         {
             memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
         }
-        
+        PrintMatrixBuf(BufB);
         //Looping
         
         for(int i = 0; i < q; i++) //Control stages
@@ -147,6 +148,7 @@ int main(int argc, char* argv[]) {
                 {
                     memcpy(&BufA[j*n_bar],&MatA[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
                 }
+                PrintMatrixBuf(BufA);
                 MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,row_rank, row_comm);
             }
             else
