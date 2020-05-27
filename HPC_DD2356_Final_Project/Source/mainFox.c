@@ -150,7 +150,7 @@ int main(int argc, char* argv[]) {
         
         //Looping
         
-        for(int i = 0; i < n_bar; i++) //Control stages
+        for(int i = 0; i < q; i++) //Control stages
         {
             if (x + i == y) //True if this is sender
             {
