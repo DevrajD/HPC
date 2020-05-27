@@ -1,6 +1,6 @@
 #include <mpi.h>
-#include <iostream>
-#include <cstdlib>
+#include <iostream.h>
+#include <stdlib.h>
 using namespace std;
 
 #define ROWS 10
