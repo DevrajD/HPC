@@ -188,8 +188,10 @@ int main(int argc, char* argv[]) {
                     sum = sum + BufMatA[c][k]*BufMatB[k][d];
                     }
                     BufMatC[c][d] += sum;
+                    printf("%f\t", BufMatC[c][d]);
                     sum = 0;
                 }
+                printf("\n");
             }
             //MPI_Sendrecv(   BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
             //                BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
