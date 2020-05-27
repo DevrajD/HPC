@@ -16,26 +16,27 @@ int** alloca_matrice(int righe, int colonne)
 
     matrice = (int **)malloc(righe * sizeof(int*));
 
-    if(matrice != NULL){
+    if(matrice != NULL)
+    {
         matrice[0] = (int *)malloc(righe*colonne*sizeof(int));
         if(matrice[0]!=NULL)
             for(i=1; i<righe; i++)
                 matrice[i] = matrice[0]+i*colonne;
-        else{
+        else
+        {
             free(matrice);
             matrice = NULL;
         }
     }
-    else{
+    else
+    {
         matrice = NULL;
     }
     return matrice;
-
 }
 
 int main(int argc, char* argv[])
 {
-
     int my_id, numprocs,length,i,j;
     int ndims, sizes[2],subsizes[2],starts[2];
     int** DEBUG_CH=NULL;
@@ -49,10 +50,9 @@ int main(int argc, char* argv[])
     MPI_Init(&argc, &argv) ;    
     MPI_Comm_rank(MPI_COMM_WORLD, &my_id) ;
     MPI_Comm_size(MPI_COMM_WORLD, &numprocs) ;  // Ottiene quanti processi sono attivi
-    if (numprocs != 4) {
+    if (numprocs != 25) {
         MPI_Abort(MPI_COMM_WORLD,1);
     }
-    MPI_Get_processor_name(name, &length);    
 
     //creo una sottomatrice ripulita dalle ghost cells
     ndims=2;
