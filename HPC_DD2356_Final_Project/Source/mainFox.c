@@ -35,11 +35,11 @@ void InitiateMatrix()
 
 void PrintMatrixBuf(double* buf)
 {
-    for(int i = 0; i < n_bar ; i++)
+    for(int i = 0; i < N_BAR ; i++)
     {
-        for(int j = 0; j < n_bar ; j++)
+        for(int j = 0; j < N_BAR ; j++)
         {
-            printf("%.6f\t", buf[i*n_bar + j]); //Upto 6 decimal places
+            printf("%.6f\t", buf[i*N_BAR + j]); //Upto 6 decimal places
         }
         printf("\n");
     }
