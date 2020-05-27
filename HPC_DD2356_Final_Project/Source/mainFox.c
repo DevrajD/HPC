@@ -133,19 +133,22 @@ int main(int argc, char* argv[]) {
         printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
 
         //tiling Size descriptors
-        double* BufA, BufB, BufC;
+        double* BufA, BufB, BufBtemp, BufC;
         BufA=(double*)malloc(n_bar*n_bar*sizeof(double));
         BufB=(double*)malloc(n_bar*n_bar*sizeof(double));
+        BufBtemp=(double*)malloc(n_bar*n_bar*sizeof(double));
+        BufC=(double*)calloc(n_bar*n_bar, sizeof(double)); //Initiate and set zero
+
         for (int j = 0; j < n_bar; j++) //Generate B Tile
         {
             memcpy(&BufB[j*n_bar],&MatB[x*n_bar + j][y*n_bar],n_bar); //x, y coordinates
         }
-        BufC=(double*)calloc(n_bar*n_bar, sizeof(double)); //Initiate and set zero
+        
         //Looping
         
 
 
-        for(int i = 0; i < N; i++) //Control stages
+        for(int i = 0; i < n_bar; i++) //Control stages
         {
             if (x + i == y) //True if this is sender
             {
@@ -161,23 +164,12 @@ int main(int argc, char* argv[]) {
             }
             multiplyMatrices(BufA, BufB, BufC, n_bar);
 
-/*
- *      +-----------+-----------+
- *      |           |           |
- *    ^ | process 0 | process 1 |
- *    | |           |           |
- * UP | +-----------+-----------+
- *    | |           |           |
- *    | | process 2 | process 3 |
- *      |           |           |
- *      +-----------------------+
- *        ------------------->
- *                RIGHT
- */
-            int old_ranksrow, new_ranksrow;
-            MPI_Cart_shift(new_communicator, 0, 1, &old_ranksx, &new_ranksx);
-            MPI_Sendrecv(   &buffer_send, 1, MPI_INT, peer, tag_send,
-                            &buffer_recv, 1, MPI_INT, peer, tag_recv, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            int receive_from, send_to;
+            MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
+            MPI_Sendrecv(   &BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
+                            &BufBtemp,  n_bar*n_bar, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+            memcpy(BufB, BufBtemp, n_bar*n_bar);
+            printf("Rank %d Sending to %d and receiving from %d \n",cart_rank, send_to, receive_from);
         }
     }
 

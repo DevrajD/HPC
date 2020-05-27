@@ -57,7 +57,11 @@ int main(int argc, char* argv[])
  
     int old_ranksx, new_ranksx, old_ranksy, new_ranksy;
     
- 
+    for (int i = 0; i < 3; i++)
+    {
+        /* code */
+    
+    
     // Let consider dims[0] = X, so the shift tells us our left and right neighbours
     MPI_Cart_shift(new_communicator, 0, 1, &old_ranksx, &new_ranksx);
  
@@ -69,7 +73,7 @@ int main(int argc, char* argv[])
     MPI_Comm_rank(new_communicator, &my_rank);
     printf("%f",afg);
     printf("My rank = %d \t Old rankx = %d \t New Rankx = %d\t Old ranky = %d \t New Ranky = %d\t \n", my_rank, old_ranksx, new_ranksx, old_ranksy , new_ranksy);
- 
+    }
     
  
     MPI_Finalize();

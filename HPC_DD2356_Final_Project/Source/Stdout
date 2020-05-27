@@ -76,3 +76,36 @@ My rank = 3 	 Old rankx = 1 	     New Rankx = -1	 Old ranky = 2 	     New Ranky 
 [MPI process 3] I have a up neighbour: process 2.
 [MPI process 3] I have a left neighbour: process 1.
 [MPI process 3] I have a right neighbour: process 1.
+
+
+0.829288My rank = 1 	 Old rankx = 13 	 New Rankx = 5	 Old ranky = 0 	 New Ranky = 2	 
+0.829288My rank = 2 	 Old rankx = 14 	 New Rankx = 6	 Old ranky = 1 	 New Ranky = 3	 
+0.829288My rank = 3 	 Old rankx = 15 	 New Rankx = 7	 Old ranky = 2 	 New Ranky = 0	 
+0.829288My rank = 4 	 Old rankx = 0 	     New Rankx = 8	 Old ranky = 7 	 New Ranky = 5	 
+0.829288My rank = 5 	 Old rankx = 1 	     New Rankx = 9	 Old ranky = 4 	 New Ranky = 6	 
+0.829288My rank = 6 	 Old rankx = 2 	     New Rankx = 10	 Old ranky = 5 	 New Ranky = 7	 
+0.829288My rank = 7 	 Old rankx = 3 	     New Rankx = 11	 Old ranky = 6 	 New Ranky = 4	 
+0.829288My rank = 8 	 Old rankx = 4 	     New Rankx = 12	 Old ranky = 11  New Ranky = 9	 
+0.829288My rank = 9 	 Old rankx = 5 	     New Rankx = 13	 Old ranky = 8 	 New Ranky = 10	 
+0.829288My rank = 11 	 Old rankx = 7 	     New Rankx = 15	 Old ranky = 10  New Ranky = 8	 
+0.829288My rank = 12 	 Old rankx = 8 	     New Rankx = 0	 Old ranky = 15  New Ranky = 13	 
+0.829288My rank = 13 	 Old rankx = 9 	     New Rankx = 1	 Old ranky = 12  New Ranky = 14	 
+0.829288My rank = 14 	 Old rankx = 10 	 New Rankx = 2	 Old ranky = 13  New Ranky = 15	 
+0.829288My rank = 15 	 Old rankx = 11 	 New Rankx = 3	 Old ranky = 14  New Ranky = 12	 
+0.829288My rank = 0 	 Old rankx = 12 	 New Rankx = 4	 Old ranky = 3 	 New Ranky = 1	 
+0.829288My rank = 10 	 Old rankx = 6 	     New Rankx = 14	 Old ranky = 9 	 New Ranky = 11	 
+
+0.257407My rank = 0 	 Old rankx = 2 	     New Rankx = 2	 Old ranky = 1 	 New Ranky = 1	 
+0.257407My rank = 1 	 Old rankx = 3 	     New Rankx = 3	 Old ranky = 0 	 New Ranky = 0	 
+0.257407My rank = 2 	 Old rankx = 0 	     New Rankx = 0	 Old ranky = 3 	 New Ranky = 3	 
+0.257407My rank = 3 	 Old rankx = 1 	     New Rankx = 1	 Old ranky = 2 	 New Ranky = 2
+	 
+0.974640My rank = 0 	 Old rankx = 6 	     New Rankx = 3	 Old ranky = 2 	 New Ranky = 1	 
+0.974640My rank = 1 	 Old rankx = 7 	     New Rankx = 4	 Old ranky = 0 	 New Ranky = 2	 
+0.974640My rank = 2 	 Old rankx = 8 	     New Rankx = 5	 Old ranky = 1 	 New Ranky = 0	 
+0.974640My rank = 3 	 Old rankx = 0 	     New Rankx = 6	 Old ranky = 5 	 New Ranky = 4	 
+0.974640My rank = 4 	 Old rankx = 1 	     New Rankx = 7	 Old ranky = 3 	 New Ranky = 5	 
+0.974640My rank = 5 	 Old rankx = 2 	     New Rankx = 8	 Old ranky = 4 	 New Ranky = 3	 
+0.974640My rank = 6 	 Old rankx = 3 	     New Rankx = 0	 Old ranky = 8 	 New Ranky = 7	 
+0.974640My rank = 7 	 Old rankx = 4 	     New Rankx = 1	 Old ranky = 6 	 New Ranky = 8	 
+0.974640My rank = 8 	 Old rankx = 5 	     New Rankx = 2	 Old ranky = 7 	 New Ranky = 6	
