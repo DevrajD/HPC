@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     MPI_Dims_create(size, 2, dims);
  
     // Make both dimensions periodic
-    int periods[2] = {false, false};
+    int periods[2] = {true, true};
  
     // Let MPI assign arbitrary ranks if it deems it necessary
     int reorder = true;
