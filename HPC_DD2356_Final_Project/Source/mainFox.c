@@ -39,19 +39,6 @@ void PrintMatrix(double** Mat)
     }
 }
 
-void multiplyMatrices(double* A, double* B, double* C, int n) 
-{
-    memset(C, 0, n*n*sizeof(double)); 
-    // Multiplying first and second matrices and storing in mult.
-    for (int i = 0; i < r1; ++i) {
-        for (int j = 0; j < c2; ++j) {
-            for (int k = 0; k < c1; ++k) {
-                mult[i][j] += first[i][k] * second[k][j];
-            }
-        }
-    }
-}
-
 void multiplyMatrices(double* a, double* b, double* C, int n) 
 {
 
@@ -152,7 +139,7 @@ int main(int argc, char* argv[]) {
         
         for(int i = 0; i < q; i++) //Control stages
         {
-            if (x + i == y) //True if this is sender
+            if ((x + i) % row_size == y) //True if this is sender
             {
                 for (int j = 0; j < n_bar; j++) //Generate A Tile
                 {
@@ -162,7 +149,7 @@ int main(int argc, char* argv[]) {
             }
             else
             {
-                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x % row_size)+i, row_comm);
+                MPI_Bcast(BufA,n_bar*n_bar,MPI_DOUBLE,(x + i) % row_size, row_comm);
             }
             multiplyMatrices(BufA, BufB, BufC, n_bar);
             MPI_Sendrecv(   &BufB,      n_bar*n_bar, MPI_DOUBLE, send_to,       0,
@@ -172,6 +159,20 @@ int main(int argc, char* argv[]) {
         }
 
         PrintMatrix(BufC);
+
+        if(rank == 0)
+        {
+            double MatCbuf[N][N];
+            buffer = (double*) malloc(size*sizeof(double));
+            MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, MatCbuf, n_bar*n_bar, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+            {
+
+            }
+        }
+        else
+        {
+            MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+        }
     }
 
 
