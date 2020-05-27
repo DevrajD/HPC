@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
             printf("Rank %d Sending to %d and receiving from %d in Stage %d\n",cart_rank, send_to, receive_from, i);
         }
 
-        PrintMatrix(BufC);
+        
 
         if(rank == 0)
         {
@@ -172,6 +172,7 @@ int main(int argc, char* argv[]) {
         {
             MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
         }
+        PrintMatrix(MatCbuf);
     }
 
 
