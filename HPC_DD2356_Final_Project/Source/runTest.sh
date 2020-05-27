@@ -23,7 +23,7 @@
 
 cc -O2 Shift_test.c -o test -lm -D N=3
 
-for i in 4
+for i in 25
 do
 rm tesoutput_fil$i
 srun -n $i ./test >> tesoutput_fil$i
