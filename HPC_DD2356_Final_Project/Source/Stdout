@@ -31,6 +31,11 @@ Two Dimensional array elements:
  *        ------------------->
  *                RIGHT
 
+My rank = 0 	 Old rankx = 2 	 New Rankx = 2	 Old ranky = 1 	 New Ranky = 1	 
+My rank = 1 	 Old rankx = 3 	 New Rankx = 3	 Old ranky = 0 	 New Ranky = 0	 
+My rank = 2 	 Old rankx = 0 	 New Rankx = 0	 Old ranky = 3 	 New Ranky = 3	 
+My rank = 3 	 Old rankx = 1 	 New Rankx = 1	 Old ranky = 2 	 New Ranky = 2	
+
 [MPI process 0] I have no down neighbour.
 [MPI process 0] I have a up neighbour: process 1.
 [MPI process 0] I have no left neighbour.
