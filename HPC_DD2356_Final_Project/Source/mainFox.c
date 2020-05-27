@@ -15,7 +15,7 @@
 #endif
 
 /* Global Variable Declarations */
-double MatA[N][N], MatB[N][N];
+double MatA[N][N], MatB[N][N], MatC[N][N];
 
 /* Function Declarations */
 void InitiateMatrix()
@@ -108,11 +108,13 @@ int main(int argc, char* argv[]) {
         int y = cart_rank % q;
 
         int row = x; // Determine color based on row
-
+        int col = y;    
         // Split the communicator based on the color and use the
         // original rank for ordering
         MPI_Comm row_comm;
         MPI_Comm_split(cart_comm, row, cart_rank, &row_comm);
+        MPI_Comm col_comm;
+        MPI_Comm_split(cart_comm, col, cart_rank, &col_comm);
 
         int row_rank, row_size;
         MPI_Comm_rank(row_comm, &row_rank);
@@ -125,7 +127,7 @@ int main(int argc, char* argv[]) {
         MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
         //tiling Size descriptors
-        double MatCbuf[N][N];
+        double MatCbuf_row[N];
         double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0};
 
         for (int j = 0; j < n_bar; j++) //Generate B Tile
@@ -176,20 +178,46 @@ int main(int argc, char* argv[]) {
         }
 
         
-/*
-        if(rank == 0)
+        for (int i = 0; i < q; i++)
         {
-            
-            MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, MatCbuf, n_bar*n_bar, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+            if(row_rank == 0)
             {
-                
+                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, &MatCbuf_row[i*N_BAR], N_BAR, MPI_DOUBLE, 0, row_comm);
+            }
+            else
+            {
+                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, row_comm);
             }
         }
-        else
+        for (int i = 0; i < N; i++)
         {
-            MPI_Gather(BufC, n_bar*n_bar, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+            printf("%f\t",MatCbuf_row[i]);
         }
-*/
+        
+        for (int i = 0; i < q; i++)
+        {
+            if(x == 0 && row_rank == 0)
+            {
+                MPI_Gather(MatCbuf_row, N, MPI_DOUBLE, MatC, N_BAR, MPI_DOUBLE, 0, col_comm);
+            }
+            else if(row_rank == 0)
+            {
+                MPI_Gather(MatCbuf_row, N, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, col_comm);
+            }
+        }
+        
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                printf("%f",MatC[i][j]);
+            }
+            printf("\n");
+        }
+        
+        
+        
+
         //PrintMatrix(MatCbuf);
     }
 
