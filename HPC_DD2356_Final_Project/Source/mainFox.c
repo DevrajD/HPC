@@ -193,7 +193,7 @@ int main(int argc, char* argv[]) {
         MPI_Type_create_resized(recvsubarray, 0, 1*sizeof(double), &resizedrecvsubarray);
         MPI_Type_commit(&resizedrecvsubarray);
 
-        int counts[N*N/(N_BAR*N_BAR)]={1};
+        int counts[]= { [0 ... (N*N/(N_BAR*N_BAR)-1)] = 1 };
         int disps[N*N/(N_BAR*N_BAR)];
         for (int i = 0; i < size; i++)
         {
