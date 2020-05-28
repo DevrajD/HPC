@@ -103,80 +103,80 @@ int main(int argc, char* argv[]) {
     int cart_rank;
     MPI_Comm_rank(cart_comm, &cart_rank);
 
+    int x = cart_rank / q;
+    int y = cart_rank % q;
+
+    int row = x; // Determine color based on row
+    int col = y;    
+    // Split the communicator based on the color and use the
+    // original rank for ordering
+    MPI_Comm row_comm;
+    MPI_Comm_split(cart_comm, row, cart_rank, &row_comm);
+    MPI_Comm col_comm;
+    MPI_Comm_split(cart_comm, col, cart_rank, &col_comm);
+
+    int row_rank, row_size;
+    MPI_Comm_rank(row_comm, &row_rank);
+    MPI_Comm_size(row_comm, &row_size);
+
+    printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
+
+    //Setting up roll in Vertical direction
+    int receive_from, send_to;
+    MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
+
+    //tiling Size descriptors
+    double MatCbuf_row[N];
+    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0};
+    for (int j = 0; j < n_bar; j++) //Generate B Tile
     {
-        int x = cart_rank / q;
-        int y = cart_rank % q;
-
-        int row = x; // Determine color based on row
-        int col = y;    
-        // Split the communicator based on the color and use the
-        // original rank for ordering
-        MPI_Comm row_comm;
-        MPI_Comm_split(cart_comm, row, cart_rank, &row_comm);
-        MPI_Comm col_comm;
-        MPI_Comm_split(cart_comm, col, cart_rank, &col_comm);
-
-        int row_rank, row_size;
-        MPI_Comm_rank(row_comm, &row_rank);
-        MPI_Comm_size(row_comm, &row_size);
-
-        printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
-
-        //Setting up roll in Vertical direction
-        int receive_from, send_to;
-        MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
-
-        //tiling Size descriptors
-        double MatCbuf_row[N];
-        double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0};
-
-        for (int j = 0; j < n_bar; j++) //Generate B Tile
+        for (int i = 0; i < n_bar; i++)
         {
-            for (int i = 0; i < n_bar; i++)
-            {
-                BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
-            }
+            BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
         }
-        
-        for(int i = 0; i < q; i++) //Control stages
+    }
+    
+    for(int i = 0; i < q; i++) //Control stages and compute multiple for the submatrices
+    {
+        if ((x + i) % row_size == y) //True if this is sender
         {
-            if ((x + i) % row_size == y) //True if this is sender
+            for (int j = 0; j < n_bar; j++) //Generate B Tile
             {
-                for (int j = 0; j < n_bar; j++) //Generate B Tile
+                for (int i = 0; i < n_bar; i++)
                 {
-                    for (int i = 0; i < n_bar; i++)
-                    {
-                        BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
-                    }
-                    
+                    BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
                 }
-                MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,row_rank, row_comm);
+                
             }
-            else
-            {
-                MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
-            }
-            //multiply
-            double sum = 0;
-            for (int c = 0 ; c < N_BAR ; c++ )
-            {
-                for (int d = 0 ; d < N_BAR ; d++ )
-                {
-                    for (int k = 0 ; k < N_BAR ; k++ )
-                    {
-                    sum = sum + BufMatA[c][k]*BufMatB[k][d];
-                    }
-                    BufMatC[c][d] += sum;
-                    printf("%f\t", BufMatC[c][d]);
-                    sum = 0;
-                }
-                printf("\n");
-            }
-            MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
-                            BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
-            memcpy(BufMatB, BufMatBtemp, n_bar*n_bar*sizeof(double));
+            MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,row_rank, row_comm);
         }
-        
+        else
+        {
+            MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
+        }
+        //multiply
+        double sum = 0;
+        for (int c = 0 ; c < N_BAR ; c++ )
+        {
+            for (int d = 0 ; d < N_BAR ; d++ )
+            {
+                for (int k = 0 ; k < N_BAR ; k++ )
+                {
+                sum = sum + BufMatA[c][k]*BufMatB[k][d];
+                }
+                BufMatC[c][d] += sum;
+                printf("%f\t", BufMatC[c][d]);
+                sum = 0;
+            }
+            printf("\n");
+        }
+        //Roll B data upwards
+        MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
+                        BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+        memcpy(BufMatB, BufMatBtemp, n_bar*n_bar*sizeof(double));
+    }
+    
+    
     int sizes[2] = {N,N};
     int subsizes[2] = {N_BAR,N_BAR};
     int starts[2] = {0,0};
@@ -199,56 +199,16 @@ int main(int argc, char* argv[]) {
     {
         disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
     }
-    
+
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
-
-    
-        
-        /* for (int i = 0; i < q; i++)
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
         {
-            if(row_rank == 0)
-            {
-                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, MatCbuf_row, N_BAR, MPI_DOUBLE, 0, row_comm);
-            }
-            else
-            {
-                MPI_Gather(&BufMatC[i][0], N_BAR, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, row_comm);
-            }
+            printf("%f\t",MatC[i][j]);
         }
-        for (int i = 0; i < N; i++)
-        {
-            printf("%f\t",MatCbuf_row[i]);
-        }
-        
-        for (int i = 0; i < q; i++)
-        {
-            if(x == 0 && row_rank == 0)
-            {
-                MPI_Gather(MatCbuf_row, N, MPI_DOUBLE, MatC, N_BAR, MPI_DOUBLE, 0, col_comm);
-            }
-            else if(row_rank == 0)
-            {
-                MPI_Gather(MatCbuf_row, N, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, col_comm);
-            }
-        } */
-        
-        for (int i = 0; i < N; i++)
-        {
-            for (int j = 0; j < N; j++)
-            {
-                printf("%f\t",MatC[i][j]);
-            }
-            printf("\n");
-        }
-        
-        
-        
-
-        //PrintMatrix(MatCbuf);
+        printf("\n");
     }
-
-
-
     MPI_Finalize();
     return 0;
 }
