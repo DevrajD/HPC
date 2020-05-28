@@ -44,9 +44,8 @@ void PrintMatrixBuf(double* buf)
         printf("\n");
     }
 }
-void PrintMatrix(double Mat[N][N], char s)
+void PrintMatrix(double Mat[N][N])
 {
-    printf("Printing Matrix%s",s);
     for(int i = 0; i < N ; i++)
     {
         for(int j = 0; j < N ; j++)
@@ -209,14 +208,17 @@ int main(int argc, char* argv[]) {
     }
 
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
-/*
+
     if (rank == 0)
     {
-        PrintMatrix(MatA, "A");
-        PrintMatrix(MatB, "B");
-        PrintMatrix(MatC, "C");
+        printf("Printing Matrix A\n");
+        PrintMatrix(MatA);
+        printf("Printing Matrix B\n");
+        PrintMatrix(MatB);
+        printf("Printing Matrix C\n");
+        PrintMatrix(MatC);
     }
-    */
+    
         /*
         for (int i = 0; i < N; i++)
         {
