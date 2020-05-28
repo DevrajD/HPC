@@ -25,8 +25,16 @@ void InitiateMatrix()
     {
         for(int j = 0; j < N ; j++)
         {
+            #ifdef DEBUG
+            #if DEBUG==1  
+            MatA[i][j] = j;
+            MatB[i][j] = j % 2;
+            #else
             MatA[i][j] = (double) random() / (double) RAND_MAX;
             MatB[i][j] = (double) random() / (double) RAND_MAX;
+            #endif 
+            #endif
+            
             //printf("%f , %f\t",MatA[i][j], MatB[i][j]);
         }
         //printf("\n");
@@ -79,6 +87,45 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
     */
 }
 
+void Debug(){
+    double mult[N][N];
+    // Initializing elements of matrix mult to 0.
+    for (int i = 0; i < N; ++i) 
+    {
+        for (int j = 0; j < N; ++j) 
+        {
+            mult[i][j] = 0;
+        }
+    }
+
+    // Multiplying first and second matrices and storing in mult.
+    for (int i = 0; i < N; ++i) 
+    {
+        for (int j = 0; j < N; ++j) 
+        {
+            for (int k = 0; k < N; ++k) 
+            {
+                mult[i][j] += MatA[i][k] * MatB[k][j];
+            }
+        }
+    }
+
+    // Verify multiplication worked correct
+    int matches = 1;
+    for (int i = 0; i < N; ++i) 
+    {
+        for (int j = 0; j < N; ++j) 
+        {
+            matches = mult[i][j] == MatC[i][j];
+            if (!matches)
+                break;
+        }
+    }
+    if (matches)
+        printf("The resutls Matches");
+    else
+        printf("The results do not match");
+}
 
 int main(int argc, char* argv[]) {
     int rank, size, provided;
@@ -127,7 +174,7 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(row_comm, &row_rank);
     MPI_Comm_size(row_comm, &row_size);
 
-    printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
+    //printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
 
     //Setting up roll in Vertical direction for B
     int receive_from, send_to;
@@ -135,9 +182,9 @@ int main(int argc, char* argv[]) {
 
     //tiling Size descriptors
     double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
-    for (int j = 0; j < n_bar; j++) //Generate B Tile
+    for (int j = 0; j < N_BAR; j++) //Generate B Tile
     {
-        for (int i = 0; i < n_bar; i++)
+        for (int i = 0; i < N_BAR; i++)
         {
             BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
         }
@@ -147,9 +194,9 @@ int main(int argc, char* argv[]) {
     {
         if ((x + i) % row_size == y) //True if this is sender
         {
-            for (int j = 0; j < n_bar; j++) //Generate B Tile
+            for (int j = 0; j < N_BAR; j++) //Generate B Tile
             {
-                for (int i = 0; i < n_bar; i++)
+                for (int i = 0; i < N_BAR; i++)
                 {
                     BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
                 }
@@ -172,15 +219,15 @@ int main(int argc, char* argv[]) {
                 sum = sum + BufMatA[c][k]*BufMatB[k][d];
                 }
                 BufMatC[c][d] += sum;
-                printf("%f\t", BufMatC[c][d]);
+                //printf("%f\t", BufMatC[c][d]);
                 sum = 0;
             }
-            printf("\n");
+            //printf("\n");
         }
         //Roll B data upwards
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
-        memcpy(BufMatB, BufMatBtemp, n_bar*n_bar*sizeof(double));
+        memcpy(BufMatB, BufMatBtemp,  N_BAR*N_BAR*sizeof(double));
     }
     
     
@@ -217,18 +264,14 @@ int main(int argc, char* argv[]) {
         PrintMatrix(MatB);
         printf("Printing Matrix C\n");
         PrintMatrix(MatC);
+
+        #ifdef DEBUG
+        #if DEBUG==1  
+        Debug();
+        #endif 
+        #endif
+        
     }
-    
-        /*
-        for (int i = 0; i < N; i++)
-        {
-            for (int j = 0; j < N; j++)
-            {
-                printf("%f\t",MatC[i][j]);
-            }
-            printf("\n");
-        }
-        */
     MPI_Finalize();
     return 0;
 }
