@@ -13,7 +13,7 @@
 # Number of nodes
 #SBATCH --nodes=1
 # Number of MPI processes per node
-#SBATCH --ntasks-per-node=32
+#SBATCH --ntasks-per-node=64
 
 #SBATCH -e error_file.e
 #SBATCH -o output_file.o
@@ -37,11 +37,11 @@ rm my_output_file*
 DEBUG=1
 N=4
 N_BAR=2
-MAX_SIDEVAL=128
+MAX_SIDEVAL=64
 while [ $N -le $MAX_SIDEVAL ]
 do
     N_BAR=2
-    while [ $N_BAR -le ${N}/2 ]
+    while [ $N_BAR -le $(( $N / 2 )) ]
     do
         PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
         cc -O2 mainFox.c -o Fox -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
