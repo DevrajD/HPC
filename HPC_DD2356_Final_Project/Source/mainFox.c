@@ -27,9 +27,9 @@ void InitiateMatrix()
         {
             MatA[i][j] = (double) random() / (double) RAND_MAX;
             MatB[i][j] = (double) random() / (double) RAND_MAX;
-            printf("%f , %f\t",MatA[i][j], MatB[i][j]);
+            //printf("%f , %f\t",MatA[i][j], MatB[i][j]);
         }
-        printf("\n");
+        //printf("\n");
     }
 }
 
@@ -40,6 +40,18 @@ void PrintMatrixBuf(double* buf)
         for(int j = 0; j < N_BAR ; j++)
         {
             printf("%.6f\t", buf[i*N_BAR + j]); //Upto 6 decimal places
+        }
+        printf("\n");
+    }
+}
+void PrintMatrix(double Mat[N][N], char s)
+{
+    printf("Printing Matrix%s",s);
+    for(int i = 0; i < N ; i++)
+    {
+        for(int j = 0; j < N ; j++)
+        {
+            printf("%.6f\t", Mat[N][N]); //Upto 6 decimal places
         }
         printf("\n");
     }
@@ -55,6 +67,7 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
                 C[i * n + j] += a[i * n + k] * b[k * n + j]; //Accumulate the results here
         }
     }
+    /*
     for (int i = 0; i < n*n; i++) 
     {
         if (i % n == 0) 
@@ -64,6 +77,7 @@ void multiplyMatrices(double* a, double* b, double* C, int n)
         printf("%f ", C[i]);
     }
     printf("\n");
+    */
 }
 
 
@@ -79,6 +93,9 @@ int main(int argc, char* argv[]) {
         MPI_Comm_rank(MPI_COMM_WORLD, &rank);
         //printf("My rank %d of %d\n", rank, size);
     }
+    PrintMatrix(MatA, "A");
+    PrintMatrix(MatB, "B");
+
     t1 = MPI_Wtime();
     size_root = sqrt((double) size);
     q = (int) size_root;
@@ -98,22 +115,16 @@ int main(int argc, char* argv[]) {
     MPI_Comm cart_comm;          // Create a communicator with a cartesian topology.
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, reorder, &cart_comm);
 
-    
     // Get my rank in the new communicator
     int cart_rank;
     MPI_Comm_rank(cart_comm, &cart_rank);
-
     int x = cart_rank / q;
     int y = cart_rank % q;
 
     int row = x; // Determine color based on row
-    int col = y;    
-    // Split the communicator based on the color and use the
-    // original rank for ordering
+    // Split the communicator based on the color and use the original rank for ordering
     MPI_Comm row_comm;
     MPI_Comm_split(cart_comm, row, cart_rank, &row_comm);
-    MPI_Comm col_comm;
-    MPI_Comm_split(cart_comm, col, cart_rank, &col_comm);
 
     int row_rank, row_size;
     MPI_Comm_rank(row_comm, &row_rank);
@@ -121,13 +132,12 @@ int main(int argc, char* argv[]) {
 
     printf("My world rank = %d Cartesian Rank = %d X = %d Y = %d row_rank = %d row_size = %d \n", rank, cart_rank, x, y, row_rank, row_size);
 
-    //Setting up roll in Vertical direction
+    //Setting up roll in Vertical direction for B
     int receive_from, send_to;
     MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
     //tiling Size descriptors
-    double MatCbuf_row[N];
-    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0};
+    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
     for (int j = 0; j < n_bar; j++) //Generate B Tile
     {
         for (int i = 0; i < n_bar; i++)
@@ -194,21 +204,31 @@ int main(int argc, char* argv[]) {
     MPI_Type_commit(&resizedrecvsubarray);
 
     int counts[]= { [0 ... (N*N/(N_BAR*N_BAR)-1)] = 1 };
-    int disps[N*N/(N_BAR*N_BAR)];
+    int disps[N*N/(N_BAR*N_BAR)]; //Calculate the displacements for the incoming Submatrices
     for (int i = 0; i < size; i++)
     {
         disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
     }
 
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
-    for (int i = 0; i < N; i++)
+
+    if (rank == 0)
     {
-        for (int j = 0; j < N; j++)
-        {
-            printf("%f\t",MatC[i][j]);
-        }
-        printf("\n");
+        PrintMatrix(MatA, "A");
+        PrintMatrix(MatB, "B");
+        PrintMatrix(MatC, "C");
     }
+    
+        /*
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                printf("%f\t",MatC[i][j]);
+            }
+            printf("\n");
+        }
+        */
     MPI_Finalize();
     return 0;
 }
