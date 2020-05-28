@@ -19,17 +19,34 @@
 #SBATCH -o output_file.o
 
 #SBATCH -C Haswell
+# for i in 9 16 32 64 128 256 512 1024 2048 4096 8192 16384
+# do
+# rm my_output_fil$i
+# rm my_output_fil2De$i
+# rm my_output_filDe$i
 
+# cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2
+# srun -n $i ./Fox >> my_output_fil$i
+# cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2 -D DEBUG=2
+# srun -n $i ./Fox >> my_output_fil2De$i
+# cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2 -D DEBUG=2
+# srun -n $i ./Fox >> my_output_filDe$i
+# done
 
-
-
-for i in 9
+rm my_output_file*
+DEBUG=1
+N=4
+N_BAR=2
+MAX_SIDEVAL=8192
+while [ $N -le $MAX_SIDEVAL ]
 do
-
-rm my_output_fil$i
-rm my_output_filDe$i
-cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2
-srun -n $i ./Fox >> my_output_fil$i
-cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2 -D DEBUG=2
-srun -n $i ./Fox >> my_output_filDe$i
+    N_BAR=2
+    while [ $N_BAR -le ${MAX_SIDEVAL}/2 ]
+    do
+        PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
+        cc -O2 mainFox.c -o Fox -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
+        srun -n $PROCESSES ./Fox >> my_output_file${N}_$N_BAR
+        N_BAR=$(( $N_BAR * 2))
+    done
+    N=$(( $N * 2 ))
 done

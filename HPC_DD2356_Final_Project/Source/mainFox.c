@@ -130,15 +130,14 @@ int main(int argc, char* argv[]) {
     int rank, size, provided;
     int q, n_bar;      // num procs per row and per col
     
-    double t1, size_root;
+    double t1, t2, t, size_root;
     InitiateMatrix();
-    {
-        MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
-        MPI_Comm_size(MPI_COMM_WORLD, &size);
-        MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-        //printf("My rank %d of %d\n", rank, size);
-    }
-
+    
+    MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    //printf("My rank %d of %d\n", rank, size);
+    
     t1 = MPI_Wtime();
     size_root = sqrt((double) size);
     q = (int) size_root;
@@ -255,6 +254,15 @@ int main(int argc, char* argv[]) {
 
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
 
+    //Time the code
+    t2 = MPI_Wtime();
+    t = t2-t1;
+    printf("MPI_Wtime measured for total run by process %d = %f\n", rank, t);
+	double time_spent = 0;
+    MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+	if(rank == 0)
+		printf("Total time by each process = %f  And Average = %f ", time_spent, time_spent/size);
+	
     if (rank == 0)
     {
         printf("Printing Matrix A\n");
