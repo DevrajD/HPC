@@ -99,7 +99,7 @@ My rank = 3 	 Old rankx = 1 	     New Rankx = -1	 Old ranky = 2 	     New Ranky 
 0.257407My rank = 1 	 Old rankx = 3 	     New Rankx = 3	 Old ranky = 0 	 New Ranky = 0	 
 0.257407My rank = 2 	 Old rankx = 0 	     New Rankx = 0	 Old ranky = 3 	 New Ranky = 3	 
 0.257407My rank = 3 	 Old rankx = 1 	     New Rankx = 1	 Old ranky = 2 	 New Ranky = 2
-	 
+
 0.974640My rank = 0 	 Old rankx = 6 	     New Rankx = 3	 Old ranky = 2 	 New Ranky = 1	 
 0.974640My rank = 1 	 Old rankx = 7 	     New Rankx = 4	 Old ranky = 0 	 New Ranky = 2	 
 0.974640My rank = 2 	 Old rankx = 8 	     New Rankx = 5	 Old ranky = 1 	 New Ranky = 0	 
@@ -109,3 +109,25 @@ My rank = 3 	 Old rankx = 1 	     New Rankx = -1	 Old ranky = 2 	     New Ranky 
 0.974640My rank = 6 	 Old rankx = 3 	     New Rankx = 0	 Old ranky = 8 	 New Ranky = 7	 
 0.974640My rank = 7 	 Old rankx = 4 	     New Rankx = 1	 Old ranky = 6 	 New Ranky = 8	 
 0.974640My rank = 8 	 Old rankx = 5 	     New Rankx = 2	 Old ranky = 7 	 New Ranky = 6	
+
+0 0 0 0 0 1 1 1 1 1 
+0 0 0 0 0 1 1 1 1 1 
+0 0 0 0 0 1 1 1 1 1 
+0 0 0 0 0 1 1 1 1 1 
+0 0 0 0 0 1 1 1 1 1 
+2 2 2 2 2 3 3 3 3 3 
+2 2 2 2 2 3 3 3 3 3 
+2 2 2 2 2 3 3 3 3 3 
+2 2 2 2 2 3 3 3 3 3 
+2 2 2 2 2 3 3 3 3 3
+
+0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 1 1 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+2 2 0 0 0 3 3 0 0 0 
+2 2 0 0 0 3 3 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0

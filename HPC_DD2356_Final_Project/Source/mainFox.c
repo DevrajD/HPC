@@ -176,9 +176,35 @@ int main(int argc, char* argv[]) {
                             BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
             memcpy(BufMatB, BufMatBtemp, n_bar*n_bar*sizeof(double));
         }
-
+        if(rank==0){
+        int sizes[2] = {N,N};
+        int subsizes[2] = {N_BAR,N_BAR};
+        int starts[2] = {0,0};
         
-        for (int i = 0; i < q; i++)
+        MPI_Datatype block2d;
+        MPI_Type_contiguous(N_BAR*N_BAR, MPI_DOUBLE, &block2d);
+        MPI_Type_commit(&block2d);
+
+        MPI_Datatype recvsubarray;
+        MPI_Type_create_subarray(2,sizes,subsizes,starts,MPI_ORDER_C,MPI_DOUBLE,&recvsubarray);
+        MPI_Type_commit(&recvsubarray);
+
+        MPI_Datatype resizedrecvsubarray;
+        MPI_Type_create_resized(recvsubarray, 0, 1*sizeof(double), &resizedrecvsubarray);
+        MPI_Type_commit(&resizedrecvsubarray);
+
+        int counts[N*N/(N_BAR*N_BAR)]={1};
+        int disps[N*N/(N_BAR*N_BAR)];
+        for (int i = 0; i < size; i++)
+        {
+            disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
+        }
+        
+        MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
+
+    }
+        
+        /* for (int i = 0; i < q; i++)
         {
             if(row_rank == 0)
             {
@@ -204,7 +230,7 @@ int main(int argc, char* argv[]) {
             {
                 MPI_Gather(MatCbuf_row, N, MPI_DOUBLE, NULL, 0, MPI_DOUBLE, 0, col_comm);
             }
-        }
+        } */
         
         for (int i = 0; i < N; i++)
         {
