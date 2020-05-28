@@ -25,13 +25,12 @@ void InitiateMatrix()
     {
         for(int j = 0; j < N ; j++)
         {
+            MatA[i][j] = (double) random() / (double) RAND_MAX;
+            MatB[i][j] = (double) random() / (double) RAND_MAX;
             #ifdef DEBUG
             #if DEBUG==2  
             MatA[i][j] = j;
             MatB[i][j] = j % 2;
-            #else
-            MatA[i][j] = (double) random() / (double) RAND_MAX;
-            MatB[i][j] = (double) random() / (double) RAND_MAX;
             #endif 
             #endif
             
