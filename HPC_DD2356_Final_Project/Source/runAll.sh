@@ -37,7 +37,7 @@ rm my_output_file*
 DEBUG=1
 N=4
 N_BAR=2
-MAX_SIDEVAL=8192
+MAX_SIDEVAL=128
 while [ $N -le $MAX_SIDEVAL ]
 do
     N_BAR=2
