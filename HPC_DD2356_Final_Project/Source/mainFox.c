@@ -93,8 +93,6 @@ int main(int argc, char* argv[]) {
         MPI_Comm_rank(MPI_COMM_WORLD, &rank);
         //printf("My rank %d of %d\n", rank, size);
     }
-    PrintMatrix(MatA, "A");
-    PrintMatrix(MatB, "B");
 
     t1 = MPI_Wtime();
     size_root = sqrt((double) size);
