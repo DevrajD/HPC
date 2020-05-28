@@ -200,7 +200,7 @@ int main(int argc, char* argv[]) {
             disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
         }
         
-        MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
+        MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,recvsubarray,0,MPI_COMM_WORLD);
 
     }
         
@@ -236,7 +236,7 @@ int main(int argc, char* argv[]) {
         {
             for (int j = 0; j < N; j++)
             {
-                printf("%f",MatC[i][j]);
+                printf("%f\t",MatC[i][j]);
             }
             printf("\n");
         }
