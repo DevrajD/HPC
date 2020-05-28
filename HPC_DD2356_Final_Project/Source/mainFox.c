@@ -26,7 +26,7 @@ void InitiateMatrix()
         for(int j = 0; j < N ; j++)
         {
             #ifdef DEBUG
-            #if DEBUG==1  
+            #if DEBUG==2  
             MatA[i][j] = j;
             MatB[i][j] = j % 2;
             #else
@@ -266,7 +266,7 @@ int main(int argc, char* argv[]) {
         PrintMatrix(MatC);
 
         #ifdef DEBUG
-        #if DEBUG==1  
+        #if DEBUG > 0  
         Debug();
         #endif 
         #endif
