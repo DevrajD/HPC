@@ -51,7 +51,7 @@ void PrintMatrix(double Mat[N][N], char s)
     {
         for(int j = 0; j < N ; j++)
         {
-            printf("%.6f\t", Mat[N][N]); //Upto 6 decimal places
+            printf("%.6f\t", Mat[i][j]); //Upto 6 decimal places
         }
         printf("\n");
     }
