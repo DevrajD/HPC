@@ -11,7 +11,7 @@
 #SBATCH -t 00:5:00
 
 # Number of nodes
-#SBATCH --nodes=1
+#SBATCH --nodes=16
 # Number of MPI processes per node
 #SBATCH --ntasks-per-node=64
 
@@ -38,15 +38,22 @@ DEBUG=1
 N=4
 N_BAR=2
 MAX_SIDEVAL=64
-while [ $N -le $MAX_SIDEVAL ]
+for i in 1 2 3
 do
-    N_BAR=2
-    while [ $N_BAR -le $(( $N / 2 )) ]
+    while [ $N -le $MAX_SIDEVAL ]
     do
-        PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
-        cc -O2 mainFox.c -o Fox -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
-        srun -n $PROCESSES ./Fox >> my_output_file${N}_$N_BAR
-        N_BAR=$(( $N_BAR * 2))
+        N_BAR=2
+        while [ $N_BAR -le $(( $N / 2 )) ]
+        do
+            PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
+            cc -O2 mainFox.c -o Fox -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
+            echo "Size of Compiled File is $(stat -c %s Fox)" >> my_output_file${N}_$N_BAR
+            srun -n $PROCESSES ./Fox >> my_output_file${N}_$N_BAR
+            N_BAR=$(( $N_BAR * 2))
+        done
+        N=$(( $N * 2 ))
     done
-    N=$(( $N * 2 ))
+    N_BAR=$(( $MAX_SIDEVAL / 4 ))
+    N=$MAX_SIDEVAL
+    MAX_SIDEVAL=$(( $MAX_SIDEVAL * 4 ))
 done
