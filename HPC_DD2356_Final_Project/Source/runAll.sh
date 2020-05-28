@@ -41,7 +41,7 @@ MAX_SIDEVAL=8192
 while [ $N -le $MAX_SIDEVAL ]
 do
     N_BAR=2
-    while [ $N_BAR -le ${MAX_SIDEVAL}/2 ]
+    while [ $N_BAR -le ${N}/2 ]
     do
         PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
         cc -O2 mainFox.c -o Fox -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
