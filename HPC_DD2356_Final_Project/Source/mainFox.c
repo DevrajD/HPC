@@ -211,14 +211,14 @@ int main(int argc, char* argv[]) {
     }
 
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
-
+/*
     if (rank == 0)
     {
         PrintMatrix(MatA, "A");
         PrintMatrix(MatB, "B");
         PrintMatrix(MatC, "C");
     }
-    
+    */
         /*
         for (int i = 0; i < N; i++)
         {
