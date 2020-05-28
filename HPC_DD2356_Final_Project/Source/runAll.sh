@@ -21,10 +21,15 @@
 #SBATCH -C Haswell
 
 
-cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2
+
 
 for i in 9
 do
+
 rm my_output_fil$i
+rm my_output_filDe$i
+cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2
 srun -n $i ./Fox >> my_output_fil$i
+cc -O2 mainFox.c -o Fox -lm -D N=6 -D N_BAR=2 -D DEBUG=2
+srun -n $i ./Fox >> my_output_filDe$i
 done
