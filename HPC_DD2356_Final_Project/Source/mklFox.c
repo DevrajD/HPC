@@ -129,7 +129,7 @@ void Debug(){
 int main(int argc, char* argv[]) {
     int rank, size, provided;
     int q, n_bar;      // num procs per row and per col
-    
+    double alpha = 1, beta = 0.0;
     double t1, t2, t, size_root;
     InitiateMatrix();
     
