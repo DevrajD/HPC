@@ -152,9 +152,9 @@ int main(int argc, char* argv[]) {
     // Define boundaries for processing
     int dims[2] = {0, 0};               // Ask MPI to decompose our processes in a 2D cartesian grid for us
     MPI_Dims_create(size, 2, dims);
-    int periods[2] = {1, 1};      //Mesh Topology, set to True for Torus Topology
-    int reorder = 1;                 // Let MPI assign arbitrary ranks if it deems it necessary
-    MPI_Comm cart_comm;          // Create a communicator with a cartesian topology.
+    int periods[2] = {1, 1};            //Mesh Topology, set to True for Torus Topology
+    int reorder = 1;                    // Let MPI assign arbitrary ranks if it deems it necessary
+    MPI_Comm cart_comm;                 // Create a communicator with a cartesian topology.
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, reorder, &cart_comm);
 
     // Get my rank in the new communicator
@@ -199,7 +199,7 @@ int main(int argc, char* argv[]) {
     {
         for (int i = 0; i < N_BAR; i++)
         {
-            BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
+            BufMatB[j*N_BAR+i] = MatB[x*N_BAR + j][y*N_BAR + i];
         }
     }
     
@@ -211,7 +211,7 @@ int main(int argc, char* argv[]) {
             {
                 for (int i = 0; i < N_BAR; i++)
                 {
-                    BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
+                    BufMatA[j*N_BAR + i] = MatA[x*N_BAR + j][y*N_BAR + i];
                 }
                 
             }
@@ -224,29 +224,7 @@ int main(int argc, char* argv[]) {
         //multiply usin MKL dgemm
         cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, 
                     N_BAR, N_BAR, N_BAR, alpha, BufMatA, N_BAR, BufMatB, N_BAR, beta, BufMatC, N_BAR);
-        /*double uble sum = 0;
-        for (int c = 0 ; c < N_BAR ; c++ )
-        {
-            for (int d = 0 ; d < N_BAR ; d++ )
-            {
-                for (int k = 0 ; k < N_BAR ; k++ )
-                {
-                sum = sum + BufMatA[c][k]*BufMatB[k][d];
-                }
-                BufMatC[c][d] += sum;
-                #ifdef DEBUG
-                #if DEBUG > 2  
-                printf("%f\t", BufMatC[c][d]);
-                #endif 
-                #endif
-                sum = 0;
-            }
-            #ifdef DEBUG
-            #if DEBUG > 2  
-            printf("\n");
-            #endif 
-            #endif
-        } */
+        
         //Roll B data upwards
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
