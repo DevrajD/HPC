@@ -23,7 +23,7 @@
 
 PROCESSES=9 #Processes variable must be a perfect square value
 DEBUG=1
-rm my_output_files*
+rm my_constProcoutput_files*
 for i in 2 4 6 8 10 16 20 25 32 64 
 do
     N_BAR=$(( $i ))

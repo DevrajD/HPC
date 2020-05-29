@@ -14,6 +14,8 @@
 #define N_BAR 2
 #endif
 
+#define EPSILON 0.000001
+
 /* Global Variable Declarations */
 double MatA[N][N], MatB[N][N], MatC[N][N];
 
@@ -115,7 +117,7 @@ void Debug(){
     {
         for (int j = 0; j < N; ++j) 
         {
-            matches = mult[i][j] == MatC[i][j];
+            matches = fabs(mult[i][j] - MatC[i][j]) <= EPSILON;
             if (!matches)
                 break;
         }
