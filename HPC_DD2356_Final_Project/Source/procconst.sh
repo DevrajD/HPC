@@ -11,9 +11,9 @@
 #SBATCH -t 00:5:00
 
 # Number of nodes
-#SBATCH --nodes=1
+#SBATCH --nodes=4
 # Number of MPI processes per node
-#SBATCH --ntasks-per-node=9
+#SBATCH --ntasks-per-node=64
 
 #SBATCH -e error_file.e
 #SBATCH -o output_file.o
@@ -23,11 +23,16 @@
 
 PROCESSES=9 #Processes variable must be a perfect square value
 DEBUG=1
-rm my_constProcoutput_files*
-for i in 2 4 6 8 10 16 20 25 32 64 
+
+for j in 2 3 4 5 6 8 10 12 14 16 
 do
-    N_BAR=$(( $i ))
-    N=$(( $(bc <<< "scale=0; sqrt($PROCESSES)") * $N_BAR ))
-    cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
-    srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_$N_BAR
+    PROCESSES=$(( $j * $j ))
+    for i in 2 4 6 8 10 16 20 25 32 64 128
+    do
+        N_BAR=$(( $i ))
+        N=$(( $(bc <<< "scale=0; sqrt($PROCESSES)") * $N_BAR ))
+        rm my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+        cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
+        srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+    done
 done
