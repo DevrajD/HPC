@@ -5,7 +5,7 @@
 #include <math.h>
 #include <time.h>
 #include <mpi.h>
-#include "omp.h"
+#include "mkl.h"
 
 #ifndef N
 #define N 6
@@ -13,10 +13,6 @@
 
 #ifndef N_BAR
 #define N_BAR 2
-#endif
-
-#ifndef OMP_THREADS
-#define OMP_THREADS 2
 #endif
 
 #define EPSILON 0.000001
@@ -183,30 +179,34 @@ int main(int argc, char* argv[]) {
     MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
     //tiling Size descriptors
-    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
-   /* 
+    //double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
+    double *BufMatA, *BufMatB, *BufMatC;
+    //Allocating memory for matrices aligned on 64-byte boundary for better performance
+    BufMatA = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
+    BufMatB = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
+    BufMatC = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
+    double alpha = 1, beta = 0.0;
+    if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL) 
+    {
+        printf( "\n ERROR: Can't allocate memory for matrices. Aborting... \n\n");
+        mkl_free(A);
+        mkl_free(B);
+        mkl_free(C);
+        return 1;
+    }
+    
     for (int j = 0; j < N_BAR; j++) //Generate B Tile
     {
         for (int i = 0; i < N_BAR; i++)
         {
             BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
         }
-    } */
-    omp_set_num_threads(OMP_THREADS);
-    #pragma omp parallel for schedule(static)
-    for (int j = 0; j < N_BAR; j++) //Generate B Tile
-    {
-        for (int i = 0; i < N_BAR; i++)
-        {
-            BufMatB[i][j] = MatB[x*N_BAR + j][y*N_BAR + i]; //Transposed matrix generation
-        }
     }
     
-    for(int i = 0; i < q; i++) //Control stages and compute multiple for the submatrices **Should not be mulltithreaded**
+    for(int i = 0; i < q; i++) //Control stages and compute multiple for the submatrices
     {
         if ((x + i) % row_size == y) //True if this is sender
         {
-            #pragma omp parallel for schedule(static)
             for (int j = 0; j < N_BAR; j++) //Generate A Tile
             {
                 for (int i = 0; i < N_BAR; i++)
@@ -221,17 +221,17 @@ int main(int argc, char* argv[]) {
         {
             MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
         }
-        //multiply utilizing transposed B tile
-        double sum = 0;
+        //multiply usin MKL dgemm
+        cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, 
+                    N_BAR, N_BAR, N_BAR, alpha, BufMatA, N_BAR, BufMatB, N_BAR, beta, BufMatC, N_BAR);
+        /*double uble sum = 0;
         for (int c = 0 ; c < N_BAR ; c++ )
         {
-            #pragma omp for schedule(static)
             for (int d = 0 ; d < N_BAR ; d++ )
             {
-                #pragma omp simd reduction(+:sum)   //Vectorize the loop here
                 for (int k = 0 ; k < N_BAR ; k++ )
                 {
-                sum += BufMatA[c][k]*BufMatB[d][k];
+                sum = sum + BufMatA[c][k]*BufMatB[k][d];
                 }
                 BufMatC[c][d] += sum;
                 #ifdef DEBUG
@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
             printf("\n");
             #endif 
             #endif
-        }
+        } */
         //Roll B data upwards
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
@@ -304,6 +304,10 @@ int main(int argc, char* argv[]) {
         #endif
         
     }
+    mkl_free(BufMatA);
+    mkl_free(BufMatB);
+    mkl_free(BufMatC);
+
     MPI_Finalize();
     return 0;
 }
