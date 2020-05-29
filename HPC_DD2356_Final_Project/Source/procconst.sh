@@ -21,15 +21,13 @@
 #SBATCH -C Haswell
 
 
+PROCESSES=9 #Processes variable must be a perfect square value
 DEBUG=1
 rm my_output_files*
-for i in "6 3" "6 2"
+for i in 2 4 6 8 10 16 20 25 32 64 
 do
-    set -- $i
-    echo $1 and $2
-    N=$(( $1 ))
-    N_BAR=$(( $2 ))
-    PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
-    cc -O2 mainFox.c -o Foxs -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
-    srun -n $PROCESSES ./Foxs >> my_output_files${N}_$N_BAR
+    N_BAR=$(( $i ))
+    N=$(bc <<< "scale=0; sqrt($PROCESSES)")
+    cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
+    srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_$N_BAR
 done
