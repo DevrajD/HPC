@@ -187,14 +187,14 @@ int main(int argc, char* argv[]) {
     BufMatBtemp = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatC = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     double alpha = 1, beta = 0.0; */
-    if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL || BufMatBtemp == NULL) 
-    {
-        printf( "\n ERROR: Can't allocate memory for matrices. Aborting... \n\n");
-        mkl_free(BufMatA);
-        mkl_free(BufMatB);
-        mkl_free(BufMatC);
-        return 1;
-    }
+    // if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL || BufMatBtemp == NULL) 
+    // {
+    //     printf( "\n ERROR: Can't allocate memory for matrices. Aborting... \n\n");
+    //     mkl_free(BufMatA);
+    //     mkl_free(BufMatB);
+    //     mkl_free(BufMatC);
+    //     return 1;
+    // }
     
     for (int j = 0; j < N_BAR; j++) //Generate B Tile
     {
@@ -285,9 +285,9 @@ int main(int argc, char* argv[]) {
         #endif
         
     }
-    mkl_free(BufMatA);
-    mkl_free(BufMatB);
-    mkl_free(BufMatC);
+    // mkl_free(BufMatA);
+    // mkl_free(BufMatB);
+    // mkl_free(BufMatC);
 
     MPI_Finalize();
     return 0;
