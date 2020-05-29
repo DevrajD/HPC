@@ -121,9 +121,9 @@ void Debug(){
         }
     }
     if (matches)
-        printf("The resutls Matches");
+        printf("The results Matches\n");
     else
-        printf("The results do not match");
+        printf("The results do not match\n");
 }
 
 int main(int argc, char* argv[]) {
