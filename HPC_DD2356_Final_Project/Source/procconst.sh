@@ -27,7 +27,7 @@ rm my_output_files*
 for i in 2 4 6 8 10 16 20 25 32 64 
 do
     N_BAR=$(( $i ))
-    N=$(bc <<< "scale=0; sqrt($PROCESSES)")
+    N=$(( $(bc <<< "scale=0; sqrt($PROCESSES)") * $N_BAR ))
     cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
     srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_$N_BAR
 done

@@ -22,7 +22,7 @@
 
 
 DEBUG=1
-rm my_output_files*
+rm my_controloutput_files*
 for i in "6 3" "6 2"
 do
     set -- $i
@@ -31,5 +31,5 @@ do
     N_BAR=$(( $2 ))
     PROCESSES=$(( ($N / $N_BAR) * ( $N / $N_BAR ) ))
     cc -O2 mainFox.c -o Foxs -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
-    srun -n $PROCESSES ./Foxs >> my_output_files${N}_$N_BAR
+    srun -n $PROCESSES ./Foxs >> my_controloutput_files${N}_$N_BAR
 done
