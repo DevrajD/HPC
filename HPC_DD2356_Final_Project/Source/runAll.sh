@@ -6,7 +6,7 @@
 #SBATCH -A edu20.DD2356
 
 # The name of the script is myjob
-#SBATCH -J myjobAll
+#SBATCH -J AllJob
 
 #SBATCH -t 00:5:00
 

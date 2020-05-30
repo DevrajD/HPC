@@ -124,6 +124,14 @@ void Debug(){
     else
         printf("The results do not match\n");
 }
+double mysecond()
+{
+	struct timeval tp;
+	struct timezone tzp;
+	int i;
+	i = gettimeofday(&tp,&tzp);
+	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+}
 
 int main(int argc, char* argv[]) {
     int rank, size, provided;
@@ -136,7 +144,7 @@ int main(int argc, char* argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     //printf("My rank %d of %d\n", rank, size);
-    
+    double TA, TB, TComm = 0;
     t1 = MPI_Wtime();
     size_root = sqrt((double) size);
     q = (int) size_root;
@@ -199,11 +207,17 @@ int main(int argc, char* argv[]) {
                 }
                 
             }
+            TA = mysecond();
             MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,row_rank, row_comm);
+            TB = mysecond();
+            TComm += TB-TA;
         }
         else
         {
+            TA = mysecond();
             MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
+            TB = mysecond();
+            TComm += TB-TA;
         }
         //multiply
         double sum = 0;
@@ -230,8 +244,11 @@ int main(int argc, char* argv[]) {
             #endif
         }
         //Roll B data upwards
+        TA = mysecond();
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+        TB = mysecond();
+        TComm += TB-TA;
         memcpy(BufMatB, BufMatBtemp,  N_BAR*N_BAR*sizeof(double));
     }
     
@@ -258,17 +275,19 @@ int main(int argc, char* argv[]) {
     {
         disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
     }
-
+    TA = mysecond();
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
-
+    TB = mysecond();
+    TComm += TB-TA;
     //Time the code
     t2 = MPI_Wtime();
     t = t2-t1;
     printf("MPI_Wtime measured for total run by process %d = %f\n", rank, t);
-	double time_spent = 0;
+	double time_spent = 0, Comm_time = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&TComm, &Comm_time, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	if(rank == 0)
-		printf("Total time by each process = %f  And Average = %f ", time_spent, time_spent/size);
+		printf("Total time by each process = %f  And Average = %f , Comm_TIME = %f", time_spent, time_spent/size, Comm_time/size);
 	
     if (rank == 0)
     {
