@@ -1,0 +1,5 @@
+MPI_Wtime measured for total run by process 0 = 157.221998
+Total time by each process = 628.818304  And Average = 157.204576 , Comm_TIME = 3.508926The results Matches
+MPI_Wtime measured for total run by process 1 = 157.174026
+MPI_Wtime measured for total run by process 2 = 157.200285
+MPI_Wtime measured for total run by process 3 = 157.221995

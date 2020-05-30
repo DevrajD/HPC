@@ -1,0 +1,17 @@
+MPI_Wtime measured for total run by process 6 = 0.007524
+MPI_Wtime measured for total run by process 7 = 0.007590
+MPI_Wtime measured for total run by process 8 = 0.007681
+MPI_Wtime measured for total run by process 12 = 0.007915
+MPI_Wtime measured for total run by process 0 = 0.007989
+Total time by each process = 0.122874  And Average = 0.007680 , Comm_TIME = 0.001704The results Matches
+MPI_Wtime measured for total run by process 1 = 0.007301
+MPI_Wtime measured for total run by process 2 = 0.007308
+MPI_Wtime measured for total run by process 3 = 0.007376
+MPI_Wtime measured for total run by process 4 = 0.007463
+MPI_Wtime measured for total run by process 5 = 0.007518
+MPI_Wtime measured for total run by process 9 = 0.007717
+MPI_Wtime measured for total run by process 10 = 0.007753
+MPI_Wtime measured for total run by process 11 = 0.007798
+MPI_Wtime measured for total run by process 13 = 0.007960
+MPI_Wtime measured for total run by process 14 = 0.007959
+MPI_Wtime measured for total run by process 15 = 0.008023
