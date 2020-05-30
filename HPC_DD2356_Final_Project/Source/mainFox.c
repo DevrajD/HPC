@@ -15,6 +15,10 @@
 #define N_BAR 2
 #endif
 
+#ifndef COMMS
+#define COMMS 0
+#endif
+
 #define EPSILON 0.000001
 
 /* Global Variable Declarations */
@@ -208,17 +212,25 @@ int main(int argc, char* argv[]) {
                 }
                 
             }
+            #if COMMS > 0
             TA = mysecond();
+            #endif
             MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,row_rank, row_comm);
+            #if COMMS > 0
             TB = mysecond();
             TComm += TB-TA;
+            #endif
         }
         else
         {
+            #if COMMS > 0
             TA = mysecond();
+            #endif
             MPI_Bcast(BufMatA,N_BAR*N_BAR,MPI_DOUBLE,(x + i) % row_size, row_comm);
+            #if COMMS > 0
             TB = mysecond();
             TComm += TB-TA;
+            #endif
         }
         //multiply
         double sum = 0;
@@ -245,11 +257,15 @@ int main(int argc, char* argv[]) {
             #endif
         }
         //Roll B data upwards
+        #if COMMS > 0
         TA = mysecond();
+        #endif
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
+        #if COMMS > 0
         TB = mysecond();
         TComm += TB-TA;
+        #endif
         memcpy(BufMatB, BufMatBtemp,  N_BAR*N_BAR*sizeof(double));
     }
     
@@ -276,17 +292,23 @@ int main(int argc, char* argv[]) {
     {
         disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
     }
+    #if COMMS > 0
     TA = mysecond();
+    #endif
     MPI_Gatherv(BufMatC,1,block2d,MatC,counts,disps,resizedrecvsubarray,0,MPI_COMM_WORLD);
+    #if COMMS > 0
     TB = mysecond();
     TComm += TB-TA;
+    #endif
     //Time the code
     t2 = MPI_Wtime();
     t = t2-t1;
     printf("MPI_Wtime measured for total run by process %d = %f\n", rank, t);
 	double time_spent = 0, Comm_time = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    #if COMMS > 0
     MPI_Reduce(&TComm, &Comm_time, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    #endif
 	if(rank == 0)
 		printf("Total time by each process = %f  And Average = %f , Comm_TIME = %f", time_spent, time_spent/size, Comm_time/size);
 	
