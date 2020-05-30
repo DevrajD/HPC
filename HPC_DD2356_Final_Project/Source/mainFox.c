@@ -318,8 +318,8 @@ int main(int argc, char* argv[]) {
         //PrintMatrix(MatA);
         //printf("\nPrinting Matrix B\n");
         //PrintMatrix(MatB);
-        printf("\nPrinting Matrix C\n");
-        PrintMatrix(MatC);
+        //printf("\nPrinting Matrix C\n");
+        //PrintMatrix(MatC);
 
         #ifdef DEBUG
         #if DEBUG > 0  
