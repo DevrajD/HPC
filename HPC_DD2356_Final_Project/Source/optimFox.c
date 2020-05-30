@@ -46,17 +46,7 @@ void InitiateMatrix()
         //printf("\n");
     }
 }
-void PrintMatrixBuf(double* buf)
-{
-    for(int i = 0; i < N_BAR ; i++)
-    {
-        for(int j = 0; j < N_BAR ; j++)
-        {
-            printf("%.6f\t", buf[i*N_BAR + j]); //Upto 6 decimal places
-        }
-        printf("\n");
-    }
-}
+
 void PrintMatrix(double Mat[N][N])
 {
     for(int i = 0; i < N ; i++)
@@ -68,28 +58,7 @@ void PrintMatrix(double Mat[N][N])
         printf("\n");
     }
 }
-void multiplyMatrices(double* a, double* b, double* C, int n) 
-{
-    for (int i = 0; i < n; i++) 
-    {
-        for (int j = 0; j < n; j++) 
-        {
-            for (int k = 0; k < n; k++)
-                C[i * n + j] += a[i * n + k] * b[k * n + j]; //Accumulate the results here
-        }
-    }
-    /*
-    for (int i = 0; i < n*n; i++) 
-    {
-        if (i % n == 0) 
-        {
-            printf("\n");
-        }
-        printf("%f ", C[i]);
-    }
-    printf("\n");
-    */
-}
+
 void Debug(){
     double mult[N][N];
     // Initializing elements of matrix mult to 0.
