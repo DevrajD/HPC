@@ -11,7 +11,7 @@
 #SBATCH -t 00:25:00
 
 # Number of nodes
-#SBATCH --nodes=4
+#SBATCH --nodes=1
 # Number of MPI processes per node
 #SBATCH --ntasks-per-node=64
 
