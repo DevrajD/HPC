@@ -230,7 +230,7 @@ int main(int argc, char* argv[]) {
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
 
-        memcpy(BufMatB, BufMatBtemp,  N_BAR*N_BAR*sizeof(double));
+        memcpy(BufMatB, BufMatBtemp,  sizeof(BufMatB));
     }
     
     
