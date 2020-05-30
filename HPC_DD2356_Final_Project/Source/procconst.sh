@@ -63,12 +63,12 @@ grep Total my_* > results #This will hold all results with the
 
 #         pkg-config --cflags --libs mkl-dynamic-ilp64-iomp
 #         rm my_MKLiompoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-#         cc -O3 mklFox.c -o mlkFOXiomp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-iomp`
+#         cc -O3 mklFox.c -o mlkFOXiomp -lm -fopenmp -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-iomp`
 #         srun -n $PROCESSES ./mlkFOXiomp >> my_MKLiompoutput_files${N}_${N_BAR}_PRO${PROCESSES}
 
 #         pkg-config --cflags --libs mkl-dynamic-ilp64-seq
 #         rm my_MKLseqoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-#         cc -O3 mklFox.c -o mlkFOXseq -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-seq`
+#         cc -O3 mklFox.c -o mlkFOXseq -lm -fopenmp -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-seq`
 #         srun -n $PROCESSES ./mlkFOXseq >> my_MKLseqoutput_files${N}_${N_BAR}_PRO${PROCESSES}
 
 #     done
