@@ -24,7 +24,7 @@
 PROCESSES=9 #Processes variable must be a perfect square value
 DEBUG=1
 
-for j in 2 3 4 5 6 8 10 12 14 16 
+for j in 2 3 4 5 6
 do
     PROCESSES=$(( $j * $j ))
     for i in 2 4 6 8 10 16 20 25 32 64 128
