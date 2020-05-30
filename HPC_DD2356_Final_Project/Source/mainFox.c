@@ -314,6 +314,7 @@ int main(int argc, char* argv[]) {
 	
     if (rank == 0)
     {
+        //FOllowing lines can be uncommented incase you want to look into the output.
         //printf("\nPrinting Matrix A\n");
         //PrintMatrix(MatA);
         //printf("\nPrinting Matrix B\n");
