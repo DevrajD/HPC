@@ -182,10 +182,14 @@ int main(int argc, char* argv[]) {
     //double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
     double *BufMatA, *BufMatB, *BufMatC, *BufMatBtemp;
     //Allocating memory for matrices aligned on 64-byte boundary for better performance
-    BufMatA = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
+   /*  BufMatA = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatB = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatBtemp = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
-    BufMatC = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
+    BufMatC = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 ); */
+    BufMatA = (double *)malloc( N_BAR*N_BAR*sizeof( double ));
+    BufMatB = (double *)malloc( N_BAR*N_BAR*sizeof( double ));
+    BufMatBtemp = (double *)malloc( N_BAR*N_BAR*sizeof( double ));
+    BufMatC = (double *)malloc( N_BAR*N_BAR*sizeof( double ));
     double alpha = 1, beta = 0.0;
     if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL || BufMatBtemp == NULL) 
     {
