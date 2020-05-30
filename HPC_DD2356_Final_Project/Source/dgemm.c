@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #include <assert.h>
 #include <mkl.h>
-
+ 
 double mysecond()
 {
 	struct timeval tp;

@@ -57,7 +57,7 @@ do
 
     done
 done
-
+ 
 
 salloc --nodes=1 -t 01:00:00 -A edu20.DD2356 
 module swap PrgEnv-cray PrgEnv-intel 

@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
     int counts[]= { [0 ... (N*N/(N_BAR*N_BAR)-1)] = 1 };
     int disps[N*N/(N_BAR*N_BAR)]; //Calculate the displacements for the incoming Submatrices
     for (int i = 0; i < size; i++)
-    {
+    { 
         disps[i] = ( i % q ) * N_BAR + ( i / q) * N * N_BAR;
     }
 

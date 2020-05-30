@@ -43,4 +43,4 @@ do
     N_BAR=$(( $MAX_SIDEVAL / 4 ))
     N=$MAX_SIDEVAL
     MAX_SIDEVAL=$(( $MAX_SIDEVAL * 4 ))
-done
+done 

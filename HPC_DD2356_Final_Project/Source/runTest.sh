@@ -28,3 +28,4 @@ do
 rm tesoutput_fil$i
 srun -n $i ./test >> tesoutput_fil$i
 done
+ 

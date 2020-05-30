@@ -20,7 +20,7 @@
 
 #SBATCH -C Haswell
 
-
+ 
 PROCESSES=9 #Processes variable must be a perfect square value
 DEBUG=0
 
