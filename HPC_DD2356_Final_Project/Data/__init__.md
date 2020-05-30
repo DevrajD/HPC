@@ -1,0 +1,1 @@
+OptimFox.s contains the assembly instructions generated for Haswell architecture. using "mpicc -S -fverbose-asm -O3 -lm optimFox.c -march=haswell"

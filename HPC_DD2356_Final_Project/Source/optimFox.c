@@ -59,6 +59,8 @@ void PrintMatrix(double Mat[N][N])
     }
 }
 
+#ifdef DEBUG
+#if DEBUG > 0
 void Debug(){
     double mult[N][N];
     // Initializing elements of matrix mult to 0.
@@ -98,6 +100,8 @@ void Debug(){
     else
         printf("The results do not match\n");
 }
+#endif 
+#endif
 
 int main(int argc, char* argv[]) {
     int rank, size, provided;
