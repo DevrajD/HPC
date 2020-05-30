@@ -37,7 +37,7 @@ do
         srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
 
         rm my_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
-        cc -O2 mainFox.c -o FoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -D COMMS=1
+        cc -O2 mainFox.c -o FoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=0 -D COMMS=1 #This is only to check for communication overheads, hence ignoring DEBUG mode
         srun -n $PROCESSES ./FoxpCOMM >> my_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
 
         rm my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
