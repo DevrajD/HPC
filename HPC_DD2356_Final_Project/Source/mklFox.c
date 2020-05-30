@@ -129,7 +129,7 @@ void Debug(){
 int main(int argc, char* argv[]) {
     int rank, size, provided;
     int q, n_bar;      // num procs per row and per col
-    double alpha = 1, beta = 0.0;
+    
     double t1, t2, t, size_root;
     InitiateMatrix();
     
@@ -179,29 +179,28 @@ int main(int argc, char* argv[]) {
     MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
     //tiling Size descriptors
-    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
-    /* double *BufMatA, *BufMatB, *BufMatC, *BufMatBtemp;
+    //double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
+    double *BufMatA, *BufMatB, *BufMatC, *BufMatBtemp;
     //Allocating memory for matrices aligned on 64-byte boundary for better performance
     BufMatA = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatB = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatBtemp = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     BufMatC = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
-    double alpha = 1, beta = 0.0; */
-    // if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL || BufMatBtemp == NULL) 
-    // {
-    //     printf( "\n ERROR: Can't allocate memory for matrices. Aborting... \n\n");
-    //     mkl_free(BufMatA);
-    //     mkl_free(BufMatB);
-    //     mkl_free(BufMatC);
-    //     return 1;
-    // }
+    double alpha = 1, beta = 0.0;
+    if (BufMatA == NULL || BufMatB == NULL || BufMatC == NULL || BufMatBtemp == NULL) 
+    {
+        printf( "\n ERROR: Can't allocate memory for matrices. Aborting... \n\n");
+        mkl_free(BufMatA);
+        mkl_free(BufMatB);
+        mkl_free(BufMatC);
+        return 1;
+    }
     
     for (int j = 0; j < N_BAR; j++) //Generate B Tile
     {
         for (int i = 0; i < N_BAR; i++)
         {
-            //BufMatB[j*N_BAR+i] = MatB[x*N_BAR + j][y*N_BAR + i];
-            BufMatB[j][i] = MatB[x*N_BAR + j][y*N_BAR + i];
+            BufMatB[j*N_BAR+i] = MatB[x*N_BAR + j][y*N_BAR + i];
         }
     }
     
@@ -213,8 +212,7 @@ int main(int argc, char* argv[]) {
             {
                 for (int i = 0; i < N_BAR; i++)
                 {
-                    //BufMatA[j*N_BAR + i] = MatA[x*N_BAR + j][y*N_BAR + i];
-                    BufMatA[j][i] = MatA[x*N_BAR + j][y*N_BAR + i];
+                    BufMatA[j*N_BAR + i] = MatA[x*N_BAR + j][y*N_BAR + i];
                 }
                 
             }
@@ -231,7 +229,11 @@ int main(int argc, char* argv[]) {
         //Roll B data upwards
         MPI_Sendrecv(   BufMatB,      N_BAR*N_BAR, MPI_DOUBLE, send_to,       0,
                         BufMatBtemp,  N_BAR*N_BAR, MPI_DOUBLE, receive_from,  0, cart_comm, MPI_STATUS_IGNORE);
-        memcpy(BufMatB, BufMatBtemp,  N_BAR*N_BAR*sizeof(double));
+
+        mkl_free(BufMatB);
+        BufMatB = BufMatBtemp;
+        mkl_free(BufMatBtemp);
+        BufMatBtemp = (double *)mkl_malloc( N_BAR*N_BAR*sizeof( double ), 64 );
     }
     
     
@@ -285,9 +287,9 @@ int main(int argc, char* argv[]) {
         #endif
         
     }
-    // mkl_free(BufMatA);
-    // mkl_free(BufMatB);
-    // mkl_free(BufMatC);
+    mkl_free(BufMatA);
+    mkl_free(BufMatB);
+    mkl_free(BufMatC);
 
     MPI_Finalize();
     return 0;
