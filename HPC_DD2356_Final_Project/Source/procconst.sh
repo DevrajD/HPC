@@ -47,7 +47,7 @@ done
 DEBUG=1
 module swap PrgEnv-cray PrgEnv-intel 
 module swap intel intel/19.0.1.144
-pkg-config --cflags --libs mkl-dynamic-ilp64-iomp
+
 
 for j in 2 3 4 5 6
 do
@@ -57,9 +57,15 @@ do
         N_BAR=$(( $i ))
         N=$(( $(bc <<< "scale=0; sqrt($PROCESSES)") * $N_BAR ))
 
-        rm my_MKLoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-        cc -O3 mklFox.c -o mlkFOX -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-iomp`
-        srun -n $PROCESSES ./mlkFOX >> my_MKLoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+        pkg-config --cflags --libs mkl-dynamic-ilp64-iomp
+        rm my_MKLiompoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+        cc -O3 mklFox.c -o mlkFOXiomp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-iomp`
+        srun -n $PROCESSES ./mlkFOXiomp >> my_MKLiompoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+
+        pkg-config --cflags --libs mkl-dynamic-ilp64-seq
+        rm my_MKLseqoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+        cc -O3 mklFox.c -o mlkFOXseq -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG `pkg-config --libs --cflags mkl-dynamic-ilp64-seq`
+        srun -n $PROCESSES ./mlkFOXseq >> my_MKLseqoutput_files${N}_${N_BAR}_PRO${PROCESSES}
 
     done
 done
