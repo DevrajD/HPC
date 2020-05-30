@@ -8,7 +8,7 @@
 # The name of the script is myjob
 #SBATCH -J ProcJob
 
-#SBATCH -t 00:25:00
+#SBATCH -t 03:00:00
 
 # Number of nodes
 #SBATCH --nodes=4
