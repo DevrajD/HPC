@@ -47,8 +47,6 @@ done
 DEBUG=1
 module swap PrgEnv-cray PrgEnv-intel 
 module swap intel intel/19.0.1.144
-
-
 for j in 2 3 4 5 6
 do
     PROCESSES=$(( $j * $j ))

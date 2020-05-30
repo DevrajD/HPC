@@ -263,11 +263,11 @@ int main(int argc, char* argv[]) {
 	
     if (rank == 0)
     {
-        printf("\nPrinting Matrix A\n");
-        PrintMatrix(MatA);
-        printf("\nPrinting Matrix B\n");
-        PrintMatrix(MatB);
-        printf("\nPrinting Matrix C\n");
+        // printf("\nPrinting Matrix A\n");
+        // PrintMatrix(MatA);
+        // printf("\nPrinting Matrix B\n");
+        // PrintMatrix(MatB);
+        // printf("\nPrinting Matrix C\n");
         PrintMatrix(MatC);
 
         #ifdef DEBUG
