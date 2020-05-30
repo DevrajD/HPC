@@ -48,7 +48,7 @@ do
     done
 done
 
-grep Total my_* > results
+grep Total my_* > results #This will hold all results with the 
 
 # DEBUG=1
 # module swap PrgEnv-cray PrgEnv-intel 
