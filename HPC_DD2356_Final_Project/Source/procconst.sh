@@ -22,12 +22,12 @@
 
 
 PROCESSES=9 #Processes variable must be a perfect square value
-DEBUG=1
+DEBUG=0
 
 for j in 2 3 4 5 6 8 9 10 11 12 14 16
 do
     PROCESSES=$(( $j * $j ))
-    for i in 2 4 6 8 10 16 20 25 32 64 128 256 512 1024 50 80 100 300 700 1500
+    for i in 2 4 6 8 10 16 20 25 32 64 128 256 512 1024 50 80 100 300 700 1500 #2048 is taking much longer
     do
         N_BAR=$(( $i ))
         N=$(( $(bc <<< "scale=0; sqrt($PROCESSES)") * $N_BAR ))
