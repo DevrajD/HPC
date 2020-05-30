@@ -1,0 +1,351 @@
+my_constProcoutputCOMM_files100_20_PRO25:Total time by each process = 0.144887  And Average = 0.005795 , Comm_TIME = 0.000174The results Matches
+my_constProcoutputCOMM_files100_25_PRO16:Total time by each process = 0.071131  And Average = 0.004446 , Comm_TIME = 0.000139The results Matches
+my_constProcoutputCOMM_files100_50_PRO4:Total time by each process = 0.021961  And Average = 0.005490 , Comm_TIME = 0.000211The results Matches
+my_constProcoutputCOMM_files1024_128_PRO64:Total time by each process = 4.133480  And Average = 0.064586 , Comm_TIME = 0.029265
+my_constProcoutputCOMM_files1024_256_PRO16:Total time by each process = 4.247436  And Average = 0.265465 , Comm_TIME = 0.064067The results Matches
+my_constProcoutputCOMM_files1024_512_PRO4:Total time by each process = 2.610073  And Average = 0.652518 , Comm_TIME = 0.032693The results Matches
+my_constProcoutputCOMM_files10_2_PRO25:Total time by each process = 0.113378  And Average = 0.004535 , Comm_TIME = 0.000518The results Matches
+my_constProcoutputCOMM_files112_16_PRO49:Total time by each process = 0.146797  And Average = 0.002996 , Comm_TIME = 0.000264
+my_constProcoutputCOMM_files1200_300_PRO16:Total time by each process = 3.235506  And Average = 0.202219 , Comm_TIME = 0.089389The results Matches
+my_constProcoutputCOMM_files120_20_PRO36:Total time by each process = 0.374419  And Average = 0.010401 , Comm_TIME = 0.000269
+my_constProcoutputCOMM_files12_2_PRO36:Total time by each process = 0.255956  And Average = 0.007110 , Comm_TIME = 0.000500
+my_constProcoutputCOMM_files12_4_PRO9:Total time by each process = 0.045275  And Average = 0.005031 , Comm_TIME = 0.000412The results Matches
+my_constProcoutputCOMM_files125_25_PRO25:Total time by each process = 0.197796  And Average = 0.007912 , Comm_TIME = 0.000285The results Matches
+my_constProcoutputCOMM_files12_6_PRO4:Total time by each process = 0.013134  And Average = 0.003283 , Comm_TIME = 0.000099The results Matches
+my_constProcoutputCOMM_files1280_256_PRO25:Total time by each process = 11.488034  And Average = 0.459521 , Comm_TIME = 0.160913The results Matches
+my_constProcoutputCOMM_files128_16_PRO64:Total time by each process = 0.541661  And Average = 0.008463 , Comm_TIME = 0.000341
+my_constProcoutputCOMM_files128_32_PRO16:Total time by each process = 0.048587  And Average = 0.003037 , Comm_TIME = 0.000716The results Matches
+my_constProcoutputCOMM_files128_64_PRO4:Total time by each process = 0.019038  And Average = 0.004759 , Comm_TIME = 0.000363The results Matches
+my_constProcoutputCOMM_files1400_700_PRO4:Total time by each process = 2.966281  And Average = 0.741570 , Comm_TIME = 0.037856The results Matches
+my_constProcoutputCOMM_files140_20_PRO49:Total time by each process = 0.397767  And Average = 0.008118 , Comm_TIME = 0.000394
+my_constProcoutputCOMM_files14_2_PRO49:Total time by each process = 0.066043  And Average = 0.001348 , Comm_TIME = 0.000621
+my_constProcoutputCOMM_files150_25_PRO36:Total time by each process = 0.209409  And Average = 0.005817 , Comm_TIME = 0.000308
+my_constProcoutputCOMM_files150_50_PRO9:Total time by each process = 0.039116  And Average = 0.004346 , Comm_TIME = 0.000336The results Matches
+my_constProcoutputCOMM_files1536_256_PRO36:Total time by each process = 11.616988  And Average = 0.322694 , Comm_TIME = 0.030724
+my_constProcoutputCOMM_files1536_512_PRO9:Total time by each process = 9.518982  And Average = 1.057665 , Comm_TIME = 0.087178The results Matches
+my_constProcoutputCOMM_files160_20_PRO64:Total time by each process = 0.438205  And Average = 0.006847 , Comm_TIME = 0.000424
+my_constProcoutputCOMM_files160_32_PRO25:Total time by each process = 0.077058  And Average = 0.003082 , Comm_TIME = 0.000571The results Matches
+my_constProcoutputCOMM_files160_80_PRO4:Total time by each process = 0.016448  And Average = 0.004112 , Comm_TIME = 0.000328The results Matches
+my_constProcoutputCOMM_files16_2_PRO64:Total time by each process = 0.173866  And Average = 0.002717 , Comm_TIME = 0.000776
+my_constProcoutputCOMM_files16_4_PRO16:Total time by each process = 0.058752  And Average = 0.003672 , Comm_TIME = 0.000458The results Matches
+my_constProcoutputCOMM_files16_8_PRO4:Total time by each process = 0.019356  And Average = 0.004839 , Comm_TIME = 0.000074The results Matches
+my_constProcoutputCOMM_files175_25_PRO49:Total time by each process = 0.121261  And Average = 0.002475 , Comm_TIME = 0.000447
+my_constProcoutputCOMM_files1792_256_PRO49:Total time by each process = 34.648327  And Average = 0.707109 , Comm_TIME = 0.205751
+my_constProcoutputCOMM_files1800_300_PRO36:Total time by each process = 5.411496  And Average = 0.150319 , Comm_TIME = 0.024207
+my_constProcoutputCOMM_files18_6_PRO9:Total time by each process = 0.035971  And Average = 0.003997 , Comm_TIME = 0.000076The results Matches
+my_constProcoutputCOMM_files192_32_PRO36:Total time by each process = 0.277050  And Average = 0.007696 , Comm_TIME = 0.001199
+my_constProcoutputCOMM_files192_64_PRO9:Total time by each process = 0.039865  And Average = 0.004429 , Comm_TIME = 0.000440The results Matches
+my_constProcoutputCOMM_files200_100_PRO4:Total time by each process = 0.026636  And Average = 0.006659 , Comm_TIME = 0.001102The results Matches
+my_constProcoutputCOMM_files200_25_PRO64:Total time by each process = 0.429606  And Average = 0.006713 , Comm_TIME = 0.000623
+my_constProcoutputCOMM_files200_50_PRO16:Total time by each process = 0.075496  And Average = 0.004719 , Comm_TIME = 0.000711The results Matches
+my_constProcoutputCOMM_files20_10_PRO4:Total time by each process = 0.015258  And Average = 0.003815 , Comm_TIME = 0.001932The results Matches
+my_constProcoutputCOMM_files2048_1024_PRO4:Total time by each process = 64.457965  And Average = 16.114491 , Comm_TIME = 0.080319The results Matches
+my_constProcoutputCOMM_files2048_256_PRO64:Total time by each process = 53.075089  And Average = 0.829298 , Comm_TIME = 0.131591
+my_constProcoutputCOMM_files2048_512_PRO16:Total time by each process = 23.739898  And Average = 1.483744 , Comm_TIME = 0.122077The results Matches
+my_constProcoutputCOMM_files20_4_PRO25:Total time by each process = 0.116610  And Average = 0.004664 , Comm_TIME = 0.000483The results Matches
+my_constProcoutputCOMM_files2100_300_PRO49:Total time by each process = 24.114111  And Average = 0.492125 , Comm_TIME = 0.183430
+my_constProcoutputCOMM_files2100_700_PRO9:Total time by each process = 11.999207  And Average = 1.333245 , Comm_TIME = 0.099755The results Matches
+my_constProcoutputCOMM_files224_32_PRO49:Total time by each process = 0.386180  And Average = 0.007881 , Comm_TIME = 0.001120
+my_constProcoutputCOMM_files2400_300_PRO64:Total time by each process = 36.380533  And Average = 0.568446 , Comm_TIME = 0.098794
+my_constProcoutputCOMM_files240_80_PRO9:Total time by each process = 0.037516  And Average = 0.004168 , Comm_TIME = 0.001198The results Matches
+my_constProcoutputCOMM_files24_4_PRO36:Total time by each process = 0.198574  And Average = 0.005516 , Comm_TIME = 0.000538
+my_constProcoutputCOMM_files24_6_PRO16:Total time by each process = 0.061442  And Average = 0.003840 , Comm_TIME = 0.000329The results Matches
+my_constProcoutputCOMM_files24_8_PRO9:Total time by each process = 0.016789  And Average = 0.001865 , Comm_TIME = 0.000073The results Matches
+my_constProcoutputCOMM_files2560_512_PRO25:Total time by each process = 61.998617  And Average = 2.479945 , Comm_TIME = 0.652150The results Matches
+my_constProcoutputCOMM_files256_128_PRO4:Total time by each process = 0.036413  And Average = 0.009103 , Comm_TIME = 0.001277The results Matches
+my_constProcoutputCOMM_files256_32_PRO64:Total time by each process = 0.700682  And Average = 0.010948 , Comm_TIME = 0.001725
+my_constProcoutputCOMM_files256_64_PRO16:Total time by each process = 0.092190  And Average = 0.005762 , Comm_TIME = 0.001399The results Matches
+my_constProcoutputCOMM_files2800_700_PRO16:Total time by each process = 42.384359  And Average = 2.649022 , Comm_TIME = 0.301692The results Matches
+my_constProcoutputCOMM_files28_4_PRO49:Total time by each process = 0.063075  And Average = 0.001287 , Comm_TIME = 0.000605
+my_constProcoutputCOMM_files3000_1500_PRO4:Total time by each process = 221.965053  And Average = 55.491263 , Comm_TIME = 0.741650The results Matches
+my_constProcoutputCOMM_files300_100_PRO9:Total time by each process = 0.057115  And Average = 0.006346 , Comm_TIME = 0.000901The results Matches
+my_constProcoutputCOMM_files300_50_PRO36:Total time by each process = 0.196714  And Average = 0.005464 , Comm_TIME = 0.000999
+my_constProcoutputCOMM_files30_10_PRO9:Total time by each process = 0.038733  And Average = 0.004304 , Comm_TIME = 0.000237The results Matches
+my_constProcoutputCOMM_files30_6_PRO25:Total time by each process = 0.157217  And Average = 0.006289 , Comm_TIME = 0.000268The results Matches
+my_constProcoutputCOMM_files3072_1024_PRO9:Total time by each process = 246.703718  And Average = 27.411524 , Comm_TIME = 0.576063The results Matches
+my_constProcoutputCOMM_files3072_512_PRO36:Total time by each process = 90.118686  And Average = 2.503297 , Comm_TIME = 0.190662
+my_constProcoutputCOMM_files320_64_PRO25:Total time by each process = 0.200298  And Average = 0.008012 , Comm_TIME = 0.002596The results Matches
+my_constProcoutputCOMM_files320_80_PRO16:Total time by each process = 0.122874  And Average = 0.007680 , Comm_TIME = 0.001704The results Matches
+my_constProcoutputCOMM_files32_16_PRO4:Total time by each process = 0.010500  And Average = 0.002625 , Comm_TIME = 0.000063The results Matches
+my_constProcoutputCOMM_files32_4_PRO64:Total time by each process = 0.356173  And Average = 0.005565 , Comm_TIME = 0.000710
+my_constProcoutputCOMM_files32_8_PRO16:Total time by each process = 0.124333  And Average = 0.007771 , Comm_TIME = 0.000123The results Matches
+my_constProcoutputCOMM_files350_50_PRO49:Total time by each process = 0.363853  And Average = 0.007426 , Comm_TIME = 0.001584
+my_constProcoutputCOMM_files3584_512_PRO49:Total time by each process = 289.712983  And Average = 5.912510 , Comm_TIME = 1.771615
+my_constProcoutputCOMM_files36_6_PRO36:Total time by each process = 0.195297  And Average = 0.005425 , Comm_TIME = 0.000286
+my_constProcoutputCOMM_files384_128_PRO9:Total time by each process = 0.172837  And Average = 0.019204 , Comm_TIME = 0.007106The results Matches
+my_constProcoutputCOMM_files384_64_PRO36:Total time by each process = 0.246267  And Average = 0.006841 , Comm_TIME = 0.001321
+my_constProcoutputCOMM_files400_100_PRO16:Total time by each process = 0.183789  And Average = 0.011487 , Comm_TIME = 0.002550The results Matches
+my_constProcoutputCOMM_files400_50_PRO64:Total time by each process = 0.531092  And Average = 0.008298 , Comm_TIME = 0.002179
+my_constProcoutputCOMM_files40_10_PRO16:Total time by each process = 0.034511  And Average = 0.002157 , Comm_TIME = 0.000306The results Matches
+my_constProcoutputCOMM_files40_20_PRO4:Total time by each process = 0.041628  And Average = 0.010407 , Comm_TIME = 0.000061The results Matches
+my_constProcoutputCOMM_files40_8_PRO25:Total time by each process = 0.101201  And Average = 0.004048 , Comm_TIME = 0.000106The results Matches
+my_constProcoutputCOMM_files4096_1024_PRO16:Total time by each process = 683.572052  And Average = 42.723253 , Comm_TIME = 1.158146The results Matches
+my_constProcoutputCOMM_files4096_2048_PRO4:Total time by each process = 628.818304  And Average = 157.204576 , Comm_TIME = 3.508926The results Matches
+my_constProcoutputCOMM_files4096_512_PRO64:Total time by each process = 521.943406  And Average = 8.155366 , Comm_TIME = 1.230092
+my_constProcoutputCOMM_files4200_700_PRO36:Total time by each process = 190.481723  And Average = 5.291159 , Comm_TIME = 0.215323
+my_constProcoutputCOMM_files42_6_PRO49:Total time by each process = 0.049279  And Average = 0.001006 , Comm_TIME = 0.000315
+my_constProcoutputCOMM_files4_2_PRO4:Total time by each process = 0.008708  And Average = 0.002177 , Comm_TIME = 0.000335The results Matches
+my_constProcoutputCOMM_files448_64_PRO49:Total time by each process = 0.326437  And Average = 0.006662 , Comm_TIME = 0.003793
+my_constProcoutputCOMM_files4500_1500_PRO9:Total time by each process = 868.329710  And Average = 96.481079 , Comm_TIME = 5.097057The results Matches
+my_constProcoutputCOMM_files480_80_PRO36:Total time by each process = 0.294079  And Average = 0.008169 , Comm_TIME = 0.001958
+my_constProcoutputCOMM_files48_16_PRO9:Total time by each process = 0.048541  And Average = 0.005393 , Comm_TIME = 0.000089The results Matches
+my_constProcoutputCOMM_files48_6_PRO64:Total time by each process = 0.339296  And Average = 0.005301 , Comm_TIME = 0.001136
+my_constProcoutputCOMM_files48_8_PRO36:Total time by each process = 0.214788  And Average = 0.005966 , Comm_TIME = 0.000142
+my_constProcoutputCOMM_files4900_700_PRO49:Total time by each process = 543.498850  And Average = 11.091813 , Comm_TIME = 3.234311
+my_constProcoutputCOMM_files50_10_PRO25:Total time by each process = 0.095098  And Average = 0.003804 , Comm_TIME = 0.000341The results Matches
+my_constProcoutputCOMM_files50_25_PRO4:Total time by each process = 0.022449  And Average = 0.005612 , Comm_TIME = 0.000110The results Matches
+my_constProcoutputCOMM_files5120_1024_PRO25:Total time by each process = 1403.841165  And Average = 56.153647 , Comm_TIME = 2.107639The results Matches
+my_constProcoutputCOMM_files512_128_PRO16:Total time by each process = 0.484839  And Average = 0.030302 , Comm_TIME = 0.013934The results Matches
+my_constProcoutputCOMM_files512_256_PRO4:Total time by each process = 0.348196  And Average = 0.087049 , Comm_TIME = 0.005012The results Matches
+my_constProcoutputCOMM_files512_64_PRO64:Total time by each process = 0.831296  And Average = 0.012989 , Comm_TIME = 0.003599
+my_constProcoutputCOMM_files5600_700_PRO64:Total time by each process = 959.562418  And Average = 14.993163 , Comm_TIME = 3.262391
+my_constProcoutputCOMM_files560_80_PRO49:Total time by each process = 0.400980  And Average = 0.008183 , Comm_TIME = 0.003624
+my_constProcoutputCOMM_files56_8_PRO49:Total time by each process = 0.050347  And Average = 0.001027 , Comm_TIME = 0.000310
+my_constProcoutputCOMM_files6000_1500_PRO16:Total time by each process = 2299.711074  And Average = 143.731942 , Comm_TIME = 5.719713The results Matches
+my_constProcoutputCOMM_files600_100_PRO36:Total time by each process = 0.379801  And Average = 0.010550 , Comm_TIME = 0.002783
+my_constProcoutputCOMM_files600_300_PRO4:Total time by each process = 0.167352  And Average = 0.041838 , Comm_TIME = 0.004041The results Matches
+my_constProcoutputCOMM_files60_10_PRO36:Total time by each process = 0.194820  And Average = 0.005412 , Comm_TIME = 0.000332
+my_constProcoutputCOMM_files60_20_PRO9:Total time by each process = 0.054016  And Average = 0.006002 , Comm_TIME = 0.000114The results Matches
+my_constProcoutputCOMM_files6144_1024_PRO36:Total time by each process = 963.689834  And Average = 26.769162 , Comm_TIME = 1.248645
+my_constProcoutputCOMM_files6144_2048_PRO9:Total time by each process = 2321.027982  And Average = 257.891998 , Comm_TIME = 5.144194The results Matches
+my_constProcoutputCOMM_files6_2_PRO9:Total time by each process = 0.040027  And Average = 0.004447 , Comm_TIME = 0.000382The results Matches
+my_constProcoutputCOMM_files640_128_PRO25:Total time by each process = 0.857509  And Average = 0.034300 , Comm_TIME = 0.016061The results Matches
+my_constProcoutputCOMM_files640_80_PRO64:Total time by each process = 0.812771  And Average = 0.012700 , Comm_TIME = 0.003408
+my_constProcoutputCOMM_files64_16_PRO16:Total time by each process = 0.080643  And Average = 0.005040 , Comm_TIME = 0.000152The results Matches
+my_constProcoutputCOMM_files64_32_PRO4:Total time by each process = 0.017677  And Average = 0.004419 , Comm_TIME = 0.000144The results Matches
+my_constProcoutputCOMM_files64_8_PRO64:Total time by each process = 0.456112  And Average = 0.007127 , Comm_TIME = 0.001155
+my_constProcoutputCOMM_files700_100_PRO49:Total time by each process = 0.564493  And Average = 0.011520 , Comm_TIME = 0.004801
+my_constProcoutputCOMM_files70_10_PRO49:Total time by each process = 0.315018  And Average = 0.006429 , Comm_TIME = 0.000429
+my_constProcoutputCOMM_files7168_1024_PRO49:Total time by each process = 3128.133874  And Average = 63.839467 , Comm_TIME = 18.369863
+my_constProcoutputCOMM_files75_25_PRO9:Total time by each process = 0.041481  And Average = 0.004609 , Comm_TIME = 0.000098The results Matches
+my_constProcoutputCOMM_files768_128_PRO36:Total time by each process = 0.898312  And Average = 0.024953 , Comm_TIME = 0.004669
+my_constProcoutputCOMM_files768_256_PRO9:Total time by each process = 1.303319  And Average = 0.144813 , Comm_TIME = 0.010673The results Matches
+my_constProcoutputCOMM_files800_100_PRO64:Total time by each process = 1.218777  And Average = 0.019043 , Comm_TIME = 0.006326
+my_constProcoutputCOMM_files80_10_PRO64:Total time by each process = 0.435163  And Average = 0.006799 , Comm_TIME = 0.001011
+my_constProcoutputCOMM_files80_16_PRO25:Total time by each process = 0.109332  And Average = 0.004373 , Comm_TIME = 0.000149The results Matches
+my_constProcoutputCOMM_files80_20_PRO16:Total time by each process = 0.086827  And Average = 0.005427 , Comm_TIME = 0.000100The results Matches
+my_constProcoutputCOMM_files8192_2048_PRO16:Total time by each process = 6234.531655  And Average = 389.658228 , Comm_TIME = 12.525944The results Matches
+my_constProcoutputCOMM_files8_2_PRO16:Total time by each process = 0.073335  And Average = 0.004583 , Comm_TIME = 0.000490The results Matches
+my_constProcoutputCOMM_files8_4_PRO4:Total time by each process = 0.011375  And Average = 0.002844 , Comm_TIME = 0.000336The results Matches
+my_constProcoutputCOMM_files896_128_PRO49:Total time by each process = 2.676366  And Average = 0.054620 , Comm_TIME = 0.015888
+my_constProcoutputCOMM_files9000_1500_PRO36:Total time by each process = 2161.293940  And Average = 60.035943 , Comm_TIME = 1.777752
+my_constProcoutputCOMM_files900_300_PRO9:Total time by each process = 0.617408  And Average = 0.068601 , Comm_TIME = 0.007787The results Matches
+my_constProcoutputCOMM_files96_16_PRO36:Total time by each process = 0.228226  And Average = 0.006340 , Comm_TIME = 0.000252
+my_constProcoutputCOMM_files96_32_PRO9:Total time by each process = 0.023057  And Average = 0.002562 , Comm_TIME = 0.000255The results Matches
+my_constProcoutput_files100_20_PRO25:Total time by each process = 0.185791  And Average = 0.007432 , Comm_TIME = 0.000000
+my_constProcoutput_files100_25_PRO16:Total time by each process = 0.086302  And Average = 0.005394 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files1024_128_PRO64:Total time by each process = 2.910700  And Average = 0.045480 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 60 = 0.048650
+my_constProcoutput_files1024_256_PRO16:Total time by each process = 3.862687  And Average = 0.241418 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files10_2_PRO25:Total time by each process = 0.138672  And Average = 0.005547 , Comm_TIME = 0.000000
+my_constProcoutput_files112_16_PRO49:Total time by each process = 0.118594  And Average = 0.002420 , Comm_TIME = 0.000000
+my_constProcoutput_files1200_300_PRO16:Total time by each process = 4.020019  And Average = 0.251251 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files120_20_PRO36:Total time by each process = 0.382578  And Average = 0.010627 , Comm_TIME = 0.000000
+my_constProcoutput_files12_2_PRO36:Total time by each process = 0.191904  And Average = 0.005331 , Comm_TIME = 0.000000
+my_constProcoutput_files12_4_PRO9:Total time by each process = 0.023402  And Average = 0.002600 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files125_25_PRO25:Total time by each process = 0.183047  And Average = 0.007322 , Comm_TIME = 0.000000
+my_constProcoutput_files1280_256_PRO25:Total time by each process = 12.475101  And Average = 0.499004 , Comm_TIME = 0.000000
+my_constProcoutput_files128_16_PRO64:Total time by each process = 0.276799  And Average = 0.004325 , Comm_TIME = 0.000000
+my_constProcoutput_files128_32_PRO16:Total time by each process = 0.111046  And Average = 0.006940 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files140_20_PRO49:Total time by each process = 0.355703  And Average = 0.007259 , Comm_TIME = 0.000000
+my_constProcoutput_files14_2_PRO49:Total time by each process = 0.253433  And Average = 0.005172 , Comm_TIME = 0.000000
+my_constProcoutput_files1500_300_PRO25:Total time by each process = 8.516168  And Average = 0.340647 , Comm_TIME = 0.000000
+my_constProcoutput_files150_25_PRO36:Total time by each process = 0.260328  And Average = 0.007231 , Comm_TIME = 0.000000
+my_constProcoutput_files150_50_PRO9:Total time by each process = 0.045084  And Average = 0.005009 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files1536_256_PRO36:Total time by each process = 11.557676  And Average = 0.321047 , Comm_TIME = 0.000000
+my_constProcoutput_files1536_512_PRO9:Total time by each process = 9.683513  And Average = 1.075946 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files160_20_PRO64:Total time by each process = 0.368278  And Average = 0.005754 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 28 = 0.006249
+my_constProcoutput_files160_32_PRO25:Total time by each process = 0.118644  And Average = 0.004746 , Comm_TIME = 0.000000
+my_constProcoutput_files16_2_PRO64:Total time by each process = 6.243149  And Average = 0.097549 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 10 = 0.095095
+my_constProcoutput_files16_4_PRO16:Total time by each process = 0.099259  And Average = 0.006204 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files175_25_PRO49:Total time by each process = 0.151199  And Average = 0.003086 , Comm_TIME = 0.000000
+my_constProcoutput_files1792_256_PRO49:Total time by each process = 34.033834  And Average = 0.694568 , Comm_TIME = 0.000000
+my_constProcoutput_files1800_300_PRO36:Total time by each process = 5.425182  And Average = 0.150699 , Comm_TIME = 0.000000
+my_constProcoutput_files18_6_PRO9:Total time by each process = 0.036139  And Average = 0.004015 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files192_32_PRO36:Total time by each process = 0.224537  And Average = 0.006237 , Comm_TIME = 0.000000
+my_constProcoutput_files192_64_PRO9:Total time by each process = 0.053854  And Average = 0.005984 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files200_25_PRO64:Total time by each process = 0.346378  And Average = 0.005412 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 4 = 0.005670
+my_constProcoutput_files200_50_PRO16:Total time by each process = 0.077321  And Average = 0.004833 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files2048_256_PRO64:Total time by each process = 48.180780  And Average = 0.752825 , Comm_TIME = 0.000000
+my_constProcoutput_files2048_512_PRO16:Total time by each process = 24.246178  And Average = 1.515386 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files20_4_PRO25:Total time by each process = 0.113202  And Average = 0.004528 , Comm_TIME = 0.000000
+my_constProcoutput_files2100_300_PRO49:Total time by each process = 22.269622  And Average = 0.454482 , Comm_TIME = 0.000000
+my_constProcoutput_files2100_700_PRO9:Total time by each process = 10.746579  And Average = 1.194064 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files224_32_PRO49:Total time by each process = 0.387690  And Average = 0.007912 , Comm_TIME = 0.000000
+my_constProcoutput_files2400_300_PRO64:Total time by each process = 35.829454  And Average = 0.559835 , Comm_TIME = 0.000000
+my_constProcoutput_files240_80_PRO9:Total time by each process = 0.056173  And Average = 0.006241 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files24_4_PRO36:Total time by each process = 0.163176  And Average = 0.004533 , Comm_TIME = 0.000000
+my_constProcoutput_files24_6_PRO16:Total time by each process = 0.079145  And Average = 0.004947 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files24_8_PRO9:Total time by each process = 0.035652  And Average = 0.003961 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files250_50_PRO25:Total time by each process = 0.153078  And Average = 0.006123 , Comm_TIME = 0.000000
+my_constProcoutput_files2560_512_PRO25:Total time by each process = 77.009903  And Average = 3.080396 , Comm_TIME = 0.000000
+my_constProcoutput_files256_32_PRO64:Total time by each process = 0.407922  And Average = 0.006374 , Comm_TIME = 0.000000
+my_constProcoutput_files256_64_PRO16:Total time by each process = 0.104630  And Average = 0.006539 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files2800_700_PRO16:Total time by each process = 41.533102  And Average = 2.595819 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files28_4_PRO49:Total time by each process = 0.261480  And Average = 0.005336 , Comm_TIME = 0.000000
+my_constProcoutput_files300_100_PRO9:Total time by each process = 0.071496  And Average = 0.007944 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files300_50_PRO36:Total time by each process = 0.251109  And Average = 0.006975 , Comm_TIME = 0.000000
+my_constProcoutput_files30_10_PRO9:Total time by each process = 0.051215  And Average = 0.005691 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files30_6_PRO25:Total time by each process = 0.125220  And Average = 0.005009 , Comm_TIME = 0.000000
+my_constProcoutput_files3072_1024_PRO9:Total time by each process = 247.718278  And Average = 27.524253 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files3072_512_PRO36:Total time by each process = 90.019544  And Average = 2.500543 , Comm_TIME = 0.000000
+my_constProcoutput_files320_64_PRO25:Total time by each process = 0.159138  And Average = 0.006366 , Comm_TIME = 0.000000
+my_constProcoutput_files320_80_PRO16:Total time by each process = 0.117122  And Average = 0.007320 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files32_4_PRO64:Total time by each process = 2.806718  And Average = 0.043855 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 22 = 0.041856
+my_constProcoutput_files32_8_PRO16:Total time by each process = 0.031782  And Average = 0.001986 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files3500_700_PRO25:Total time by each process = 110.806914  And Average = 4.432277 , Comm_TIME = 0.000000
+my_constProcoutput_files350_50_PRO49:Total time by each process = 0.136345  And Average = 0.002783 , Comm_TIME = 0.000000
+my_constProcoutput_files3584_512_PRO49:Total time by each process = 287.955269  And Average = 5.876638 , Comm_TIME = 0.000000
+my_constProcoutput_files36_6_PRO36:Total time by each process = 0.198814  And Average = 0.005523 , Comm_TIME = 0.000000
+my_constProcoutput_files384_128_PRO9:Total time by each process = 0.122140  And Average = 0.013571 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files384_64_PRO36:Total time by each process = 0.284274  And Average = 0.007897 , Comm_TIME = 0.000000
+my_constProcoutput_files400_100_PRO16:Total time by each process = 0.149523  And Average = 0.009345 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files400_50_PRO64:Total time by each process = 0.630435  And Average = 0.009851 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 1 = 0.009093
+my_constProcoutput_files400_80_PRO25:Total time by each process = 0.247108  And Average = 0.009884 , Comm_TIME = 0.000000
+my_constProcoutput_files40_10_PRO16:Total time by each process = 0.035754  And Average = 0.002235 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files40_8_PRO25:Total time by each process = 0.081403  And Average = 0.003256 , Comm_TIME = 0.000000
+my_constProcoutput_files4096_1024_PRO16:Total time by each process = 680.615877  And Average = 42.538492 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files4096_512_PRO64:Total time by each process = 411.077979  And Average = 6.423093 , Comm_TIME = 0.000000
+my_constProcoutput_files4200_700_PRO36:Total time by each process = 194.569941  And Average = 5.404721 , Comm_TIME = 0.000000
+my_constProcoutput_files42_6_PRO49:Total time by each process = 0.313250  And Average = 0.006393 , Comm_TIME = 0.000000
+my_constProcoutput_files448_64_PRO49:Total time by each process = 0.318304  And Average = 0.006496 , Comm_TIME = 0.000000
+my_constProcoutput_files4500_1500_PRO9:Total time by each process = 845.401067  And Average = 93.933452 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files480_80_PRO36:Total time by each process = 0.313054  And Average = 0.008696 , Comm_TIME = 0.000000
+my_constProcoutput_files48_16_PRO9:Total time by each process = 0.051691  And Average = 0.005743 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files48_6_PRO64:Total time by each process = 0.308821  And Average = 0.004825 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 17 = 0.004715
+my_constProcoutput_files48_8_PRO36:Total time by each process = 0.171421  And Average = 0.004762 , Comm_TIME = 0.000000
+my_constProcoutput_files4900_700_PRO49:Total time by each process = 1807.088554  And Average = 36.879358 , Comm_TIME = 0.000000
+my_constProcoutput_files500_100_PRO25:Total time by each process = 0.312588  And Average = 0.012504 , Comm_TIME = 0.000000
+my_constProcoutput_files50_10_PRO25:Total time by each process = 0.084852  And Average = 0.003394 , Comm_TIME = 0.000000
+my_constProcoutput_files5120_1024_PRO25:Total time by each process = 634.688847  And Average = 25.387554 , Comm_TIME = 0.000000
+my_constProcoutput_files512_128_PRO16:Total time by each process = 0.408816  And Average = 0.025551 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files512_64_PRO64:Total time by each process = 0.717609  And Average = 0.011213 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 1 = 0.010216
+my_constProcoutput_files5600_700_PRO64:Total time by each process = 948.426872  And Average = 14.819170 , Comm_TIME = 0.000000
+my_constProcoutput_files560_80_PRO49:Total time by each process = 0.591900  And Average = 0.012080 , Comm_TIME = 0.000000
+my_constProcoutput_files56_8_PRO49:Total time by each process = 0.212495  And Average = 0.004337 , Comm_TIME = 0.000000
+my_constProcoutput_files6000_1500_PRO16:Total time by each process = 2243.532664  And Average = 140.220791 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files600_100_PRO36:Total time by each process = 0.384903  And Average = 0.010692 , Comm_TIME = 0.000000
+my_constProcoutput_files60_10_PRO36:Total time by each process = 0.208606  And Average = 0.005795 , Comm_TIME = 0.000000
+my_constProcoutput_files60_20_PRO9:Total time by each process = 0.035419  And Average = 0.003935 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files6144_1024_PRO36:Total time by each process = 968.458095  And Average = 26.901614 , Comm_TIME = 0.000000
+my_constProcoutput_files6_2_PRO9:Total time by each process = 0.054659  And Average = 0.006073 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files640_128_PRO25:Total time by each process = 0.908668  And Average = 0.036347 , Comm_TIME = 0.000000
+my_constProcoutput_files640_80_PRO64:Total time by each process = 1.030464  And Average = 0.016101 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 32 = 0.017553
+my_constProcoutput_files64_16_PRO16:Total time by each process = 0.079210  And Average = 0.004951 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files64_8_PRO64:Total time by each process = 0.233516  And Average = 0.003649 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 6 = 0.003960
+my_constProcoutput_files700_100_PRO49:Total time by each process = 0.632333  And Average = 0.012905 , Comm_TIME = 0.000000
+my_constProcoutput_files70_10_PRO49:Total time by each process = 283.110548  And Average = 5.777766 , Comm_TIME = 0.000000
+my_constProcoutput_files7168_1024_PRO49:Total time by each process = 3131.388697  And Average = 63.905892 , Comm_TIME = 0.000000
+my_constProcoutput_files7500_1500_PRO25:Total time by each process = 1451.636480  And Average = 58.065459 , Comm_TIME = 0.000000
+my_constProcoutput_files75_25_PRO9:Total time by each process = 0.042049  And Average = 0.004672 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files768_128_PRO36:Total time by each process = 0.978365  And Average = 0.027177 , Comm_TIME = 0.000000
+my_constProcoutput_files768_256_PRO9:Total time by each process = 1.288448  And Average = 0.143161 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files800_100_PRO64:Total time by each process = 1.462354  And Average = 0.022849 , Comm_TIME = 0.000000MPI_Wtime measured for total run by process 32 = 0.025245
+my_constProcoutput_files80_10_PRO64:Total time by each process = 0.216803  And Average = 0.003388 , Comm_TIME = 0.000000
+my_constProcoutput_files80_16_PRO25:Total time by each process = 0.160506  And Average = 0.006420 , Comm_TIME = 0.000000
+my_constProcoutput_files80_20_PRO16:Total time by each process = 0.089378  And Average = 0.005586 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files8_2_PRO16:Total time by each process = 0.031875  And Average = 0.001992 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files896_128_PRO49:Total time by each process = 2.170185  And Average = 0.044289 , Comm_TIME = 0.000000
+my_constProcoutput_files9000_1500_PRO36:Total time by each process = 2133.959015  And Average = 59.276639 , Comm_TIME = 0.000000
+my_constProcoutput_files900_300_PRO9:Total time by each process = 0.618084  And Average = 0.068676 , Comm_TIME = 0.000000The results Matches
+my_constProcoutput_files96_16_PRO36:Total time by each process = 0.052660  And Average = 0.001463 , Comm_TIME = 0.000000
+my_constProcoutput_files96_32_PRO9:Total time by each process = 0.027367  And Average = 0.003041 , Comm_TIME = 0.000000The results Matches
+my_OPconstProcoutput_files100_20_PRO25:Total time by each process = 4.966544  And Average = 0.198662 The results Matches
+my_OPconstProcoutput_files100_25_PRO16:Total time by each process = 1.522054  And Average = 0.095128 The results Matches
+my_OPconstProcoutput_files100_50_PRO4:Total time by each process = 0.087319  And Average = 0.021830 The results Matches
+my_OPconstProcoutput_files1024_256_PRO16:Total time by each process = 2.243893  And Average = 0.140243 The results Matches
+my_OPconstProcoutput_files1024_512_PRO4:Total time by each process = 0.459408  And Average = 0.114852 The results Matches
+my_OPconstProcoutput_files10_2_PRO25:Total time by each process = 5.636316  And Average = 0.225453 The results Matches
+my_OPconstProcoutput_files1200_300_PRO16:Total time by each process = 1.775142  And Average = 0.110946 The results Matches
+my_OPconstProcoutput_files120_20_PRO36:Total time by each process = 12.138407  And Average = 0.337178 The results Matches
+my_OPconstProcoutput_files12_2_PRO36:Total time by each process = 13.484301  And Average = 0.374564 The results Matches
+my_OPconstProcoutput_files12_4_PRO9:Total time by each process = 0.560078  And Average = 0.062231 The results Matches
+my_OPconstProcoutput_files125_25_PRO25:Total time by each process = 2.565161  And Average = 0.102606 The results Matches
+my_OPconstProcoutput_files12_6_PRO4:Total time by each process = 0.078417  And Average = 0.019604 The results Matches
+my_OPconstProcoutput_files1280_256_PRO25:Total time by each process = 6.318642  And Average = 0.252746 The results Matches
+my_OPconstProcoutput_files128_32_PRO16:Total time by each process = 1.419942  And Average = 0.088746 The results Matches
+my_OPconstProcoutput_files128_64_PRO4:Total time by each process = 0.215491  And Average = 0.053873 The results Matches
+my_OPconstProcoutput_files1400_700_PRO4:Total time by each process = 1.067115  And Average = 0.266779 The results Matches
+my_OPconstProcoutput_files1500_300_PRO25:Total time by each process = 8.467143  And Average = 0.338686 The results Matches
+my_OPconstProcoutput_files150_25_PRO36:Total time by each process = 13.381099  And Average = 0.371697 The results Matches
+my_OPconstProcoutput_files150_50_PRO9:Total time by each process = 0.403759  And Average = 0.044862 The results Matches
+my_OPconstProcoutput_files1536_256_PRO36:Total time by each process = 16.918325  And Average = 0.469953 The results Matches
+my_OPconstProcoutput_files1536_512_PRO9:Total time by each process = 2.143844  And Average = 0.238205 The results Matches
+my_OPconstProcoutput_files160_32_PRO25:Total time by each process = 4.831894  And Average = 0.193276 The results Matches
+my_OPconstProcoutput_files160_80_PRO4:Total time by each process = 0.215317  And Average = 0.053829 The results Matches
+my_OPconstProcoutput_files16_4_PRO16:Total time by each process = 0.996048  And Average = 0.062253 The results Matches
+my_OPconstProcoutput_files16_8_PRO4:Total time by each process = 0.079717  And Average = 0.019929 The results Matches
+my_OPconstProcoutput_files1800_300_PRO36:Total time by each process = 18.421484  And Average = 0.511708 The results Matches
+my_OPconstProcoutput_files18_6_PRO9:Total time by each process = 0.310613  And Average = 0.034513 The results Matches
+my_OPconstProcoutput_files192_32_PRO36:Total time by each process = 11.859479  And Average = 0.329430 The results Matches
+my_OPconstProcoutput_files192_64_PRO9:Total time by each process = 0.337210  And Average = 0.037468 The results Matches
+my_OPconstProcoutput_files200_100_PRO4:Total time by each process = 0.087300  And Average = 0.021825 The results Matches
+my_OPconstProcoutput_files200_50_PRO16:Total time by each process = 1.551252  And Average = 0.096953 The results Matches
+my_OPconstProcoutput_files20_10_PRO4:Total time by each process = 0.079221  And Average = 0.019805 The results Matches
+my_OPconstProcoutput_files2048_1024_PRO4:Total time by each process = 2.935910  And Average = 0.733977 The results Matches
+my_OPconstProcoutput_files2048_512_PRO16:Total time by each process = 4.720787  And Average = 0.295049 The results Matches
+my_OPconstProcoutput_files20_4_PRO25:Total time by each process = 4.487196  And Average = 0.179488 The results Matches
+my_OPconstProcoutput_files2100_700_PRO9:Total time by each process = 4.357808  And Average = 0.484201 The results Matches
+my_OPconstProcoutput_files240_80_PRO9:Total time by each process = 0.334026  And Average = 0.037114 The results Matches
+my_OPconstProcoutput_files24_4_PRO36:Total time by each process = 16.752348  And Average = 0.465343 The results Matches
+my_OPconstProcoutput_files24_6_PRO16:Total time by each process = 1.216840  And Average = 0.076052 The results Matches
+my_OPconstProcoutput_files24_8_PRO9:Total time by each process = 0.604136  And Average = 0.067126 The results Matches
+my_OPconstProcoutput_files250_50_PRO25:Total time by each process = 4.753936  And Average = 0.190157 The results Matches
+my_OPconstProcoutput_files2560_512_PRO25:Total time by each process = 14.189406  And Average = 0.567576 The results Matches
+my_OPconstProcoutput_files256_128_PRO4:Total time by each process = 0.096635  And Average = 0.024159 The results Matches
+my_OPconstProcoutput_files256_64_PRO16:Total time by each process = 1.641717  And Average = 0.102607 The results Matches
+my_OPconstProcoutput_files2800_700_PRO16:Total time by each process = 23.650570  And Average = 1.478161 The results Matches
+my_OPconstProcoutput_files3000_1500_PRO4:Total time by each process = 10.673756  And Average = 2.668439 The results Matches
+my_OPconstProcoutput_files300_100_PRO9:Total time by each process = 0.472029  And Average = 0.052448 The results Matches
+my_OPconstProcoutput_files300_50_PRO36:Total time by each process = 13.774244  And Average = 0.382618 The results Matches
+my_OPconstProcoutput_files30_10_PRO9:Total time by each process = 0.462186  And Average = 0.051354 The results Matches
+my_OPconstProcoutput_files30_6_PRO25:Total time by each process = 4.408027  And Average = 0.176321 The results Matches
+my_OPconstProcoutput_files3072_1024_PRO9:Total time by each process = 15.470315  And Average = 1.718924 The results Matches
+my_OPconstProcoutput_files3072_512_PRO36:Total time by each process = 36.439133  And Average = 1.012198 The results Matches
+my_OPconstProcoutput_files320_64_PRO25:Total time by each process = 5.570467  And Average = 0.222819 The results Matches
+my_OPconstProcoutput_files320_80_PRO16:Total time by each process = 1.610680  And Average = 0.100667 The results Matches
+my_OPconstProcoutput_files32_16_PRO4:Total time by each process = 0.083068  And Average = 0.020767 The results Matches
+my_OPconstProcoutput_files32_8_PRO16:Total time by each process = 1.348743  And Average = 0.084296 The results Matches
+my_OPconstProcoutput_files3500_700_PRO25:Total time by each process = 34.343141  And Average = 1.373726 The results Matches
+my_OPconstProcoutput_files36_6_PRO36:Total time by each process = 14.042012  And Average = 0.390056 The results Matches
+my_OPconstProcoutput_files384_128_PRO9:Total time by each process = 0.352990  And Average = 0.039221 The results Matches
+my_OPconstProcoutput_files384_64_PRO36:Total time by each process = 14.797542  And Average = 0.411043 The results Matches
+my_OPconstProcoutput_files400_100_PRO16:Total time by each process = 1.040452  And Average = 0.065028 The results Matches
+my_OPconstProcoutput_files400_80_PRO25:Total time by each process = 6.509900  And Average = 0.260396 The results Matches
+my_OPconstProcoutput_files40_10_PRO16:Total time by each process = 1.343251  And Average = 0.083953 The results Matches
+my_OPconstProcoutput_files40_20_PRO4:Total time by each process = 0.075177  And Average = 0.018794 The results Matches
+my_OPconstProcoutput_files40_8_PRO25:Total time by each process = 3.974144  And Average = 0.158966 The results Matches
+my_OPconstProcoutput_files4096_1024_PRO16:Total time by each process = 117.828004  And Average = 7.364250 The results Matches
+my_OPconstProcoutput_files4200_700_PRO36:Total time by each process = 104.330620  And Average = 2.898073 The results Matches
+my_OPconstProcoutput_files4_2_PRO4:Total time by each process = 0.085896  And Average = 0.021474 The results Matches
+my_OPconstProcoutput_files4500_1500_PRO9:Total time by each process = 107.412565  And Average = 11.934729 The results Matches
+my_OPconstProcoutput_files480_80_PRO36:Total time by each process = 13.493565  And Average = 0.374821 The results Matches
+my_OPconstProcoutput_files48_16_PRO9:Total time by each process = 0.523354  And Average = 0.058150 The results Matches
+my_OPconstProcoutput_files48_8_PRO36:Total time by each process = 11.388819  And Average = 0.316356 The results Matches
+my_OPconstProcoutput_files500_100_PRO25:Total time by each process = 3.045255  And Average = 0.121810 The results Matches
+my_OPconstProcoutput_files50_10_PRO25:Total time by each process = 4.640837  And Average = 0.185633 The results Matches
+my_OPconstProcoutput_files50_25_PRO4:Total time by each process = 0.084121  And Average = 0.021030 The results Matches
+my_OPconstProcoutput_files5120_1024_PRO25:Total time by each process = 280.292580  And Average = 11.211703 The results Matches
+my_OPconstProcoutput_files512_128_PRO16:Total time by each process = 1.711087  And Average = 0.106943 The results Matches
+my_OPconstProcoutput_files512_256_PRO4:Total time by each process = 0.140108  And Average = 0.035027 The results Matches
+my_OPconstProcoutput_files6000_1500_PRO16:Total time by each process = 467.074066  And Average = 29.192129 The results Matches
+my_OPconstProcoutput_files600_100_PRO36:Total time by each process = 13.471483  And Average = 0.374208 The results Matches
+my_OPconstProcoutput_files600_300_PRO4:Total time by each process = 0.162704  And Average = 0.040676 The results Matches
+my_OPconstProcoutput_files60_10_PRO36:Total time by each process = 13.238110  And Average = 0.367725 The results Matches
+my_OPconstProcoutput_files60_20_PRO9:Total time by each process = 0.528427  And Average = 0.058714 The results Matches
+my_OPconstProcoutput_files6144_1024_PRO36:Total time by each process = 884.764299  And Average = 24.576786 The results Matches
+my_OPconstProcoutput_files6_2_PRO9:Total time by each process = 0.368126  And Average = 0.040903 The results Matches
+my_OPconstProcoutput_files640_128_PRO25:Total time by each process = 39.452546  And Average = 1.578102 The results Matches
+my_OPconstProcoutput_files64_16_PRO16:Total time by each process = 1.328625  And Average = 0.083039 The results Matches
+my_OPconstProcoutput_files64_32_PRO4:Total time by each process = 0.110026  And Average = 0.027507 The results Matches
+my_OPconstProcoutput_files7500_1500_PRO25:Total time by each process = 1341.923660  And Average = 53.676946 The results Matches
+my_OPconstProcoutput_files75_25_PRO9:Total time by each process = 0.409394  And Average = 0.045488 The results Matches
+my_OPconstProcoutput_files768_128_PRO36:Total time by each process = 12.882148  And Average = 0.357837 The results Matches
+my_OPconstProcoutput_files768_256_PRO9:Total time by each process = 0.626084  And Average = 0.069565 The results Matches
+my_OPconstProcoutput_files80_16_PRO25:Total time by each process = 4.520308  And Average = 0.180812 The results Matches
+my_OPconstProcoutput_files80_20_PRO16:Total time by each process = 1.528228  And Average = 0.095514 The results Matches
+my_OPconstProcoutput_files8_2_PRO16:Total time by each process = 1.279719  And Average = 0.079982 The results Matches
+my_OPconstProcoutput_files8_4_PRO4:Total time by each process = 0.084167  And Average = 0.021042 The results Matches
+my_OPconstProcoutput_files9000_1500_PRO36:Total time by each process = 2138.426413  And Average = 59.400734 The results Matches
+my_OPconstProcoutput_files900_300_PRO9:Total time by each process = 0.905411  And Average = 0.100601 The results Matches
+my_OPconstProcoutput_files96_16_PRO36:Total time by each process = 10.540973  And Average = 0.292805 The results Matches
+my_OPconstProcoutput_files96_32_PRO9:Total time by each process = 0.549541  And Average = 0.061060 The results Matches
