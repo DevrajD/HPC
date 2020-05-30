@@ -48,6 +48,8 @@ do
     done
 done
 
+grep Total my_* > results
+
 # DEBUG=1
 # module swap PrgEnv-cray PrgEnv-intel 
 # module swap intel intel/19.0.1.144
