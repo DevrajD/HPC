@@ -299,7 +299,7 @@ int main(int argc, char* argv[]) {
     t2 = MPI_Wtime();
     t = t2-t1;
     printf("MPI_Wtime measured for total run by process %d = %f\n", rank, t);
-	double time_spent = 0;
+	double time_spent = 0, Comm_time = 0;
     MPI_Reduce(&t, &time_spent, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 	#if COMMS > 0
     MPI_Reduce(&TComm, &Comm_time, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
