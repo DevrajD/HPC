@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
     double t1, t2, t, size_root;
     InitiateMatrix();
     
-    MPI_Init_thread(&argc, &argv, MPI_THREAD_SINGLE, &provided);
+    MPI_Init_thread(&argc, &argv, MPI_THREAD_FUNNELED, &provided);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     //printf("My rank %d of %d\n", rank, size);
@@ -123,7 +123,7 @@ int main(int argc, char* argv[]) {
     {
         printf("Incorrect number of Process alocated, refer instructions for correct # of Process");
         MPI_Finalize();
-        return 1;
+        return 49;
     }
 
     // Define boundaries for processing

@@ -70,16 +70,16 @@ do
             N_BAR=$(( $N / $j ))
 
             rm my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-            cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
-            srun -n $PROCESSES ./Foxp >> my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+            cc -O2 mainFox.c -o Foxp1 -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG
+            srun -n $PROCESSES ./Foxp1 >> my_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
 
             rm my_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
-            cc -O2 mainFox.c -o FoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=0 -D COMMS=1 #This is only to check for communication overheads, hence ignoring DEBUG mode
-            srun -n $PROCESSES ./FoxpCOMM >> my_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
+            cc -O2 mainFox.c -o FoxpCOMM1 -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=0 -D COMMS=1 #This is only to check for communication overheads, hence ignoring DEBUG mode
+            srun -n $PROCESSES ./FoxpCOMM1 >> my_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
 
             rm my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-            cc -O3 optimFox.c -o OPFoxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -fopenmp
-            srun -n $PROCESSES ./OPFoxp >> my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+            cc -O3 optimFox.c -o OPFoxp1 -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -fopenmp
+            srun -n $PROCESSES ./OPFoxp1 >> my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
         fi
     done
 done

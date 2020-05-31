@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
     {
         printf("Incorrect number of Process alocated, refer instructions for correct # of Process");
         MPI_Finalize();
-        return 1;
+        return 49;
     }
 
     // Define boundaries for processing
