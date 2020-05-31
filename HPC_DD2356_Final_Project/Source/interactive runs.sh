@@ -125,7 +125,7 @@ done
 grep Total my_* > Intel_results #This will hold all results with the 
 
 
-salloc --nodes=225 -t 00:02:00 -A edu20.DD2356 
+salloc --nodes=8 -t 01:00:00 -A edu20.DD2356 
 module swap PrgEnv-cray PrgEnv-intel 
 module swap intel intel/19.0.1.144
 for N in 4 6 8 9 10 12 14 16 25 32 49 50 64 90 128 256 512 768 1024 1500 2048 2100
@@ -138,9 +138,9 @@ do
             PROCESSES=$(( $j * $j ))
             N_BAR=$(( $N / $j ))
 
-            rm my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-            cc -O3 optimFox.c -o OPFoxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -fopenmp
-            srun -n $PROCESSES ./OPFoxp >> my_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
+            rm my_OPconstProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
+            cc -O3 optimFox.c -o OPFoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -fopenmp -D COMMS=1
+            srun -n $PROCESSES ./OPFoxpCOMM >> my_OPconstProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
             echo "Hi_${j}_${N}_${N_BAR}_${PROCESSES}"
         fi
     j=$(( $j + 1 ))
@@ -148,5 +148,3 @@ do
 done
 
 grep Total my_* > Intel_results #Thi
-
-cc -O3 optimFox.c -o OPFoxp -lm -D N=2100 -D N_BAR=140 -D DEBUG=1 -fopenmp

@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <sys/time.h>
 #include <mpi.h>
 #include "omp.h"
 
@@ -29,6 +30,16 @@
 double MatA[N][N], MatB[N][N], MatC[N][N];
 
 /* Function Declarations */
+
+double mysecond()
+{
+	struct timeval tp;
+	struct timezone tzp;
+	int i;
+	i = gettimeofday(&tp,&tzp);
+	return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+}
+
 void InitiateMatrix()
 {
     srand(time(NULL) + 14876);
