@@ -125,10 +125,10 @@ done
 grep Total my_* > Intel_results #This will hold all results with the 
 
 
-salloc --nodes=8 -t 01:00:00 -A edu20.DD2356 
+salloc --nodes=225 -t 00:02:00 -A edu20.DD2356 
 module swap PrgEnv-cray PrgEnv-intel 
 module swap intel intel/19.0.1.144
-for N in 4 6 8 9 10 12 14 16 25 32 49 50 64 90 128 256 512 768 1024 1500 2048 2100 16800
+for N in 4 6 8 9 10 12 14 16 25 32 49 50 64 90 128 256 512 768 1024 1500 2048 2100
 do
     j=2
     while [ $j -le 16 ]
@@ -148,3 +148,5 @@ do
 done
 
 grep Total my_* > Intel_results #Thi
+
+cc -O3 optimFox.c -o OPFoxp -lm -D N=2100 -D N_BAR=140 -D DEBUG=1 -fopenmp
