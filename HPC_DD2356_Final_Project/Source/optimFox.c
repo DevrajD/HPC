@@ -156,7 +156,8 @@ int main(int argc, char* argv[]) {
     MPI_Cart_shift(cart_comm, 0, 1, &send_to, &receive_from);
 
     //tiling Size descriptors
-    double BufMatA[N_BAR][N_BAR], BufMatB[N_BAR][N_BAR], BufMatBtemp[N_BAR][N_BAR], BufMatC[N_BAR][N_BAR]={0}; //Local Buffers
+    double  BufMatA[N_BAR][N_BAR] __attribute__ ((aligned)), BufMatB[N_BAR][N_BAR] __attribute__ ((aligned)), 
+            BufMatBtemp[N_BAR][N_BAR] __attribute__ ((aligned)), BufMatC[N_BAR][N_BAR] __attribute__ ((aligned)) ={0}; //Local Buffers
    /* 
     for (int j = 0; j < N_BAR; j++) //Generate B Tile
     {
