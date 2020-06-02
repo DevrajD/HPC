@@ -37,18 +37,19 @@ do
             rm myCray_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
             cc -O2 mainFox.c -o Foxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -mcmodel=medium
             srun -n $PROCESSES ./Foxp >> myCray_constProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-
+            echo "Hi_${j}_${N}_${N_BAR}_${PROCESSES}"
             rm myCray_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
             cc -O2 mainFox.c -o FoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=0 -D COMMS=1 -mcmodel=medium #This is only to check for communication overheads, hence ignoring DEBUG mode
             srun -n $PROCESSES ./FoxpCOMM >> myCray_constProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
-
+            echo "Hi_${j}_${N}_${N_BAR}_${PROCESSES}"
             rm myCray_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
             cc -O3 optimFox.c -o OPFoxp -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=$DEBUG -fopenmp -mcmodel=medium -D OMP_THREADS=64
             srun -n $PROCESSES ./OPFoxp >> myCray_OPconstProcoutput_files${N}_${N_BAR}_PRO${PROCESSES}
-
+            echo "Hi_${j}_${N}_${N_BAR}_${PROCESSES}"
             rm myCray_OPconstProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
             cc -O3 optimFox.c -o OPFoxpCOMM -lm -D N=$N -D N_BAR=$N_BAR -D DEBUG=0 -fopenmp -D COMMS=1 -D OMP_THREADS=64 -mcmodel=medium
             srun -n $PROCESSES ./OPFoxpCOMM >> myCray_OPconstProcoutputCOMM_files${N}_${N_BAR}_PRO${PROCESSES}
+            echo "Hi_${j}_${N}_${N_BAR}_${PROCESSES}"
         fi
     done
 done
